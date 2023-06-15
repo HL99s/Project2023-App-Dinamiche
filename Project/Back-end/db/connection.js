@@ -8,4 +8,4 @@ const client = new Client({
     database: "dvdrental"
 })
 
-module.exports = {client};
+module.exports = client;

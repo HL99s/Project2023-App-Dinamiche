@@ -9,10 +9,12 @@ import { ApiService } from './api.service';
 export class AppComponent implements OnInit {
   title = 'Front-end';
   message: any;
+
   constructor(private apiService: ApiService) { };
   ngOnInit() {
     this.apiService.getMessage().subscribe(data => {
-      this.message = data;
+      this.message=data
+
     });
   }
 }
