@@ -13,8 +13,10 @@ const utenti = require('./MOCK_DATA.json')
 
 const pgPromise = require('pg-promise');
 const { get } = require('https');
+const { throws } = require('assert');
 
 const connStr = 'postgresql://postgres@localhost:5432/dvdrental'; 
+const {buildSchema} = graphql
 
 const pgp = pgPromise({}); // empty pgPromise instance
 const psql = pgp(connStr); // get connection to your db instance
@@ -55,19 +57,36 @@ const UserType = new GraphQLObjectType({
 
 
 const filmList = ()=>(
-    client.query("select * from film").then((valore)=>(valore.rows)).catch((error)=>(console.log(error)))
+    client.query("select * from film order by film_id").then((res)=>(res.rows)).catch((error)=>(console.log(error)))
 )
+
+const filmById = (id)=>(
+    client.query(`select * from film where film_id=${id} order by film_id`).then((res)=>(res.rowCount==1 ? res.rows[0]: console.log("Sono più di uno"))).catch((error)=>(console.log(error.)))
+)
+
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
     fields:{
         getAllFilm: {
             type: new GraphQLList(FilmType),
-            resolve(parent, args){
+            resolve(){
             
             return filmList()
             }
+    
+        },
+        getById:{
+            type: FilmType,
+            args: {
+                film_id: {type: GraphQLInt},
+                
+            },
+            resolve: function (_,args){
+                return filmById(args.film_id)
+            }
         }
+
     }
 })
 
@@ -88,7 +107,7 @@ const Mutation = new GraphQLObjectType({
 
 const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
 
-app.use('/graphql', graphqlHTTP({
+app.use('/', graphqlHTTP({
     schema,
     graphiql: true
 }))
