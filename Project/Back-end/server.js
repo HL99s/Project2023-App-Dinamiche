@@ -5,21 +5,15 @@ const {client} = require('./db/connection')
 const graphql = require('graphql')
 
 const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = graphql
-const {graphqlHTTP}  = require('express-graphql')
+const {graphqlHTTP} = require('express-graphql')
 
 const fs = require('fs');
 
+const {get} = require('https');
+const {throws} = require('assert');
 
-const pgPromise = require('pg-promise');
-const { get } = require('https');
-const { throws } = require('assert');
-
-const connStr = 'postgresql://postgres@localhost:5432/dvdrental'; 
+const connStr = 'postgresql://postgres@localhost:5432/dvdrental';
 const {buildSchema} = graphql
-
-const pgp = pgPromise({}); // empty pgPromise instance
-const psql = pgp(connStr); // get connection to your db instance
-
 
 
 client.connect();
@@ -45,69 +39,72 @@ const FilmType = new GraphQLObjectType({
 
 const UserType = new GraphQLObjectType({
     name: "User",
-    fields: ()=>({
+    fields: () => ({
         id: {type: GraphQLInt},
         firstName: {type: GraphQLString},
         lastName: {type: GraphQLString},
         email: {type: GraphQLString}
-       
+
     })
 })
 
 
-const filmList = ()=>(
-    client.query("select * from film order by film_id").then((res)=>(res.rows)).catch((error)=>(console.log(error)))
+const filmList = () => (
+    client.query("select * from film order by film_id").then((res) => (res.rows)).catch((error) => (console.log(error)))
 )
 
-const filmById = (id)=>(
-    client.query(`select * from film where film_id=${id} order by film_id`).then((res)=>(res.rowCount==1 ? res.rows[0]: console.log("Sono più di uno"))).catch((error)=>(console.log(error)))
+const filmById = (id) => (
+    client.query(`select *
+                  from film
+                  where film_id = ${id}
+                  order by film_id`).then((res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))).catch((error) => (console.log(error)))
 )
 
-const filmByCategory = (category)=>(
-    client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name 
-    from (film as f
-    JOIN film_category as fCat ON f.film_id = fCat.film_id) 
-    JOIN category as cat 
-    ON fCat.category_id = cat.category_id
-    WHERE cat.name = ${category}`).then((res)=>(res.rows)).catch((error)=>(console.log(error)))
+const filmByCategory = (category) => (
+    client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name
+                  from (film as f
+                      JOIN film_category as fCat ON f.film_id = fCat.film_id)
+                           JOIN category as cat
+                                ON fCat.category_id = cat.category_id
+                  WHERE cat.name = ${category}`).then((res) => (res.rows)).catch((error) => (console.log(error)))
 )
 
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
-    fields:{
+    fields: {
         getAllFilm: {
             type: new GraphQLList(FilmType),
-            resolve(){
-            
-            return filmList()
+            resolve() {
+
+                return filmList()
             }
-    
+
         },
-        getById:{
+        getById: {
             type: FilmType,
             args: {
                 film_id: {type: GraphQLInt},
-                
+
             },
-            resolve: function (_,args){
+            resolve: function (_, args) {
                 return filmById(args.film_id)
             }
         },
-        getByCategory:{
+        getByCategory: {
             type: new GraphQLList(FilmType),
             args: {
                 name: {type: GraphQLString},
-                
+
             },
-            resolve: function (_,args){
+            resolve: function (_, args) {
                 console.log(args.name)
-                return client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name 
-                from (film as f
-                JOIN film_category as fCat ON f.film_id = fCat.film_id) 
-                JOIN category as cat 
-                ON fCat.category_id = cat.category_id
-                WHERE cat.name = ${args.name}`).then((res)=>(res.rows)).catch((error)=>(console.log(error)))
+                return client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name
+                                     from (film as f
+                                         JOIN film_category as fCat ON f.film_id = fCat.film_id)
+                                              JOIN category as cat
+                                                   ON fCat.category_id = cat.category_id
+                                     WHERE cat.name = ${args.name}`).then((res) => (res.rows)).catch((error) => (console.log(error)))
             }
         }
 
@@ -116,14 +113,14 @@ const RootQuery = new GraphQLObjectType({
 
 const Mutation = new GraphQLObjectType({
     name: "Mutation",
-    fields:{
+    fields: {
         createFilm: {
             type: FilmType,
             args: {
-                title:{type:GraphQLString},
+                title: {type: GraphQLString},
             },
             resolve(parent, args) {
-                
+
             }
         }
     }
