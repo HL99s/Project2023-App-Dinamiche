@@ -9,7 +9,7 @@
 /bazel-out
 
 # Node
-Project/Front-end/node_modules
+Project/node_modules/
 
 # IDEs and editors
 .idea/
