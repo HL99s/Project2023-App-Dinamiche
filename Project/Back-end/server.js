@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const client = require('./db/connection')
+const {client} = require('./db/connection')
 const graphql = require('graphql')
 
 const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = graphql
@@ -9,7 +9,6 @@ const {graphqlHTTP}  = require('express-graphql')
 
 const fs = require('fs');
 
-const utenti = require('./MOCK_DATA.json')
 
 const pgPromise = require('pg-promise');
 const { get } = require('https');
@@ -61,7 +60,7 @@ const filmList = ()=>(
 )
 
 const filmById = (id)=>(
-    client.query(`select * from film where film_id=${id} order by film_id`).then((res)=>(res.rowCount==1 ? res.rows[0]: console.log("Sono più di uno"))).catch((error)=>(console.log(error.)))
+    client.query(`select * from film where film_id=${id} order by film_id`).then((res)=>(res.rowCount==1 ? res.rows[0]: console.log("Sono più di uno"))).catch((error)=>(console.log(error)))
 )
 
 
