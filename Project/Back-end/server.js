@@ -1,23 +1,18 @@
+//Express Server
 const express = require('express');
-const app = express();
-
-const {client} = require('./db/connection')
-const graphql = require('graphql')
-
-const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = graphql
+const cors = require('cors');
+const app = express().use(cors());
+//Postgres DB
+const {db} = require('./db/connection')
+//GraphQL
+const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList, buildSchema} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
-const fs = require('fs');
+//const { get } = require('https');
+//const { throws } = require('assert');
 
-const {get} = require('https');
-const {throws} = require('assert');
-
-const connStr = 'postgresql://postgres@localhost:5432/dvdrental';
-const {buildSchema} = graphql
-
-
-client.connect();
-
+//DB Connection
+db.connect();
 
 // handling CORS
 app.use((req, res, next) => {
@@ -27,6 +22,19 @@ app.use((req, res, next) => {
         "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+/*const schema = buildSchema(`
+    type Query {
+        filmByCat(cat:String!, offset:Int=0, limit:Int = 10): [FilmByCat]
+    }
+
+    type FilmByCat{
+        film_id: Int,
+        title: String,
+        description: String,
+        category: String
+    }
+`);*/
 
 const FilmType = new GraphQLObjectType({
     name: "Film",
@@ -48,25 +56,60 @@ const UserType = new GraphQLObjectType({
     })
 })
 
+/*const root = {
+    filmByCat: args => {
+        return db.query(
+            `SELECT f.film_id, f.title, f.description, fcat.category_id, cat.name
+              FROM (film AS f
+                  JOIN film_category AS fcat ON f.film_id = fcat.film_id)
+                       JOIN category AS cat
+                            ON fcat.category_id = cat.category_id
+              WHERE cat.name = "${args.cat}"
+              LIMIT ${args.limit}`,
+            false
+        ).then(rows =>
+            rows.map(result => {
+                return {
+                    film_id: result.film_id,
+                    title: result.title,
+                    description: result.description,
+                    category: result.name
+                };
+            })
+        );
+    }
+}*/
 
 const filmList = () => (
-    client.query("select * from film order by film_id").then((res) => (res.rows)).catch((error) => (console.log(error)))
+    db.query("select * from film order by film_id").then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        )
 )
 
 const filmById = (id) => (
-    client.query(`select *
-                  from film
-                  where film_id = ${id}
-                  order by film_id`).then((res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))).catch((error) => (console.log(error)))
+    db.query(`select *
+              from film
+              where film_id = ${id}
+              order by film_id`).then(
+                  (res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))
+                ).catch(
+                    (error) => (console.log(error))
+                )
 )
 
 const filmByCategory = (category) => (
-    client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name
-                  from (film as f
-                      JOIN film_category as fCat ON f.film_id = fCat.film_id)
-                           JOIN category as cat
-                                ON fCat.category_id = cat.category_id
-                  WHERE cat.name = ${category}`).then((res) => (res.rows)).catch((error) => (console.log(error)))
+    db.query(`SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name
+              FROM (film AS f
+                  JOIN film_category AS fCat ON f.film_id = fCat.film_id)
+                       JOIN category AS cat
+                            ON fCat.category_id = cat.category_id
+              WHERE cat.name = "${category}"`).then(
+                  (res) => (res.rows)
+                ).catch(
+                    (error) => (console.log(error))
+                )
 )
 
 
@@ -76,16 +119,13 @@ const RootQuery = new GraphQLObjectType({
         getAllFilm: {
             type: new GraphQLList(FilmType),
             resolve() {
-
                 return filmList()
             }
-
         },
         getById: {
             type: FilmType,
             args: {
                 film_id: {type: GraphQLInt},
-
             },
             resolve: function (_, args) {
                 return filmById(args.film_id)
@@ -94,17 +134,10 @@ const RootQuery = new GraphQLObjectType({
         getByCategory: {
             type: new GraphQLList(FilmType),
             args: {
-                name: {type: GraphQLString},
-
+                cat: {type: GraphQLString},
             },
             resolve: function (_, args) {
-                console.log(args.name)
-                return client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name
-                                     from (film as f
-                                         JOIN film_category as fCat ON f.film_id = fCat.film_id)
-                                              JOIN category as cat
-                                                   ON fCat.category_id = cat.category_id
-                                     WHERE cat.name = ${args.name}`).then((res) => (res.rows)).catch((error) => (console.log(error)))
+                return filmByCategory(args.cat)
             }
         }
 
@@ -130,13 +163,15 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
 
 app.use('/', graphqlHTTP({
     schema,
+    //rootValue: root,
     graphiql: true
-}))
+    })
+);
 
 // route for handling requests from the Angular client
 /*
 app.get('/api/message', (req, res) => {
-    client.query("select * from customer", (err, resd)=>{
+    db.query("select * from customer", (err, resd)=>{
         res.json(resd.rows); 
 })})*/
 
