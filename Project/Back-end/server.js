@@ -63,6 +63,15 @@ const filmById = (id)=>(
     client.query(`select * from film where film_id=${id} order by film_id`).then((res)=>(res.rowCount==1 ? res.rows[0]: console.log("Sono più di uno"))).catch((error)=>(console.log(error)))
 )
 
+const filmByCategory = (category)=>(
+    client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name 
+    from (film as f
+    JOIN film_category as fCat ON f.film_id = fCat.film_id) 
+    JOIN category as cat 
+    ON fCat.category_id = cat.category_id
+    WHERE cat.name = ${category}`).then((res)=>(res.rows)).catch((error)=>(console.log(error)))
+)
+
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
@@ -83,6 +92,22 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve: function (_,args){
                 return filmById(args.film_id)
+            }
+        },
+        getByCategory:{
+            type: new GraphQLList(FilmType),
+            args: {
+                name: {type: GraphQLString},
+                
+            },
+            resolve: function (_,args){
+                console.log(args.name)
+                return client.query(`select f.film_id, f.title, f.description, fCat.category_id, cat.name 
+                from (film as f
+                JOIN film_category as fCat ON f.film_id = fCat.film_id) 
+                JOIN category as cat 
+                ON fCat.category_id = cat.category_id
+                WHERE cat.name = ${args.name}`).then((res)=>(res.rows)).catch((error)=>(console.log(error)))
             }
         }
 
