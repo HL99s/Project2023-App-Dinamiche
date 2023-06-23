@@ -23,18 +23,6 @@ app.use((req, res, next) => {
     next();
 });
 
-/*const schema = buildSchema(`
-    type Query {
-        filmByCat(cat:String!, offset:Int=0, limit:Int = 10): [FilmByCat]
-    }
-
-    type FilmByCat{
-        film_id: Int,
-        title: String,
-        description: String,
-        category: String
-    }
-`);*/
 
 const FilmType = new GraphQLObjectType({
     name: "Film",
@@ -56,29 +44,6 @@ const UserType = new GraphQLObjectType({
     })
 })
 
-/*const root = {
-    filmByCat: args => {
-        return db.query(
-            `SELECT f.film_id, f.title, f.description, fcat.category_id, cat.name
-              FROM (film AS f
-                  JOIN film_category AS fcat ON f.film_id = fcat.film_id)
-                       JOIN category AS cat
-                            ON fcat.category_id = cat.category_id
-              WHERE cat.name = "${args.cat}"
-              LIMIT ${args.limit}`,
-            false
-        ).then(rows =>
-            rows.map(result => {
-                return {
-                    film_id: result.film_id,
-                    title: result.title,
-                    description: result.description,
-                    category: result.name
-                };
-            })
-        );
-    }
-}*/
 
 const filmList = () => (
     db.query("select * from film order by film_id").then(
@@ -100,16 +65,11 @@ const filmById = (id) => (
 )
 
 const filmByCategory = (category) => (
-    db.query(`SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name
-              FROM (film AS f
-                  JOIN film_category AS fCat ON f.film_id = fCat.film_id)
-                       JOIN category AS cat
-                            ON fCat.category_id = cat.category_id
-              WHERE cat.name = "${category}"`).then(
-                  (res) => (res.rows)
-                ).catch(
-                    (error) => (console.log(error))
-                )
+    db.query("SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name FROM (film AS f JOIN film_category AS fCat ON f.film_id = fCat.film_id)JOIN category AS cat ON fCat.category_id = cat.category_id WHERE cat.name = '${category}'").then(
+        (res) => (res.rows)
+    ).catch(
+        (error) => (console.log(error))
+    )
 )
 
 
@@ -163,7 +123,6 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
 
 app.use('/', graphqlHTTP({
     schema,
-    //rootValue: root,
     graphiql: true
     })
 );
