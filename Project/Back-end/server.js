@@ -5,7 +5,7 @@ const app = express().use(cors());
 //Postgres DB
 const {db} = require('./db/connection')
 //GraphQL
-const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = require('graphql')
+const {buildSchema} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
 //const { get } = require('https');
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 
-const FilmType = new GraphQLObjectType({
+/*const FilmType = new GraphQLObjectType({
     name: "Film",
     fields: () => ({
         film_id: {type: GraphQLInt},
@@ -33,10 +33,10 @@ const FilmType = new GraphQLObjectType({
     })
 })
 
-const filmList = () => (
+const filmList = (offset, limit) => (
     db.query(`SELECT *
               FROM film
-              ORDER BY film_id`).then(
+              ORDER BY film_id LIMIT ${limit} OFFSET ${offset} `).then(
         (res) => (res.rows)
     ).catch(
         (error) => (console.log(error))
@@ -72,8 +72,12 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         getAllFilm: {
             type: new GraphQLList(FilmType),
-            resolve() {
-                return filmList()
+            args: {
+                offset: {type: GraphQLInt},
+                limit: {type: GraphQLInt},
+            },
+            resolve: function (_, args) {
+                return filmList(args.offset, args.limit)
             }
         },
         getById: {
@@ -113,10 +117,36 @@ const Mutation = new GraphQLObjectType({
     }
 })
 
-const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
+const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})*/
 
-app.use('/', graphqlHTTP({
+const schema = buildSchema(`
+    type Query {
+       getAllFilm(offset:Int=0, limit:Int = 10): [Film]
+    }
+
+    type Film{
+        film_id: Int,
+        title: String,
+        description: String,
+    }
+`);
+
+const root = {
+    getAllFilm: args => {
+        return db.query(
+            `SELECT *
+             FROM film
+             ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                (res) => (res.rows)
+            ).catch(
+                (error) => (console.log(error))
+            );
+    }
+}
+
+app.use('/graphql', graphqlHTTP({
         schema,
+        rootValue:root,
         graphiql: true
 
     })
