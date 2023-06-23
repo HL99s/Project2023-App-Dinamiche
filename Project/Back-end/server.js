@@ -55,6 +55,7 @@ const filmById = (id) => (
 )
 
 const filmByCategory = (category) => (
+
     db.query(`SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name
               FROM (film AS f JOIN film_category AS fCat ON f.film_id = fCat.film_id)
                        JOIN category AS cat ON fCat.category_id = cat.category_id
@@ -117,6 +118,7 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
 app.use('/', graphqlHTTP({
         schema,
         graphiql: true
+
     })
 );
 
