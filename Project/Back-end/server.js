@@ -5,7 +5,7 @@ const app = express().use(cors());
 //Postgres DB
 const {db} = require('./db/connection')
 //GraphQL
-const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList, buildSchema} = require('graphql')
+const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
 //const { get } = require('https');
@@ -33,39 +33,33 @@ const FilmType = new GraphQLObjectType({
     })
 })
 
-const UserType = new GraphQLObjectType({
-    name: "User",
-    fields: () => ({
-        id: {type: GraphQLInt},
-        firstName: {type: GraphQLString},
-        lastName: {type: GraphQLString},
-        email: {type: GraphQLString}
-
-    })
-})
-
-
 const filmList = () => (
-    db.query("select * from film order by film_id").then(
-            (res) => (res.rows)
-        ).catch(
-            (error) => (console.log(error))
-        )
+    db.query(`SELECT *
+              FROM film
+              ORDER BY film_id`).then(
+        (res) => (res.rows)
+    ).catch(
+        (error) => (console.log(error))
+    )
 )
 
 const filmById = (id) => (
-    db.query(`select *
-              from film
-              where film_id = ${id}
-              order by film_id`).then(
-                  (res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))
-                ).catch(
-                    (error) => (console.log(error))
-                )
+    db.query(`SELECT *
+              FROM film
+              WHERE film_id = ${id}
+              ORDER BY film_id`).then(
+        (res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))
+    ).catch(
+        (error) => (console.log(error))
+    )
 )
 
 const filmByCategory = (category) => (
-    db.query("SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name FROM (film AS f JOIN film_category AS fCat ON f.film_id = fCat.film_id)JOIN category AS cat ON fCat.category_id = cat.category_id WHERE cat.name = '${category}'").then(
+
+    db.query(`SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name
+              FROM (film AS f JOIN film_category AS fCat ON f.film_id = fCat.film_id)
+                       JOIN category AS cat ON fCat.category_id = cat.category_id
+              WHERE cat.name = '${category}'`).then(
         (res) => (res.rows)
     ).catch(
         (error) => (console.log(error))
@@ -122,8 +116,9 @@ const Mutation = new GraphQLObjectType({
 const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})
 
 app.use('/', graphqlHTTP({
-    schema,
-    graphiql: true
+        schema,
+        graphiql: true
+
     })
 );
 
