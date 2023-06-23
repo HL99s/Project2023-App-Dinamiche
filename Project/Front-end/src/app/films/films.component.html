@@ -1,0 +1,30 @@
+<table
+  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"
+>
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">Film_id</th>
+    <th class="mdl-data-table__cell--non-numeric">Title</th>
+    <th class="mdl-data-table__cell--non-numeric">Description</th>
+  </tr>
+  <tr *ngFor="let film of films">
+    <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
+    <td class="mdl-data-table__cell--non-numeric">{{film.description}}</td>
+  </tr>
+</table>
+
+<div class="paging">
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="prevPage()"
+  >
+    <i class="material-icons">arrow_back</i>
+  </button>
+  Page {{page+1}}
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="nextPage()"
+  >
+    <i class="material-icons">arrow_forward</i>
+  </button>
+</div>

@@ -1,13 +1,53 @@
-<h1 style="color: green;
-           font-style: italic;">
-  GEEKS FOR GEEKS
-</h1>
-<h3>
-  Build a Simple Web App with Express & Angular
-</h3>
-<h5>
-  The below message is fetched from the express backend
-</h5>
-<p *ngIf="message">
-  {{ message.message }}
-</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <div class="mdl-layout__header mdl-layout__header--waterfall">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title" routerLink="/">
+        <i class="material-icons">home</i> Angular with GraphQL
+      </span>
+      <!-- Add spacer, to align navigation to the right in desktop -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <ul class="mdl-navigation">
+        <li class="mdl-navigation__link" routerLink="/">Home</li>
+        <li class="mdl-navigation__link" routerLink="/films">Films</li>
+        <!--<li
+          class="mdl-navigation__link"
+          *ngIf="!isAuthenticated"
+          (click)="login()"
+        >
+          Login
+        </li>
+        <li
+          class="mdl-navigation__link"
+          *ngIf="isAuthenticated"
+          (click)="logout()"
+        >
+          Logout
+        </li> -->
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-layout__drawer">
+    <ul class="mdl-navigation">
+      <li class="mdl-navigation__link" routerLink="/">Home</li>
+      <li class="mdl-navigation__link" routerLink="/films">Films</li>
+      <!--<li
+        class="mdl-navigation__link"
+        *ngIf="!isAuthenticated"
+        (click)="login()"
+      >
+        Login
+      </li>
+      <li
+        class="mdl-navigation__link"
+        *ngIf="isAuthenticated"
+        (click)="logout()"
+      >
+        Logout
+      </li>  -->
+    </ul>
+  </div>
+
+  <div class="mdl-layout__content content"><router-outlet></router-outlet></div>
+</div>
