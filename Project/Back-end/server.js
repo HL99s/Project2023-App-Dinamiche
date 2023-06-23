@@ -5,7 +5,7 @@ const app = express().use(cors());
 //Postgres DB
 const {db} = require('./db/connection')
 //GraphQL
-const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList, buildSchema} = require('graphql')
+const {GraphQLObjectType, GraphQLSchema, GraphQLInt, GraphQLString, GraphQLList} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
 //const { get } = require('https');
@@ -32,18 +32,6 @@ const FilmType = new GraphQLObjectType({
         description: {type: GraphQLString}
     })
 })
-
-const UserType = new GraphQLObjectType({
-    name: "User",
-    fields: () => ({
-        id: {type: GraphQLInt},
-        firstName: {type: GraphQLString},
-        lastName: {type: GraphQLString},
-        email: {type: GraphQLString}
-
-    })
-})
-
 
 const filmList = () => (
     db.query(`SELECT *
