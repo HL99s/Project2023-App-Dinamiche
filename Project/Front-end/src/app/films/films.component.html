@@ -6,7 +6,7 @@
     <th class="mdl-data-table__cell--non-numeric">Title</th>
     <th class="mdl-data-table__cell--non-numeric">Description</th>
   </tr>
-  <tr *ngFor="let film of films">
+  <tr *ngFor="let film of films.getAllFilm">
     <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
     <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
     <td class="mdl-data-table__cell--non-numeric">{{film.description}}</td>
