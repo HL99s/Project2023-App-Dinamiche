@@ -123,6 +123,8 @@ const schema = buildSchema(`
     type Query {
        getAllFilm(offset:Int=0, limit:Int = 10): [Film],
        getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film]
+       getAllStore: [Store]
+
     }
  
     type Film{
@@ -130,6 +132,13 @@ const schema = buildSchema(`
         title: String,
         description: String,
     }
+
+    type Store{
+        store_id: Int,
+        address: String,
+
+    }
+
 `);
 
 const root = {
@@ -154,7 +163,17 @@ const root = {
             ).catch(
                 (error) => (console.log(error))
             );
-            }    
+            },
+    getAllStore: args => {
+        return db.query(
+            `SELECT s.store_id, ad.address
+            FROM store AS s JOIN address AS ad
+            ON s.address_id = ad.address_id`).then(
+                (res) => (res.rows)
+            ).catch(
+                (error) => (console.log(error))
+            );
+            }   
         
     }
 

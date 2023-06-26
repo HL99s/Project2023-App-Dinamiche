@@ -75,7 +75,7 @@ export class FilmsComponent implements OnInit{
     });*/
   }
 
-  /*
+  
   update() {
     this.apollo.query({
       query: FILMS_QUERY,
@@ -85,7 +85,7 @@ export class FilmsComponent implements OnInit{
       console.log(data)
     } )
   }
-  */
+  
 
   nextPage() {
     this.page++;
