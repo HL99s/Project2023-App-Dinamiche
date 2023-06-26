@@ -30,7 +30,6 @@ query getAllFilm($offset: Int!) {
 
 export class FilmsComponent implements OnInit {
   page: number = 0;
-  rowcount: number;
   films: any;
   searchByTitle: String = "";
 
@@ -47,7 +46,6 @@ export class FilmsComponent implements OnInit {
       variables: {offset: 10 * this.page}
     }).subscribe(({data, loading}) => {
       this.films = data;
-      this.rowcount = this.films.count;
     })
   }
 
@@ -57,12 +55,12 @@ export class FilmsComponent implements OnInit {
       variables: {offset: 10 * this.page, filmTitle: filmTitle}
     }).subscribe(({data, loading}) => {
       this.films = data;
-      this.rowcount = this.films.count;
     })
   }
 
   nextPage() {
-    if(this.rowcount < 11) {
+    // TODO: fix: don't go to the next page if there is no more data
+    //if(this.films.rowCount < 11) {
       this.page++;
 
       if (this.searchByTitle != "") {
@@ -70,7 +68,7 @@ export class FilmsComponent implements OnInit {
       } else {
         this.updateAllFilms();
       }
-    }
+    //}
   }
 
   prevPage() {
