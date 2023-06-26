@@ -23,7 +23,7 @@
     <th class="mdl-data-table__cell--non-numeric">Description</th>
   </tr>
 
-  <ng-template [ngIf]="completeList || ricercaVuota">
+  <ng-template [ngIf] = "searchByTitle == ''">
   <tr *ngFor="let film of films.getAllFilm">
     <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
     <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
@@ -31,13 +31,13 @@
   </tr>
   </ng-template>
 
-  <ng-template [ngIf]="!completeList">
+  <ng-template [ngIf] = "searchByTitle != ''">
     <tr *ngFor="let film of films.getFilm">
       <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
       <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
       <td class="mdl-data-table__cell--non-numeric">{{film.description}}</td>
     </tr>
-    </ng-template>
+  </ng-template>
 
 
 </table>
@@ -51,11 +51,11 @@
     <i class="material-icons">arrow_back</i>
   </button>
 
-  Page {{page}}
+  Page {{page+1}}
 
   <button
     class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="nextPage()"  
+    (click)="nextPage()"
   >
     <i class="material-icons">arrow_forward</i>
   </button>
