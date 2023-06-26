@@ -121,14 +121,24 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})*/
 
 const schema = buildSchema(`
     type Query {
-       getAllFilm(offset:Int=0, limit:Int = 10): [Film]
-    }
+       getAllFilm(offset:Int=0, limit:Int = 10): [Film],
+       getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film]
+       getAllStore: [Store]
 
+    }
+ 
     type Film{
         film_id: Int,
         title: String,
         description: String,
     }
+
+    type Store{
+        store_id: Int,
+        address: String,
+
+    }
+
 `);
 
 const root = {
@@ -141,8 +151,32 @@ const root = {
             ).catch(
                 (error) => (console.log(error))
             );
+            },
+
+    getFilm: args => {
+        return db.query(
+            `SELECT *
+            FROM film
+            WHERE title ILIKE '%${args.filmTitle}%'
+            ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                (res) => (res.rows)
+            ).catch(
+                (error) => (console.log(error))
+            );
+            },
+    getAllStore: args => {
+        return db.query(
+            `SELECT s.store_id, ad.address
+            FROM store AS s JOIN address AS ad
+            ON s.address_id = ad.address_id`).then(
+                (res) => (res.rows)
+            ).catch(
+                (error) => (console.log(error))
+            );
+            }   
+        
     }
-}
+
 
 app.use('/graphql', graphqlHTTP({
         schema,
