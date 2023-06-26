@@ -10,18 +10,30 @@ import { FilmsComponent } from './films/films.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { MatInputModule } from '@angular/material/input';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     FilmsComponent,
     HomeComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     GraphQLModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
