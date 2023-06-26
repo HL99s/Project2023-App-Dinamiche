@@ -1,30 +1,63 @@
+<!--<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search Film</mat-label>
+    <input matInput placeholder="Film title" value="" (input)="searchByFilm($event)">
+  </mat-form-field>
+</form>-->
+
+<form>
+  <input #box (keyup.enter)="searchByFilm(box.value)">
+</form>
+
+
 <table
-  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp"
->
+  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp fixed-size-table">
+  <colgroup>
+    <col class="mdl-data-table__cell--non-numeric" style="width: 100px;">
+    <col class="mdl-data-table__cell--non-numeric" style="width: 200px;">
+    <col class="mdl-data-table__cell--non-numeric" style="width: 300px;">
+  </colgroup>
   <tr>
     <th class="mdl-data-table__cell--non-numeric">Film_id</th>
     <th class="mdl-data-table__cell--non-numeric">Title</th>
     <th class="mdl-data-table__cell--non-numeric">Description</th>
   </tr>
+
+  <ng-template [ngIf] = "searchByTitle == ''">
   <tr *ngFor="let film of films.getAllFilm">
     <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
     <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
     <td class="mdl-data-table__cell--non-numeric">{{film.description}}</td>
   </tr>
+  </ng-template>
+
+  <ng-template [ngIf] = "searchByTitle != ''">
+    <tr *ngFor="let film of films.getFilm">
+      <td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{film.title}}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{film.description}}</td>
+    </tr>
+  </ng-template>
+
+
 </table>
 
 <div class="paging">
+
   <button
     class="mdl-button mdl-js-button mdl-button--colored"
     (click)="prevPage()"
   >
     <i class="material-icons">arrow_back</i>
   </button>
+
   Page {{page+1}}
+
   <button
     class="mdl-button mdl-js-button mdl-button--colored"
     (click)="nextPage()"
   >
     <i class="material-icons">arrow_forward</i>
   </button>
+
 </div>
