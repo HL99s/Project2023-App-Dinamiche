@@ -1,3 +1,43 @@
+.mat-column-film-id {
+    width: 30px;
+  }
+  
+  .mat-column-title {
+    width: 150px;
+  }
+  
+  .mat-column-description {
+    width: 200px;
+  }
+  
+  .mat-column-info {
+    width: 50px;
+  }
+
 .fixed-size-table{
+    width: 70%;
     table-layout: fixed;
 }
+
+.table-container{
+    display: flex;
+    justify-content: center;
+}
+
+.button-info{
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.description-cell {
+    white-space: pre-wrap;
+}
+
+.search-input-container{
+    width: 500px;
+    display: block;
+    justify-content: center !important;
+    /*align-items: center !important;*/
+    
+}
+
