@@ -3,13 +3,9 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 
 
-
-
-
-
-const SEARCH_FILMS_QUERY = gql`
-query getFilm($offset: Int, $limit: Int, $filmTitle: String){
-  getFilm(offset: $offset, limit: $limit, filmTitle: $filmTitle){
+const FILMS_WITH_CATEGORY_QUERY = gql`
+query getAllFilmsWithCategory($offset: Int!) {
+  getAllFilmsWithCategory(offset: $offset, limit: 10) {
     film_id
     title
     description,
@@ -18,9 +14,9 @@ query getFilm($offset: Int, $limit: Int, $filmTitle: String){
 }
 `;
 
-const FILMS_QUERY = gql`
-query getAllFilm($offset: Int!) {
-  getAllFilm(offset: $offset, limit: 10) {
+const FILMS_BY_TITLE_QUERY = gql`
+query getFilmsByTitle($offset: Int, $filmTitle: String){
+  getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
     film_id
     title
     description,
@@ -29,9 +25,9 @@ query getAllFilm($offset: Int!) {
 }
 `;
 
-const SEARCH_FILMS_CATEGORY_QUERY = gql`
-query getFilmByCategory($offset: Int, $limit: Int, $filmTitle: String, $categoryName: String!){
-  getFilm(offset: $offset, limit: $limit, filmTitle: $filmTitle, categoryName: $categoryName){
+const FILMS_BY_CATEGORY_QUERY = gql`
+query getFilmsByCategory($offset: Int, $categoryName: String!) {
+  getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
     film_id
     title
     description,
@@ -40,9 +36,9 @@ query getFilmByCategory($offset: Int, $limit: Int, $filmTitle: String, $category
 }
 `;
 
-const FILMS_CATEGORY_QUERY = gql`
-query getAllFilmByCategory($offset: Int, $limit: Int, $categoryName: String!) {
-  getAllFilm(offset: $offset, limit: 10, categoryName: $categoryName) {
+const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
+query getFilmByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
+  getFilmByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
     film_id
     title
     description,
@@ -52,8 +48,8 @@ query getAllFilmByCategory($offset: Int, $limit: Int, $categoryName: String!) {
 `;
 
 const CATEGORY_QUERY = gql`
-  query getAllCategory($offset: Int!){
-    getAllCategory(offset: $offset){
+  query getAllCategories{
+    getAllCategories{
       category_id,
       category
     }
@@ -69,14 +65,12 @@ const CATEGORY_QUERY = gql`
 export class FilmsComponent implements OnInit {
   page: number = 0;
   films: any;
-  filmCategory: any;
-  searchByTitle: String = "";
-  filmsList: any[];
-  selectedCategoryOption: any = "All";
   numberOfElements: number;
-  
 
+  searchByTitle: String = "";
+  selectedCategoryOption: any = "All";
 
+  filmCategory: any;
 
   constructor(private apollo: Apollo) {
   }
@@ -86,78 +80,68 @@ export class FilmsComponent implements OnInit {
     this.updateCategory()
   }
 
-
   updateAllFilms() {
 
-    if(this.selectedCategoryOption == "All"){
+    if (this.selectedCategoryOption == "All") {
       console.log(`updateAllFilms ${this.page}`);
       this.apollo.query({
-        query: FILMS_QUERY,
+        query: FILMS_WITH_CATEGORY_QUERY,
         variables: {offset: 10 * this.page}
       }).subscribe(({data, loading}) => {
-        this.films = data;
+        // @ts-ignore
+        this.films = data.getAllFilmsWithCategory;
         console.log(this.films);
-        this.filmsList = this.films.getAllFilm; //quiiii
       })
-    }else{
+    } else {
       console.log('TO DO: else updateAllFilms');
       this.apollo.query({
-        query: FILMS_CATEGORY_QUERY,
+        query: FILMS_BY_CATEGORY_QUERY,
         variables: {offset: 10 * this.page, filmCategory: this.selectedCategoryOption}
       }).subscribe(({data, loading}) => {
-        this.films = data;
-        this.filmsList = this.films.getAllFilm;
-       
-       
+        // @ts-ignore
+        this.films = data.getFilmsByCategory;
       })
     }
-    
+
   }
 
-  updateCategory(){
+  updateCategory() {
     this.apollo.query({
       query: CATEGORY_QUERY,
-      variables: {offset: 0}
     }).subscribe(({data, loading}) => {
-      this.filmCategory = data;
-      this.filmCategory = this.filmCategory.getAllCategory;
+      // @ts-ignore
+      this.filmCategory = data.getAllCategories;
       console.log(this.filmCategory);
     })
   }
 
   updateFilmsByTitle(filmTitle: String) {
 
-    if(this.selectedCategoryOption == "All"){
+    if (this.selectedCategoryOption == "All") {
       console.log(`updateFilmsByTitle ${this.page}`);
       this.apollo.query({
-        query: SEARCH_FILMS_QUERY,
+        query: FILMS_BY_TITLE_QUERY,
         variables: {offset: 10 * this.page, filmTitle: filmTitle}
       }).subscribe(({data, loading}) => {
-        this.films = data;
+        // @ts-ignore
+        this.films = data.getFilmsByTitle;
         console.log(this.films);
-        this.filmsList = this.films.getFilm;
       })
-    }else{
+    } else {
       console.log('TO DO: else updateFilmsByTitle')
       this.apollo.query({
-        query: SEARCH_FILMS_CATEGORY_QUERY,
+        query: FILMS_BY_CATEGORY_AND_TITLE_QUERY,
         variables: {offset: 10 * this.page, filmTitle: filmTitle, filmCategory: this.selectedCategoryOption}
       }).subscribe(({data, loading}) => {
-        this.films = data;
-        this.filmsList = this.films.getAllFilm;
-    
+        // @ts-ignore
+        this.films = data.getFilmByCategoryAndTitle;
       })
     }
-
   }
 
   nextPage() {
-    // TODO: fix: if you search f.ex. "a" you have only 10 row 
-    
-    //let numberOfElements = this.filmsList ? this.filmsList.length : 0;
-    this.numberOfElements = this.films.getAllFilm.length;
-    console.log(this.numberOfElements);
-    if(this.numberOfElements >= 10) {
+    this.numberOfElements = this.films.length;
+    if (this.numberOfElements == 10) {
       this.page++;
 
       if (this.searchByTitle != "") {
@@ -181,7 +165,7 @@ export class FilmsComponent implements OnInit {
   searchByFilm(filmTitle: String) {
     this.page = 0;
 
-    if(this.selectedCategoryOption == "All"){
+    if (this.selectedCategoryOption == "All") {
       if (filmTitle != "") {
         this.searchByTitle = filmTitle;
         this.updateFilmsByTitle(filmTitle);
@@ -189,24 +173,21 @@ export class FilmsComponent implements OnInit {
         this.searchByTitle = "";
         this.updateAllFilms();
       }
-    }else{
+    } else {
       //Se la categoria non è All
       console.log('TO DO : else di searchByFilm');
       if (filmTitle != "") {
         this.searchByTitle = filmTitle;
-        this.updateFilmsByTitle(filmTitle); //qui
+        this.updateFilmsByTitle(filmTitle);
       } else {
         this.searchByTitle = "";
-        this.updateAllFilms();  //qui
+        this.updateAllFilms();
       }
     }
-    
   }
 
-
-  onCategoryChange(event: any){
+  onCategoryChange(event: any) {
     console.log(`Categoria: ${this.selectedCategoryOption}`)
   }
-
 
 }
