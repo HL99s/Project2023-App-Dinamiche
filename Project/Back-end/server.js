@@ -146,7 +146,7 @@ const root = {
         return db.query(
             `SELECT *
              FROM film
-             ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+             ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
                 (res) => (res.rows)
             ).catch(
                 (error) => (console.log(error))
@@ -158,7 +158,7 @@ const root = {
             `SELECT *
             FROM film
             WHERE title ILIKE '%${args.filmTitle}%'
-            ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
                 (res) => (res.rows)
             ).catch(
                 (error) => (console.log(error))

@@ -64,10 +64,10 @@ export class FilmsComponent implements OnInit {
   }
 
   nextPage() {
-    // TODO: fix: don't go to the next page if there is no more data
+    // TODO: fix: if you search f.ex. "a" you have only 10 row 
   console.log(this.films)
-  const numberOfElements = Object.keys(this.films.getAllFilm).length;
-  console.log(numberOfElements); // Output: 3
+  let numberOfElements = Object.keys(this.films.getAllFilm).length;
+  console.log(numberOfElements); 
     if(numberOfElements >= 10) {
       this.page++;
 

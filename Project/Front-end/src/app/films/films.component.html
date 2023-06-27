@@ -5,11 +5,37 @@
   </mat-form-field>
 </form>-->
 
+<div class = "container-search">
 <div  class="search-input-container">
   <mat-form-field appearance = "outline">
     <input matInput placeholder="Cerca" #box (keyup.enter)="searchByFilm(box.value)">
   </mat-form-field>
 </div>
+
+
+<div class="paging">
+
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="prevPage()"
+  >
+    <i class="material-icons">arrow_back</i>
+  </button>
+
+  Page {{page+1}}
+
+  <button
+    class="mdl-button mdl-js-button mdl-button--colored"
+    (click)="nextPage()"
+  >
+    <i class="material-icons">arrow_forward</i>
+  </button>
+
+</div>
+
+</div>
+
+
 
 <div class = "table-container">
 <table
@@ -52,22 +78,5 @@
 
 </table>
 </div>
-<div class="paging">
 
-  <button
-    class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="prevPage()"
-  >
-    <i class="material-icons">arrow_back</i>
-  </button>
 
-  Page {{page+1}}
-
-  <button
-    class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="nextPage()"
-  >
-    <i class="material-icons">arrow_forward</i>
-  </button>
-
-</div>
