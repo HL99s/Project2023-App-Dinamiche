@@ -2,24 +2,58 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 
-const SEARCH_FILMS_QUERY = gql`
-query getFilm($offset: Int, $limit: Int, $filmTitle: String){
-  getFilm(offset: $offset, limit: $limit, filmTitle: $filmTitle){
+
+const FILMS_WITH_CATEGORY_QUERY = gql`
+query getAllFilmsWithCategory($offset: Int!) {
+  getAllFilmsWithCategory(offset: $offset, limit: 10) {
     film_id
     title
-    description
+    description,
+    name
   }
 }
 `;
 
-const FILMS_QUERY = gql`
-query getAllFilm($offset: Int!) {
-  getAllFilm(offset: $offset, limit: 10) {
+const FILMS_BY_TITLE_QUERY = gql`
+query getFilmsByTitle($offset: Int, $filmTitle: String){
+  getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
     film_id
     title
-    description
+    description,
+    name
   }
 }
+`;
+
+const FILMS_BY_CATEGORY_QUERY = gql`
+query getFilmsByCategory($offset: Int, $categoryName: String!) {
+  getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
+    film_id
+    title
+    description,
+    name
+  }
+}
+`;
+
+const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
+query getFilmByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
+  getFilmByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
+    film_id
+    title
+    description,
+    name
+  }
+}
+`;
+
+const CATEGORY_QUERY = gql`
+  query getAllCategories{
+    getAllCategories{
+      category_id,
+      category
+    }
+  }
 `;
 
 @Component({
@@ -31,36 +65,83 @@ query getAllFilm($offset: Int!) {
 export class FilmsComponent implements OnInit {
   page: number = 0;
   films: any;
+  numberOfElements: number;
+
   searchByTitle: String = "";
+  selectedCategoryOption: any = "All";
+
+  filmCategory: any;
 
   constructor(private apollo: Apollo) {
   }
 
   ngOnInit() {
     this.updateAllFilms()
+    this.updateCategory()
   }
 
   updateAllFilms() {
+
+    if (this.selectedCategoryOption == "All") {
+      console.log(`updateAllFilms ${this.page}`);
+      this.apollo.query({
+        query: FILMS_WITH_CATEGORY_QUERY,
+        variables: {offset: 10 * this.page}
+      }).subscribe(({data, loading}) => {
+        // @ts-ignore
+        this.films = data.getAllFilmsWithCategory;
+        console.log(this.films);
+      })
+    } else {
+      console.log('TO DO: else updateAllFilms');
+      this.apollo.query({
+        query: FILMS_BY_CATEGORY_QUERY,
+        variables: {offset: 10 * this.page, filmCategory: this.selectedCategoryOption}
+      }).subscribe(({data, loading}) => {
+        // @ts-ignore
+        this.films = data.getFilmsByCategory;
+      })
+    }
+
+  }
+
+  updateCategory() {
     this.apollo.query({
-      query: FILMS_QUERY,
-      variables: {offset: 10 * this.page}
+      query: CATEGORY_QUERY,
     }).subscribe(({data, loading}) => {
-      this.films = data;
+      // @ts-ignore
+      this.filmCategory = data.getAllCategories;
+      console.log(this.filmCategory);
     })
   }
 
   updateFilmsByTitle(filmTitle: String) {
-    this.apollo.query({
-      query: SEARCH_FILMS_QUERY,
-      variables: {offset: 10 * this.page, filmTitle: filmTitle}
-    }).subscribe(({data, loading}) => {
-      this.films = data;
-    })
+
+    if (this.selectedCategoryOption == "All") {
+      console.log(`updateFilmsByTitle ${this.page}`);
+      this.apollo.query({
+        query: FILMS_BY_TITLE_QUERY,
+        variables: {offset: 10 * this.page, filmTitle: filmTitle}
+      }).subscribe(({data, loading}) => {
+        // @ts-ignore
+        this.films = data.getFilmsByTitle;
+        console.log(this.films);
+      })
+    } else {
+      console.log('TO DO: else updateFilmsByTitle')
+      this.apollo.query({
+        query: FILMS_BY_CATEGORY_AND_TITLE_QUERY,
+        variables: {offset: 10 * this.page, filmTitle: filmTitle, filmCategory: this.selectedCategoryOption}
+      }).subscribe(({data, loading}) => {
+        // @ts-ignore
+        this.films = data.getFilmByCategoryAndTitle;
+      })
+    }
   }
 
   nextPage() {
-    // TODO: fix: don't go to the next page if there is no more data
-    //if(this.films.rowCount < 11) {
+    this.numberOfElements = this.films.length;
+    if (this.numberOfElements == 10) {
       this.page++;
 
       if (this.searchByTitle != "") {
@@ -68,7 +149,7 @@ export class FilmsComponent implements OnInit {
       } else {
         this.updateAllFilms();
       }
-    //}
+    }
   }
 
   prevPage() {
@@ -82,12 +163,31 @@ export class FilmsComponent implements OnInit {
   }
 
   searchByFilm(filmTitle: String) {
-    if (filmTitle != "") {
-      this.searchByTitle = filmTitle;
-      this.updateFilmsByTitle(filmTitle);
+    this.page = 0;
+
+    if (this.selectedCategoryOption == "All") {
+      if (filmTitle != "") {
+        this.searchByTitle = filmTitle;
+        this.updateFilmsByTitle(filmTitle);
+      } else {
+        this.searchByTitle = "";
+        this.updateAllFilms();
+      }
     } else {
-      this.searchByTitle = "";
-      this.updateAllFilms();
+      //Se la categoria non è All
+      console.log('TO DO : else di searchByFilm');
+      if (filmTitle != "") {
+        this.searchByTitle = filmTitle;
+        this.updateFilmsByTitle(filmTitle);
+      } else {
+        this.searchByTitle = "";
+        this.updateAllFilms();
+      }
     }
   }
+
+  onCategoryChange(event: any) {
+    console.log(`Categoria: ${this.selectedCategoryOption}`)
+  }
+
 }

@@ -8,9 +8,6 @@ const {db} = require('./db/connection')
 const {buildSchema} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
-//const { get } = require('https');
-//const { throws } = require('assert');
-
 //DB Connection
 db.connect();
 
@@ -24,25 +21,7 @@ app.use((req, res, next) => {
 });
 
 
-/*const FilmType = new GraphQLObjectType({
-    name: "Film",
-    fields: () => ({
-        film_id: {type: GraphQLInt},
-        title: {type: GraphQLString},
-        description: {type: GraphQLString}
-    })
-})
-
-const filmList = (offset, limit) => (
-    db.query(`SELECT *
-              FROM film
-              ORDER BY film_id LIMIT ${limit} OFFSET ${offset} `).then(
-        (res) => (res.rows)
-    ).catch(
-        (error) => (console.log(error))
-    )
-)
-
+/*
 const filmById = (id) => (
     db.query(`SELECT *
               FROM film
@@ -53,54 +32,6 @@ const filmById = (id) => (
         (error) => (console.log(error))
     )
 )
-
-const filmByCategory = (category) => (
-
-    db.query(`SELECT f.film_id, f.title, f.description, fCat.category_id, cat.name
-              FROM (film AS f JOIN film_category AS fCat ON f.film_id = fCat.film_id)
-                       JOIN category AS cat ON fCat.category_id = cat.category_id
-              WHERE cat.name = '${category}'`).then(
-        (res) => (res.rows)
-    ).catch(
-        (error) => (console.log(error))
-    )
-)
-
-
-const RootQuery = new GraphQLObjectType({
-    name: "RootQueryType",
-    fields: {
-        getAllFilm: {
-            type: new GraphQLList(FilmType),
-            args: {
-                offset: {type: GraphQLInt},
-                limit: {type: GraphQLInt},
-            },
-            resolve: function (_, args) {
-                return filmList(args.offset, args.limit)
-            }
-        },
-        getById: {
-            type: FilmType,
-            args: {
-                film_id: {type: GraphQLInt},
-            },
-            resolve: function (_, args) {
-                return filmById(args.film_id)
-            }
-        },
-        getByCategory: {
-            type: new GraphQLList(FilmType),
-            args: {
-                cat: {type: GraphQLString},
-            },
-            resolve: function (_, args) {
-                return filmByCategory(args.cat)
-            }
-        }
-
-    }
-})
 
 const Mutation = new GraphQLObjectType({
     name: "Mutation",
@@ -121,9 +52,14 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})*/
 
 const schema = buildSchema(`
     type Query {
-       getAllFilm(offset:Int=0, limit:Int = 10): [Film],
-       getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film]
-       getAllStore: [Store]
+       getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
+       getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
+
+       getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
+       getFilmByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
+
+       getAllStores: [Store],
+       getAllCategories: [FilmCategory]
 
     }
  
@@ -131,56 +67,109 @@ const schema = buildSchema(`
         film_id: Int,
         title: String,
         description: String,
+        name: String
+    }
+
+    type FilmCategory{
+        category_id: Int,
+        category: String
     }
 
     type Store{
         store_id: Int,
         address: String,
-
     }
 
 `);
 
 const root = {
-    getAllFilm: args => {
+    getAllFilmsWithCategory: args => {
         return db.query(
             `SELECT *
-             FROM film
-             ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
-                (res) => (res.rows)
-            ).catch(
-                (error) => (console.log(error))
-            );
-            },
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+             ORDER BY title 
+             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
 
-    getFilm: args => {
+    getFilmsByTitle: args => {
         return db.query(
             `SELECT *
-            FROM film
-            WHERE title ILIKE '%${args.filmTitle}%'
-            ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
-                (res) => (res.rows)
-            ).catch(
-                (error) => (console.log(error))
-            );
-            },
-    getAllStore: args => {
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+             WHERE title ILIKE '%${args.filmTitle}%'
+             ORDER BY title
+             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+
+    getFilmsByCategory: args => {
+        return db.query(
+            `SELECT *
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+             WHERE ca.name = '${args.categoryName}'
+             ORDER BY title
+             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+
+    getFilmByCategoryAndTitle: args => {
+        return db.query(
+            `SELECT *
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+             WHERE ca.name = '${args.categoryName}'
+               AND f.title ILIKE '%${args.filmTitle}%'
+             ORDER BY title
+             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getAllCategories: args => {
+        return db.query(
+            `SELECT DISTINCT category_id, name as category
+             FROM category
+             ORDER BY category_id`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+
+    getAllStores: args => {
         return db.query(
             `SELECT s.store_id, ad.address
-            FROM store AS s JOIN address AS ad
-            ON s.address_id = ad.address_id`).then(
-                (res) => (res.rows)
-            ).catch(
-                (error) => (console.log(error))
-            );
-            }   
-        
+             FROM store AS s
+                      JOIN address AS ad
+                           ON s.address_id = ad.address_id`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
 
+}
 
 app.use('/graphql', graphqlHTTP({
         schema,
-        rootValue:root,
+        rootValue: root,
         graphiql: true
 
     })
