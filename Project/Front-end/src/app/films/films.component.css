@@ -17,6 +17,7 @@
 .fixed-size-table{
     width: 70%;
     table-layout: fixed;
+    margin-bottom: 40px;
 }
 
 .table-container{

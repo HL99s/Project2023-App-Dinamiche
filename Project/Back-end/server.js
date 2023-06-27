@@ -124,6 +124,7 @@ const schema = buildSchema(`
        getAllFilm(offset:Int=0, limit:Int = 10): [Film],
        getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film]
        getAllStore: [Store]
+       getAllCategory(offset: Int=0): [FilmCategory]
 
     }
  
@@ -131,6 +132,11 @@ const schema = buildSchema(`
         film_id: Int,
         title: String,
         description: String,
+    }
+
+    type FilmCategory{
+        category_id: Int,
+        category: String
     }
 
     type Store{
@@ -164,6 +170,21 @@ const root = {
                 (error) => (console.log(error))
             );
             },
+    getAllCategory: args => {
+        return db.query(
+              
+            `SELECT DISTINCT ca.category_id, ca.name as category
+            FROM film AS f
+            JOIN film_category AS fc ON f.film_id = fc.film_id
+            JOIN category AS ca ON fc.category_id = ca.category_id
+            ORDER BY ca.category_id ASC`).then(
+                    (res) => (res.rows)
+            ).catch(
+                    (error) => (console.log(error))
+            );
+            },
+
+
     getAllStore: args => {
         return db.query(
             `SELECT s.store_id, ad.address

@@ -20,6 +20,12 @@ import { MatInputModule } from '@angular/material/input';
 
 
 
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +43,9 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NgFor,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
