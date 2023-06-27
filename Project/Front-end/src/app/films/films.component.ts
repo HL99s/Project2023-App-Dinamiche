@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 
+
+
 const SEARCH_FILMS_QUERY = gql`
 query getFilm($offset: Int, $limit: Int, $filmTitle: String){
   getFilm(offset: $offset, limit: $limit, filmTitle: $filmTitle){
@@ -32,6 +34,9 @@ export class FilmsComponent implements OnInit {
   page: number = 0;
   films: any;
   searchByTitle: String = "";
+  
+
+
 
   constructor(private apollo: Apollo) {
   }
@@ -60,7 +65,10 @@ export class FilmsComponent implements OnInit {
 
   nextPage() {
     // TODO: fix: don't go to the next page if there is no more data
-    //if(this.films.rowCount < 11) {
+  console.log(this.films)
+  const numberOfElements = Object.keys(this.films.getAllFilm).length;
+  console.log(numberOfElements); // Output: 3
+    if(numberOfElements >= 10) {
       this.page++;
 
       if (this.searchByTitle != "") {
@@ -68,7 +76,7 @@ export class FilmsComponent implements OnInit {
       } else {
         this.updateAllFilms();
       }
-    //}
+    }
   }
 
   prevPage() {
@@ -82,6 +90,7 @@ export class FilmsComponent implements OnInit {
   }
 
   searchByFilm(filmTitle: String) {
+    this.page = 0;
     if (filmTitle != "") {
       this.searchByTitle = filmTitle;
       this.updateFilmsByTitle(filmTitle);
