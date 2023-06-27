@@ -9,12 +9,20 @@ import { GraphQLModule } from './graphql.module';
 import { FilmsComponent } from './films/films.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { InfoComponent } from './info/info.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 
 
 import { MatInputModule } from '@angular/material/input';
+
+
+
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -22,8 +30,9 @@ import { MatInputModule } from '@angular/material/input';
   declarations: [
     AppComponent,
     FilmsComponent,
-    HomeComponent
-    
+    HomeComponent,
+    InfoComponent
+
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,10 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    NgFor,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
