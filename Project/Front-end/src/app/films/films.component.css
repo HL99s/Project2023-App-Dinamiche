@@ -1,3 +1,66 @@
+/*.mat-column-film-id {
+    width: 10%;
+  }*/
+  
+  .mat-column-title {
+    width: 25%;
+  }
+  
+  .mat-column-description {
+    width: 45%;
+  }
+
+  .mat-column-category{
+    width: 10%;
+  }
+  
+  .mat-column-info {
+    width: 20%;
+  }
+
+  /*.button-rental {
+    width: 10%;
+  }*/
+
 .fixed-size-table{
+    width: 75%;
     table-layout: fixed;
+    margin-bottom: 40px;
 }
+
+.table-container{
+    display: flex;
+    justify-content: center;
+}
+
+.button-info{
+    /*justify-content: flex-end;*/
+    /*justify-content: center;*/
+    width: 100%;
+    
+    margin-top: 10px;
+}
+
+.description-cell {
+    white-space: pre-wrap;
+}
+
+.search-input-container{
+    /*width: 500px;*/
+    display: block;
+    justify-content: center !important;
+    /*align-items: center !important;*/
+    
+}
+
+.container-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+.film-title{
+  font-size: 22px;
+}
+
+

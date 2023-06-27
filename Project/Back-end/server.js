@@ -122,8 +122,13 @@ const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})*/
 const schema = buildSchema(`
     type Query {
        getAllFilm(offset:Int=0, limit:Int = 10): [Film],
-       getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film]
-       getAllStore: [Store]
+       getFilm(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
+
+       getAllFilmByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
+       getFilmByCategory(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
+
+       getAllStore: [Store],
+       getAllCategory(offset: Int=0): [FilmCategory]
 
     }
  
@@ -131,6 +136,12 @@ const schema = buildSchema(`
         film_id: Int,
         title: String,
         description: String,
+        name: String
+    }
+
+    type FilmCategory{
+        category_id: Int,
+        category: String
     }
 
     type Store{
@@ -142,11 +153,11 @@ const schema = buildSchema(`
 `);
 
 const root = {
-    getAllFilm: args => {
+    /*getAllFilm: args => {
         return db.query(
             `SELECT *
              FROM film
-             ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+             ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
                 (res) => (res.rows)
             ).catch(
                 (error) => (console.log(error))
@@ -158,12 +169,81 @@ const root = {
             `SELECT *
             FROM film
             WHERE title ILIKE '%${args.filmTitle}%'
-            ORDER BY film_id LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+            ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
                 (res) => (res.rows)
             ).catch(
                 (error) => (console.log(error))
             );
+            },*/
+    getAllFilm: args => {
+                return db.query(
+                    `SELECT *
+                    FROM film AS f
+                    JOIN film_category AS fc ON f.film_id = fc.film_id
+                    JOIN category AS ca ON fc.category_id = ca.category_id
+                    ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                        (res) => (res.rows)
+                    ).catch(
+                        (error) => (console.log(error))
+                    );
+                    },
+        
+    getFilm: args => {
+                return db.query(
+                    `SELECT *
+                    FROM film AS f
+                    JOIN film_category AS fc ON f.film_id = fc.film_id
+                    JOIN category AS ca ON fc.category_id = ca.category_id
+                    WHERE title ILIKE '%${args.filmTitle}%'
+                    ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                        (res) => (res.rows)
+                    ).catch(
+                        (error) => (console.log(error))
+                    );
+                    },
+    
+    getAllFilmByCategory: args => {
+                return db.query(
+                    `SELECT *
+                    FROM film AS f
+                    JOIN film_category AS fc ON f.film_id = fc.film_id
+                    JOIN category AS ca ON fc.category_id = ca.category_id
+                    WHERE ca.name = '${args.categoryName}'
+                    ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                        (res) => (res.rows)
+                    ).catch(
+                        (error) => (console.log(error))
+                    );
+                    },
+        
+    getFilmByCategory: args => {
+                return db.query(
+                    `SELECT *
+                    FROM film AS f
+                    JOIN film_category AS fc ON f.film_id = fc.film_id
+                    JOIN category AS ca ON fc.category_id = ca.category_id
+                    WHERE ca.name = '${args.categoryName}' AND f.title ILIKE '%${args.filmTitle}%'
+                    ORDER BY rental_rate DESC LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+                        (res) => (res.rows)
+                    ).catch(
+                        (error) => (console.log(error))
+                    );
+                    },
+    getAllCategory: args => {
+        return db.query(
+              
+            `SELECT DISTINCT ca.category_id, ca.name as category
+            FROM film AS f
+            JOIN film_category AS fc ON f.film_id = fc.film_id
+            JOIN category AS ca ON fc.category_id = ca.category_id
+            ORDER BY ca.category_id ASC`).then(
+                    (res) => (res.rows)
+            ).catch(
+                    (error) => (console.log(error))
+            );
             },
+
+
     getAllStore: args => {
         return db.query(
             `SELECT s.store_id, ad.address
