@@ -63,7 +63,7 @@
       <col class="mat-column-language mdl-data-table__cell--non-numeric">
       <col class="mat-column-price mdl-data-table__cell">
       <col class="mat-column-info mdl-data-table__cell--non-numeric">
-      
+
     </colgroup>
     <tr>
       <!--<th class="mdl-data-table__cell--non-numeric">Film_id</th>-->
@@ -80,7 +80,7 @@
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric">{{film.film_title}}</td>
+        <td class="title-cell film-title mdl-data-table__cell--non-numeric"><a  href="openInfo:;" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
         <td class="year-cell mdl-data-table__cell--non-numeric ">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric">{{film.category}}</td>
@@ -98,14 +98,14 @@
     <ng-template [ngIf]="searchByTitle != ''">
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric">{{film.film_title}}</td>
+        <td class="title-cell film-title mdl-data-table__cell--non-numeric"><a  href="openInfo:;" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
         <td class="year-cell mdl-data-table__cell--non-numeric ">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric">{{film.category}}</td>
         <td class="language-cell mdl-data-table__cell--non-numeric">{{film.language}}</td>
         <td class="price-cell mdl-data-table__cell">{{film.cost | currency}}</td>
         <td>
-
+          <button mat-button (click)="openInfo(film.film_id)">Info</button>
         </td>
         <td>
           <button class="button-info" mat-raised-button color="primary">Rental</button>
@@ -116,5 +116,4 @@
 
   </table>
 </div>
-
 
