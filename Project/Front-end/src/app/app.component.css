@@ -3,3 +3,26 @@
   display: flex;
   justify-content: center;
 }
+
+
+.link_style {
+  display: inline-block !important;
+  text-decoration: none !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+
+.link_style:hover {
+  text-decoration: underline !important;
+}
+
+.link_style_side {
+  display: inline-block !important;
+  text-decoration: none !important;
+  color: rgb(0, 0, 0) !important;
+  cursor: pointer !important;
+}
+
+.link_style_side:hover {
+  text-decoration: underline !important;
+}
