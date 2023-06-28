@@ -7,12 +7,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import gql from 'graphql-tag';
 import { RentalComponent } from '../rental/rental.component';
 
-const FILM_BY_ID = gql`
-query getFilmById($id: Int){
-  getFilmById(id: $id){
+const FILM_INFO_BY_ID = gql`
+query getFilmInfoById($filmId: Int){
+  getFilmInfoById(filmId: $filmId){
     film_title
     release_year
+    language
+    length
+    category
     description
+    rating
+    cost
   }
 }
 `;
@@ -40,8 +45,8 @@ export class InfoComponent implements OnInit{
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
     this.apollo.query({
-      query: FILM_BY_ID,
-      variables: {id: this.arg.film_id}
+      query: FILM_INFO_BY_ID,
+      variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading})=>{
       this.film = data
     })

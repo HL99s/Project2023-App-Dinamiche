@@ -1,12 +1,15 @@
-<h2 mat-dialog-title>Film Info</h2>
+<h2 mat-dialog-title>{{film.getFilmInfoById.film_title}}</h2>
 <mat-dialog-content class="mat-typography">
   <ul>
-    <li>Title: {{film.getFilmById.film_title}}</li>
-    <li>Release: {{film.getFilmById.release_year}}</li>
-    <li>Description: {{film.getFilmById.description}}</li>
-    <li>Actors: <span *ngFor="let actor of actors.getFilmActors; let la = last">{{actor.first_name}} {{actor.last_name}}<span *ngIf="!la">, </span></span></li>
+    <li><b>Rating</b>: {{film.getFilmInfoById.rating}}</li>
+    <li><b>Release</b>: {{film.getFilmInfoById.release_year}}</li>
+    <li><b>Language</b>: {{film.getFilmInfoById.language}}</li>
+    <li><b>Duration</b>: {{film.getFilmInfoById.length}} min</li>
+    <li><b>Category</b>: {{film.getFilmInfoById.category}}</li>
+    <li><b>Description</b>: {{film.getFilmInfoById.description}}</li>
+    <li><b>Actors</b>: <span *ngFor="let actor of actors.getFilmActors; let la = last">{{actor.first_name}} {{actor.last_name}}<span *ngIf="!la">, </span></span></li>
+    <li><b>Price</b>: {{film.getFilmInfoById.cost | currency}}</li>
   </ul>
-
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
