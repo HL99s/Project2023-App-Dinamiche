@@ -55,6 +55,7 @@ const schema = buildSchema(`
        getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
        getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
        getFilmById(id: Int): Film,
+       getFilmInfoById(filmId: Int): Film
        
        getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
        getFilmByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
@@ -73,7 +74,8 @@ const schema = buildSchema(`
         category: String,
         language: String, 
         cost: Float,
-        description: String
+        description: String,
+        length: Int
     }
 
     type Actor{
@@ -127,6 +129,8 @@ const root = {
             (error) => (console.log(error))
         );
     },
+
+
     getFilmById: args => {
         return db.query(
             `SELECT film_id, title as film_title, description, release_year, rental_rate as cost
@@ -136,7 +140,22 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
-    }, 
+    },
+
+    getFilmInfoById: args => {
+        return db.query(
+            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.length, description, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
+            FROM film AS f
+            JOIN film_category AS fc ON f.film_id = fc.film_id
+            JOIN category AS ca ON fc.category_id = ca.category_id
+            JOIN language as l ON l.language_id = f.language_id
+            WHERE f.film_id = ${args.filmId}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+
     //ok
     getFilmsByCategory: args => {
         return db.query(
