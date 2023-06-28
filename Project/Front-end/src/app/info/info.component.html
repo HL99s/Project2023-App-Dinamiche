@@ -1,5 +1,11 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">{{data.film_id}}</mat-dialog-content>
+<h2 mat-dialog-title>Film Info</h2>
+<mat-dialog-content class="mat-typography">
+  <ul>
+    <li>Titolo: {{film.getFilmById.film_title}}</li>
+    <li>Anno: {{film.getFilmById.release_year}}</li>
+    <li>Descrizione: {{film.getFilmById.description}}</li>
+  </ul>
+</mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Noleggia</button>
