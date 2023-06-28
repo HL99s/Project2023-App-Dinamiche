@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { InfoComponent } from '../info/info.component';
 
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
@@ -72,7 +74,7 @@ export class FilmsComponent implements OnInit {
 
   filmCategory: any;
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -188,6 +190,10 @@ export class FilmsComponent implements OnInit {
 
   onCategoryChange(event: any) {
     console.log(`Categoria: ${this.selectedCategoryOption}`)
+  }
+
+  openInfo(val: any){
+    this.dialog.open(InfoComponent, {data: {film_id: val}})
   }
 
 }
