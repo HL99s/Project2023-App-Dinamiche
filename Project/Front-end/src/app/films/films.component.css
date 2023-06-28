@@ -1,6 +1,7 @@
-.mat-column-title{
-  width: 30%;
+/*.mat-column-title{
+  width: 50%;
 }
+
 .mat-column-year{
   width: 10%;
 }
@@ -19,12 +20,16 @@
 .mat-column-info{
   width: 10%;
 }
-
+*/
 
 
 
 .fixed-size-table{
-    width: 75%;
+    /*width: 75%;
+    table-layout: fixed;
+    margin-bottom: 40px;*/
+
+    width: 100%;
     table-layout: fixed;
     margin-bottom: 40px;
 }
@@ -56,10 +61,46 @@
   }
   
 .film-title{
-  font-size: 22px;
+  font-size: 17px;
 }
 
 a { color: black; }
 a:active { color: gray; }
 a:visited { color: grey; }
 
+.mat-column-info {
+  white-space: nowrap;
+  width: auto;
+}
+
+.year-cell {
+  max-width: 100px; /* Regola la larghezza massima a tuo piacimento */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.align-center {
+  text-align: center;
+  align-items: center;
+}
+
+.search-input-container{
+  margin-right: 20px;
+}
+
+.paging{
+  text-align: center;
+}
+
+.page-number{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.material-icons{
+  font-size: 40px;
+}
+
+th{
+  font-size: 20px;
+}
