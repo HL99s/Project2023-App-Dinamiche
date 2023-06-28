@@ -25,7 +25,6 @@ export class InfoComponent implements OnInit{
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any){}
   ngOnInit(): void {
-    console.log((this.arg.film_id))
     this.apollo.query({
       query: FILM_BY_ID,
       variables: {id: this.arg.film_id}
