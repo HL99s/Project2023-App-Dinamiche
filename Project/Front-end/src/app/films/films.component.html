@@ -12,7 +12,7 @@
     </mat-form-field>
   </div>
 
-  
+
   <mat-form-field>
     <mat-label>Film Category</mat-label>
     <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange($event)">
@@ -28,7 +28,7 @@
   </mat-form-field>
 
 
-  
+
 
 
 </div>
@@ -63,7 +63,7 @@
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a  href="openInfo:;" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
+        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a  href="openInfo:void(0);" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
         <td class="year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric align-center">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
@@ -78,7 +78,7 @@
     <ng-template [ngIf]="searchByTitle != ''">
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a  href="openInfo:;" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
+        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a  href="openInfo:void(0);" (click)="openInfo(film.film_id)">{{film.film_title}}</a></td>
         <td class="year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric align-center ">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
