@@ -1,29 +1,35 @@
-/*.mat-column-film-id {
-    width: 10%;
-  }*/
-  
-  .mat-column-title {
-    width: 25%;
-  }
-  
-  .mat-column-description {
-    width: 45%;
-  }
+/*.mat-column-title{
+  width: 50%;
+}
 
-  .mat-column-category{
-    width: 10%;
-  }
-  
-  .mat-column-info {
-    width: 20%;
-  }
+.mat-column-year{
+  width: 10%;
+}
+.mat-column-rating{
+  width: 10%;
+}
+.mat-column-category{
+  width: 10%;
+}
+.mat-column-language{
+  width: 10%;
+}
+.mat-column-price{
+  width: 10%;
+}
+.mat-column-info{
+  width: 10%;
+}
+*/
 
-  /*.button-rental {
-    width: 10%;
-  }*/
+
 
 .fixed-size-table{
-    width: 75%;
+    /*width: 75%;
+    table-layout: fixed;
+    margin-bottom: 40px;*/
+
+    width: 100%;
     table-layout: fixed;
     margin-bottom: 40px;
 }
@@ -34,23 +40,18 @@
 }
 
 .button-info{
-    /*justify-content: flex-end;*/
-    /*justify-content: center;*/
     width: 100%;
-    
     margin-top: 10px;
 }
 
-.description-cell {
-    white-space: pre-wrap;
+
+.title-cell{
+  white-space: pre-wrap;
 }
 
 .search-input-container{
-    /*width: 500px;*/
     display: block;
-    justify-content: center !important;
-    /*align-items: center !important;*/
-    
+    justify-content: center !important;   
 }
 
 .container-search {
@@ -60,7 +61,46 @@
   }
   
 .film-title{
-  font-size: 22px;
+  font-size: 17px;
 }
 
+a { color: black; }
+a:active { color: gray; }
+a:visited { color: grey; }
 
+.mat-column-info {
+  white-space: nowrap;
+  width: auto;
+}
+
+.year-cell {
+  max-width: 100px; /* Regola la larghezza massima a tuo piacimento */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.align-center {
+  text-align: center;
+  align-items: center;
+}
+
+.search-input-container{
+  margin-right: 20px;
+}
+
+.paging{
+  text-align: center;
+}
+
+.page-number{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.material-icons{
+  font-size: 40px;
+}
+
+th{
+  font-size: 20px;
+}
