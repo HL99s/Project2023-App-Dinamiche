@@ -55,12 +55,13 @@ const schema = buildSchema(`
        getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
        getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
        getFilmById(id: Int): Film,
-
+       
        getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
        getFilmByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
 
        getAllStores: [Store],
-       getAllCategories: [FilmCategory]
+       getAllCategories: [FilmCategory],
+       getFilmActors(filmId: Int): [Actor],
 
     }
  
@@ -73,6 +74,12 @@ const schema = buildSchema(`
         language: String, 
         cost: Float,
         description: String
+    }
+
+    type Actor{
+        actor_id: Int,
+        first_name: String,
+        last_name: String
     }
 
     type FilmCategory{
@@ -183,7 +190,19 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
+    },
+    getFilmActors: args => {
+        return db.query(
+            `SELECT *
+             FROM film_actor as fa JOIN actor as act
+             ON fa.actor_id = act.actor_id
+             WHERE fa.film_id = ${args.filmId}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
+    
 
 }
 
