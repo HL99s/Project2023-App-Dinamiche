@@ -4,9 +4,14 @@
     <li>Title: {{film.getFilmById.film_title}}</li>
     <li>Release: {{film.getFilmById.release_year}}</li>
     <li>Description: {{film.getFilmById.description}}</li>
+    <li>Actors: <span *ngFor="let actor of actors.getFilmActors; let la = last">{{actor.first_name}} {{actor.last_name}}<span *ngIf="!la">, </span></span></li>
   </ul>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="openRental()">Rental</button>
 </mat-dialog-actions>
+
+
+

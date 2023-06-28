@@ -17,6 +17,15 @@ query getFilmById($id: Int){
 }
 `;
 
+const FILM_ACTORS = gql`
+query getFilmActors($filmId: Int){
+  getFilmActors(filmId: $filmId){
+    first_name
+    last_name
+  }
+}
+`;
+
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
@@ -25,6 +34,8 @@ query getFilmById($id: Int){
 export class InfoComponent implements OnInit{
 
   film: any;
+  actors: any;
+  size: Number;
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
@@ -33,6 +44,13 @@ export class InfoComponent implements OnInit{
       variables: {id: this.arg.film_id}
     }).subscribe(({data, loading})=>{
       this.film = data
+    })
+
+    this.apollo.query({
+      query: FILM_ACTORS,
+      variables: {filmId: this.arg.film_id}
+    }).subscribe(({data, loading})=>{
+      this.actors = data
     })
   }
   openRental(){
