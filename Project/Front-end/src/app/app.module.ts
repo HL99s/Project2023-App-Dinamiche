@@ -10,6 +10,7 @@ import { FilmsComponent } from './films/films.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
+import { RentalComponent } from './rental/rental.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     FilmsComponent,
     HomeComponent,
-    InfoComponent
+    InfoComponent,
+    RentalComponent
 
   ],
   imports: [

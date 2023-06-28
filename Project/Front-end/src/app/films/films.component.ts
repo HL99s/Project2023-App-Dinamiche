@@ -3,6 +3,7 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { InfoComponent } from '../info/info.component';
+import { RentalComponent } from '../rental/rental.component';
 
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
@@ -206,6 +207,10 @@ export class FilmsComponent implements OnInit {
 
   openInfo(val: any){
     this.dialog.open(InfoComponent, {data: {film_id: val}})
+  }
+
+  openRental(id: any){
+    this.dialog.open(RentalComponent, {data: {film_id: id}})
   }
 
 }
