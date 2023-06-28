@@ -122,7 +122,7 @@ const root = {
     },
     getFilmById: args => {
         return db.query(
-            `SELECT film_id, title as film_title, description, release_year
+            `SELECT film_id, title as film_title, description, release_year, rental_rate as cost
             FROM film
             WHERE film_id = ${args.id}`).then(
             (res) => (res.rows[0])
