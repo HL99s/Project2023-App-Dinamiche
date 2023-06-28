@@ -5,100 +5,96 @@
   </mat-form-field>
 </form>-->
 
-<div class = "container-search">
-<div  class="search-input-container">
-  <mat-form-field appearance = "outline">
-    <input matInput placeholder="Search" #box (keyup.enter)="searchByFilm(box.value)">
+<div class="container-search">
+  <div class="search-input-container">
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Search" #box (keyup.enter)="searchByFilm(box.value)">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Film Category</mat-label>
+    <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange($event)">
+
+      <mat-option value="All">All</mat-option>
+
+      <mat-option *ngFor="let category of filmCategory" [value]="category.category">
+        {{category.category}}
+      </mat-option>
+
+
+    </mat-select>
   </mat-form-field>
-</div>
-
-<mat-form-field>
-  <mat-label>Film Category</mat-label>
-  <mat-select [(value)] = "selectedCategoryOption" (selectionChange) = "onCategoryChange($event)">
-    
-    <mat-option value="All">All</mat-option>
-
-    <mat-option *ngFor="let category of filmCategory" [value] = "category.category">
-      {{category.category}}
-    </mat-option>
-
-    
-  </mat-select>
-</mat-form-field>
 
 
-<div class="paging">
+  <div class="paging">
 
-  <button
-    class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="prevPage()"
-  >
-    <i class="material-icons">arrow_back</i>
-  </button>
+    <button
+      class="mdl-button mdl-js-button mdl-button--colored"
+      (click)="prevPage()"
+    >
+      <i class="material-icons">arrow_back</i>
+    </button>
 
-  Page {{page+1}}
+    Page {{page + 1}}
 
-  <button
-    class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="nextPage()"
-  >
-    <i class="material-icons">arrow_forward</i>
-  </button>
+    <button
+      class="mdl-button mdl-js-button mdl-button--colored"
+      (click)="nextPage()"
+    >
+      <i class="material-icons">arrow_forward</i>
+    </button>
 
-</div>
-
-
-
+  </div>
 
 
 </div>
 
 
-
-<div class = "table-container">
-<table
-  class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
-  <colgroup>
-    <!--<col class="mat-column-film-id mdl-data-table__cell--non-numeric">-->
-    <col class="mat-column-title mdl-data-table__cell--non-numeric">
-    <col class="mat-column-description mdl-data-table__cell--non-numeric">
-    <col class="mat-column-category mdl-data-table__cell--non-numeric">
-    <col class="mat-column-info mdl-data-table__cell--non-numeric">
-  </colgroup>
-  <tr>
-    <!--<th class="mdl-data-table__cell--non-numeric">Film_id</th>-->
-    <th class="mdl-data-table__cell--non-numeric">Title</th>
-    <th class="mdl-data-table__cell--non-numeric">Description</th>
-    <th class="mdl-data-table__cell--non-numeric">Category</th>
-    <th class="mdl-data-table__cell--non-numeric">Info</th>
-  </tr>
-
-  <ng-template [ngIf] = "searchByTitle == ''">
-  <tr *ngFor="let film of films.getAllFilm">
-    <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-    <td class="description-cell film-title mdl-data-table__cell--non-numeric">{{film.title}}</td>
-    <td class="description-cell mdl-data-table__cell--non-numeric ">{{film.description}}</td>
-    <td class="mdl-data-table__cell--non-numeric">{{film.name}}</td>
-    <td>
-      <button class="button-info" mat-raised-button color="primary">Rental</button>
-    </td>
-  </tr>
-  </ng-template>
-
-  <ng-template [ngIf] = "searchByTitle != ''">
-    <tr *ngFor="let film of films.getFilm">
-      <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-      <td class="description-cell film-title mdl-data-table__cell--non-numeric">{{film.title}}</td>
-      <td class="description-cell mdl-data-table__cell--non-numeric ">{{film.description}}</td>
-      <td class="mdl-data-table__cell--non-numeric">{{film.name}}</td>
-      <td>
-        <button class="button-info"  mat-raised-button color="primary">Rental</button>
-      </td>
+<div class="table-container">
+  <table
+    class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
+    <colgroup>
+      <!--<col class="mat-column-film-id mdl-data-table__cell--non-numeric">-->
+      <col class="mat-column-title mdl-data-table__cell--non-numeric">
+      <col class="mat-column-description mdl-data-table__cell--non-numeric">
+      <col class="mat-column-category mdl-data-table__cell--non-numeric">
+      <col class="mat-column-info mdl-data-table__cell--non-numeric">
+    </colgroup>
+    <tr>
+      <!--<th class="mdl-data-table__cell--non-numeric">Film_id</th>-->
+      <th class="mdl-data-table__cell--non-numeric">Title</th>
+      <th class="mdl-data-table__cell--non-numeric">Description</th>
+      <th class="mdl-data-table__cell--non-numeric">Category</th>
+      <th class="mdl-data-table__cell--non-numeric">Info</th>
     </tr>
-  </ng-template>
+
+    <ng-template [ngIf]="searchByTitle == ''">
+      <tr *ngFor="let film of films">
+        <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
+        <td class="description-cell film-title mdl-data-table__cell--non-numeric">{{film.title}}</td>
+        <td class="description-cell mdl-data-table__cell--non-numeric ">{{film.description}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{film.name}}</td>
+        <td>
+          <button class="button-info" mat-raised-button color="primary">Rental</button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template [ngIf]="searchByTitle != ''">
+      <tr *ngFor="let film of films">
+        <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
+        <td class="description-cell film-title mdl-data-table__cell--non-numeric">{{film.title}}</td>
+        <td class="description-cell mdl-data-table__cell--non-numeric ">{{film.description}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{film.name}}</td>
+        <td>
+          <button class="button-info" mat-raised-button color="primary">Rental</button>
+        </td>
+      </tr>
+    </ng-template>
 
 
-</table>
+  </table>
 </div>
 
 
