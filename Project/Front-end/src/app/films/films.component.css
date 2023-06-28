@@ -1,26 +1,27 @@
-/*.mat-column-film-id {
-    width: 10%;
-  }*/
-  
-  .mat-column-title {
-    width: 25%;
-  }
-  
-  .mat-column-description {
-    width: 45%;
-  }
+.mat-column-title{
+  width: 20%;
+}
+.mat-column-year{
+  width: 10%;
+}
+.mat-column-rating{
+  width: 10%;
+}
+.mat-column-category{
+  width: 10%;
+}
+.mat-column-language{
+  width: 10%;
+}
+.mat-column-price{
+  width: 10%;
+}
+.mat-column-info{
+  width: 10%;
+}
 
-  .mat-column-category{
-    width: 10%;
-  }
-  
-  .mat-column-info {
-    width: 20%;
-  }
 
-  /*.button-rental {
-    width: 10%;
-  }*/
+
 
 .fixed-size-table{
     width: 75%;
@@ -41,8 +42,9 @@
     margin-top: 10px;
 }
 
-.description-cell {
-    white-space: pre-wrap;
+
+.title-cell{
+  white-space: pre-wrap;
 }
 
 .search-input-container{

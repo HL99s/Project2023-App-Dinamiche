@@ -9,9 +9,12 @@ const FILMS_WITH_CATEGORY_QUERY = gql`
 query getAllFilmsWithCategory($offset: Int!) {
   getAllFilmsWithCategory(offset: $offset, limit: 10) {
     film_id
-    title
-    description,
-    name
+    film_title
+    release_year
+    rating
+    category,
+    language,
+    cost
   }
 }
 `;
@@ -20,9 +23,12 @@ const FILMS_BY_TITLE_QUERY = gql`
 query getFilmsByTitle($offset: Int, $filmTitle: String){
   getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
     film_id
-    title
-    description,
-    name
+    film_title
+    release_year
+    rating
+    category,
+    language,
+    cost
   }
 }
 `;
@@ -31,9 +37,12 @@ const FILMS_BY_CATEGORY_QUERY = gql`
 query getFilmsByCategory($offset: Int, $categoryName: String!) {
   getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
     film_id
-    title
-    description,
-    name
+    film_title
+    release_year
+    rating
+    category,
+    language,
+    cost
   }
 }
 `;
@@ -42,9 +51,12 @@ const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
 query getFilmByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
   getFilmByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
     film_id
-    title
-    description,
-    name
+    film_title
+    release_year
+    rating
+    category,
+    language,
+    cost
   }
 }
 `;
