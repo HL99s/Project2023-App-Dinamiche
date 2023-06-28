@@ -10,10 +10,12 @@ import { FilmsComponent } from './films/films.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
+import { RentalComponent } from './rental/rental.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     FilmsComponent,
     HomeComponent,
-    InfoComponent
+    InfoComponent,
+    RentalComponent
 
   ],
   imports: [
@@ -45,7 +48,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatButtonModule,
     NgFor,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
