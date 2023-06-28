@@ -58,7 +58,7 @@ const schema = buildSchema(`
        getFilmInfoById(filmId: Int): Film
        
        getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
-       getFilmByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
+       getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
 
        getAllStores: [Store],
        getAllCategories: [FilmCategory],
@@ -93,19 +93,23 @@ const schema = buildSchema(`
         store_id: Int,
         address: String,
     }
-
 `);
 
 const root = {
-    //ok
     getAllFilmsWithCategory: args => {
         return db.query(
-            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
-            FROM film AS f
-            JOIN film_category AS fc ON f.film_id = fc.film_id
-            JOIN category AS ca ON fc.category_id = ca.category_id
-            JOIN language as l ON l.language_id = f.language_id
-            ORDER BY title 
+            `SELECT f.film_id,
+                    f.title as film_title,
+                    f.release_year as release_year,
+                    f.rating as rating,
+                    ca.name as category,
+                    l.name as language,
+                    f.rental_rate as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             ORDER BY title
              LIMIT ${args.limit} OFFSET ${args.offset}`).then(
             (res) => (res.rows)
         ).catch(
@@ -113,29 +117,33 @@ const root = {
         );
     },
 
-    //ok
     getFilmsByTitle: args => {
         return db.query(
-            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
-            FROM film AS f
-            JOIN film_category AS fc ON f.film_id = fc.film_id
-            JOIN category AS ca ON fc.category_id = ca.category_id
-            JOIN language as l ON l.language_id = f.language_id
-            WHERE title ILIKE '%${args.filmTitle}%'
-            ORDER BY title
+            `SELECT f.film_id,
+                    f.title as film_title,
+                    f.release_year as release_year,
+                    f.rating as rating,
+                    ca.name as category,
+                    l.name as language,
+                    f.rental_rate as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             WHERE title ILIKE '%${args.filmTitle}%'
+             ORDER BY title
              LIMIT ${args.limit} OFFSET ${args.offset}`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
         );
     },
-
 
     getFilmById: args => {
         return db.query(
             `SELECT film_id, title as film_title, description, release_year, rental_rate as cost
-            FROM film
-            WHERE film_id = ${args.id}`).then(
+             FROM film
+             WHERE film_id = ${args.id}`).then(
             (res) => (res.rows[0])
         ).catch(
             (error) => (console.log(error))
@@ -144,50 +152,71 @@ const root = {
 
     getFilmInfoById: args => {
         return db.query(
-            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.length, description, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
-            FROM film AS f
-            JOIN film_category AS fc ON f.film_id = fc.film_id
-            JOIN category AS ca ON fc.category_id = ca.category_id
-            JOIN language as l ON l.language_id = f.language_id
-            WHERE f.film_id = ${args.filmId}`).then(
+            `SELECT f.film_id,
+                    f.title as film_title,
+                    f.release_year as release_year,
+                    f.length,
+                    description,
+                    f.rating as rating,
+                    ca.name as category,
+                    l.name as language,
+                    f.rental_rate as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             WHERE f.film_id = ${args.filmId}`).then(
             (res) => (res.rows[0])
         ).catch(
             (error) => (console.log(error))
         );
     },
 
-    //ok
     getFilmsByCategory: args => {
         return db.query(
-            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
-            FROM film AS f
-            JOIN film_category AS fc ON f.film_id = fc.film_id
-            JOIN category AS ca ON fc.category_id = ca.category_id
-            JOIN language as l ON l.language_id = f.language_id
-            WHERE ca.name = '${args.categoryName}'
-            ORDER BY title
+            `SELECT f.film_id,
+                    f.title as film_title,
+                    f.release_year as release_year,
+                    f.rating as rating,
+                    ca.name as category,
+                    l.name as language,
+                    f.rental_rate as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             WHERE ca.name = '${args.categoryName}'
+             ORDER BY title
              LIMIT ${args.limit} OFFSET ${args.offset}`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
         );
     },
-    //ok
-    getFilmByCategoryAndTitle: args => {
+
+    getFilmsByCategoryAndTitle: args => {
         return db.query(
-            `SELECT f.film_id, f.title as film_title, f.release_year as release_year, f.rating as rating, ca.name as category, l.name as language, f.rental_rate as cost
-            FROM film AS f
-            JOIN film_category AS fc ON f.film_id = fc.film_id
-            JOIN category AS ca ON fc.category_id = ca.category_id
-            JOIN language as l ON l.language_id = f.language_id
-            WHERE ca.name = '${args.categoryName}' AND f.title ILIKE '%${args.filmTitle}%'
-            ORDER BY f.title
+            `SELECT f.film_id,
+                    f.title as film_title,
+                    f.release_year as release_year,
+                    f.rating as rating,
+                    ca.name as category,
+                    l.name as language,
+                    f.rental_rate as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             WHERE ca.name = '${args.categoryName}'
+               AND f.title ILIKE '%${args.filmTitle}%'
+             ORDER BY f.title
              LIMIT ${args.limit} OFFSET ${args.offset}`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
         );
     },
+
     getAllCategories: args => {
         return db.query(
             `SELECT DISTINCT category_id, name as category
@@ -210,19 +239,19 @@ const root = {
             (error) => (console.log(error))
         );
     },
+
     getFilmActors: args => {
         return db.query(
             `SELECT *
-             FROM film_actor as fa JOIN actor as act
-             ON fa.actor_id = act.actor_id
+             FROM film_actor as fa
+                      JOIN actor as act
+                           ON fa.actor_id = act.actor_id
              WHERE fa.film_id = ${args.filmId}`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
         );
     }
-    
-
 }
 
 app.use('/graphql', graphqlHTTP({
