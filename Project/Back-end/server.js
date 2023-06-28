@@ -54,6 +54,7 @@ const schema = buildSchema(`
     type Query {
        getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
        getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
+       getFilmById(film_id: Int): Film,
 
        getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
        getFilmByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
@@ -66,6 +67,7 @@ const schema = buildSchema(`
     type Film{
         film_id: Int,
         film_title: String,
+        description: String,
         release_year: Int,
         rating: String,
         category: String,
@@ -118,6 +120,16 @@ const root = {
             (error) => (console.log(error))
         );
     },
+    getFilmById: args => {
+        return db.query(
+            `SELECT film_id, title as film_title, description, release_year
+            FROM film
+            WHERE film_id = ${args.film_id}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    }, 
     //ok
     getFilmsByCategory: args => {
         return db.query(
