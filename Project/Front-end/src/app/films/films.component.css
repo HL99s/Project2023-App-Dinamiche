@@ -83,3 +83,24 @@ a:visited { color: grey; }
   text-align: center;
   align-items: center;
 }
+
+.search-input-container{
+  margin-right: 20px;
+}
+
+.paging{
+  text-align: center;
+}
+
+.page-number{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.material-icons{
+  font-size: 40px;
+}
+
+th{
+  font-size: 20px;
+}
