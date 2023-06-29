@@ -1,244 +1,148 @@
-
-.link_style {
-  /*display: inline-block !important;*/
-  text-decoration: underline !important;
-  color: black !important;
-  cursor: pointer !important;
-}
-
-
-.fixed-size-table {
-  width: 100%;
-  table-layout: fixed;
-  margin-bottom: 40px;
-}
-
-.table-container {
-  display: flex;
-  justify-content: center;
-}
-
-/*Cambio visualizzazione per schermi piccoli*/
-@media (max-width: 600px) {
-  th, td {
-    width: 100%;
+/* Schermo extra small (telefoni) */
+@media screen and (max-width: 480px) {
+  /* Regole CSS per lo schermo extra small */
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
   }
 
-  th {
-    font-size: 14px !important;
-  }
-
-  td:before {
-    content: attr(data-label);
-    font-weight: bold;
-    display: inline-block;
-    width: 50%;
-    margin-right: 5px;
-  }
-
-  .film-title {
-    font-size: 14px !important;
-    z-index: 1;
-  }
-
-  .year-cell {
-    font-size: 10px !important;
-    padding-right: 0 !important;
-    padding-left: 5px !important;
-  }
-
-  .rating-cell {
-    padding-right: 0 !important;
-  }
-
-  .category-cell {
-    padding-left: 0 !important;
-  }
-
-  .language-cell {
-    padding-left: 40px !important;
-  }
-
-  .button-cell {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .button-info {
-    display: flex;
-    width: 1px !important;
-    font-size: 10px !important;
-  }
-
-  .button-info {
-    /*width: 1% !important;*/
-    margin-top: 10px;
-  }
-
-}
-
-/*Cambio visualizzazione per schermi piccoli 400*/
-@media (max-width: 480px) {
-
- 
-
-  .container-search {
-    display: flex !important;
-    flex-direction: column !important;
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
     justify-content: center;
   }
 
-  th, td {
+  /*All the <table>*/
+  .fixed-size-table{
     width: 100%;
+    table-layout:fixed;
+    margin-bottom: 40px;
   }
 
-  th {
-    font-size: 10px !important;
+  .title-cell {
+    white-space: pre-wrap;
   }
 
-  td{
-    font-size: 8px !important;
-  }
-
-  td:before {
-    content: attr(data-label);
-    font-weight: bold;
-    display: inline-block;
-    width: 50%;
-    margin-right: 5px;
-  }
-
-
-  .film-title{
-    text-align: left !important;
-    font-size: 9px !important;
-    z-index: 1;
-  }
-  
-  .year-cell{
-    /*font-size: 5px !important;*/
-    text-align: left !important;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-
-  }
-
-  .rating-cell {
-    padding-right: 0 !important;
-  }
-
-  .category-cell {
-    padding-left: 0 !important;
-  }
-
-
-  .language-cell{
-    padding-left: 20px !important;
-
-  }
-
-  .button-cell {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .button-info {
-    display: flex;
-    width: 1px !important;
-    font-size: 10px !important;
-  }
-
-
-.button-info{
-  /*width: 1% !important;*/
-  margin-top: 10px;
-}
-
-.cell{
-  margin-top:0px !important;
-  margin-bottom:0px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
  
+}
+
+/* Schermo small (tablet verticali) */
+@media screen and (min-width: 480.01px) and (max-width: 767.98px) {
+  /* Regole CSS per lo schermo small */
+
+  .link_style {
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Opzionale: per allineare verticalmente al centro */
+  }
+
+  .fixed-size-table {
+    width: 100%;
+    /*table-layout: fixed;*/
+    margin-bottom: 40px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .mdl-data-table tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mdl-data-table tr th,
+  .mdl-data-table tr td {
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .cell{
+    width:100%;
+  }
+}
+
+/* Schermo medium (tablet orizzontali) */
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  /* Regole CSS per lo schermo medium */
+
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
+    justify-content: center;
+  }
+
+  /*All the <table>*/
+  .fixed-size-table{
+    width: 100%;
+    table-layout:fixed;
+    margin-bottom: 40px;
+  }
+
+  
+}
+
+/* Schermo large (desktop) */
+@media screen and (min-width: 992px) and (max-width: 1199.98px) {
+  /* Regole CSS per lo schermo large */
+
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
+    justify-content: center;
+  }
+
+  /*All the <table>*/
+  .fixed-size-table{
+    width: 100%;
+    /*table-layout:fixed;*/
+    margin-bottom: 40px;
+  }
+
+
 
 }
 
-.button-info {
-  width: 100%;
-  margin-top: 10px;
-}
+/* Schermo extra large (grandi desktop) */
+@media screen and (min-width: 1200px) {
+  /* Regole CSS per lo schermo extra large */
 
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
 
-.title-cell {
-  white-space: pre-wrap;
-}
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
+    justify-content: center;
+  }
 
-.search-input-container {
-  display: block;
-  justify-content: center !important;
-}
-
-.container-search {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.film-title {
-  font-size: 17px;
-}
-
-a {
-  color: black;
-}
-
-a:active {
-  color: gray;
-}
-
-a:visited {
-  color: grey;
-}
-
-.mat-column-info {
-  /*white-space: nowrap;*/
-  width: auto;
-}
-
-.year-cell {
-  max-width: 100px; /* Regola la larghezza massima a tuo piacimento */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.align-center {
-  text-align: center;
-  align-items: center;
-}
-
-.search-input-container {
-  margin-right: 20px;
-}
-
-.paging {
-  text-align: center;
-}
-
-.page-number {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.material-icons {
-  font-size: 40px;
-}
-
-th {
-  font-size: 20px;
+  /*All the <table>*/
+  .fixed-size-table{
+    width: 100%;
+    /*table-layout:fixed;*/
+    margin-bottom: 40px;
+  }
 }

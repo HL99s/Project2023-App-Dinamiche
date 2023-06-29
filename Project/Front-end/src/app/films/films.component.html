@@ -5,6 +5,8 @@
   </mat-form-field>
 </form>-->
 
+<!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
+
 <div class="container-search">
   <div class="search-input-container">
     <mat-form-field appearance="outline">
@@ -38,7 +40,7 @@
       <col class="mat-column-category mdl-data-table__cell--non-numeric">
       <col class="mat-column-language mdl-data-table__cell--non-numeric">
       <col class="mat-column-price mdl-data-table__cell">
-      <col class="mat-column-info mdl-data-table__cell--non-numeric">
+      <col class="mat-column-rent mdl-data-table__cell--non-numeric">
 
     </colgroup>
     <tr>
@@ -66,7 +68,7 @@
         <td class="cell price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
         <td class = "cell button-cell">
 
-          <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
+          <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>
       </tr>
