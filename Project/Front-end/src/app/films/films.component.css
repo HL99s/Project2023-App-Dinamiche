@@ -1,27 +1,82 @@
 /* Schermo extra small (telefoni) */
 @media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
-  .link_style{
+  .link_style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
   /*div that contains <table>*/
-  .table-container{
+  .table-container {
     display:flex;
     justify-content: center;
+    align-items: center; /* Opzionale: per allineare verticalmente al centro */
   }
 
-  /*All the <table>*/
-  .fixed-size-table{
+  .fixed-size-table {
     width: 100%;
-    table-layout:fixed;
+    table-layout:auto;
     margin-bottom: 40px;
   }
 
   .title-cell {
     white-space: pre-wrap;
+  }
+
+  
+  .mdl-data-table tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mdl-data-table tr th,
+  .mdl-data-table tr td {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .head-title{
+    display:none;
+  }
+
+  .before-title::before{
+    content: "Title: ";
+    text-decoration: none !important;
+  }
+
+
+  .before-year::before{
+    content: "Year: ";
+  }
+
+  .before-rating::before{
+    content: "Rating: "
+  }
+
+  .before-category:before{
+    content: "Category: "
+  }
+
+  .before-language::before{
+    content: "Language: "
+  }
+
+  .before-price::before{
+    content: "Price: "
+  }
+
+  .tr, th{
+    display:none;
+  }
+
+  .cell{
+    width:100%;
+  }
+
+  .container-search{
+    display:center;
+    flex-direction: column;
   }
 
  
@@ -39,14 +94,14 @@
 
   /*div that contains <table>*/
   .table-container {
-    display: flex;
+    display:flex;
     justify-content: center;
-    align-items: flex-start; /* Opzionale: per allineare verticalmente al centro */
+    align-items: center; /* Opzionale: per allineare verticalmente al centro */
   }
 
   .fixed-size-table {
     width: 100%;
-    /*table-layout: fixed;*/
+    table-layout:auto;
     margin-bottom: 40px;
   }
 
@@ -54,6 +109,7 @@
     white-space: pre-wrap;
   }
 
+  
   .mdl-data-table tr {
     display: flex;
     flex-direction: column;
@@ -62,11 +118,50 @@
   .mdl-data-table tr th,
   .mdl-data-table tr td {
     flex-basis: 100%;
-    text-align: left;
+    text-align: center;
+  }
+
+  .head-title{
+    display:none;
+  }
+
+  .before-title::before{
+    content: "Title: ";
+    text-decoration: none !important;
+  }
+
+
+  .before-year::before{
+    content: "Year: ";
+  }
+
+  .before-rating::before{
+    content: "Rating: "
+  }
+
+  .before-category:before{
+    content: "Category: "
+  }
+
+  .before-language::before{
+    content: "Language: "
+  }
+
+  .before-price::before{
+    content: "Price: "
+  }
+
+  .tr, th{
+    display:none;
   }
 
   .cell{
     width:100%;
+  }
+
+  .container-search{
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -93,6 +188,16 @@
     margin-bottom: 40px;
   }
 
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
+  }
+
   
 }
 
@@ -115,8 +220,18 @@
   /*All the <table>*/
   .fixed-size-table{
     width: 100%;
-    /*table-layout:fixed;*/
+    table-layout:fixed;
     margin-bottom: 40px;
+  }
+
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
   }
 
 
@@ -142,7 +257,18 @@
   /*All the <table>*/
   .fixed-size-table{
     width: 100%;
-    /*table-layout:fixed;*/
+    table-layout:fixed;
     margin-bottom: 40px;
   }
+
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
+  }
+
 }

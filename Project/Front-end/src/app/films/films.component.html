@@ -12,21 +12,20 @@
     <mat-form-field appearance="outline">
       <input matInput placeholder="Search By Title" #box (keyup.enter)="searchFilmByTitle(box.value)">
     </mat-form-field>
-  </div>
+</div>
 
 
   <mat-form-field>
     <mat-label>Film Category</mat-label>
     <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange()">
       <mat-option value="All">All</mat-option>
-      <mat-option *ngFor="let category of filmCategory" [value]="category.category">
-        {{category.category}}
+      <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-
-
 </div>
+
+
 
 
 <div class="table-container">
@@ -45,13 +44,13 @@
     </colgroup>
     <tr>
       <!--<th class="mdl-data-table__cell--non-numeric">Film_id</th>-->
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Title</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Year</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Rating</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Category</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Language</b></th>
-      <th class="mdl-data-table__cell align-center"><b>Price</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Rental</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Title</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Year</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rating</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Category</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Language</b></th>
+      <th class="mdl-data-table__cell align-center"><b class="head-title">Price</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rental</b></th>
     </tr>
 
     <ng-template [ngIf]="searchByTitle == ''">
@@ -59,13 +58,13 @@
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
 
-        <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)">{{film.film_title}}
+        <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b>{{film.film_title}}
         </td>
-        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
-        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center">{{film.rating}}</td>
-        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
-        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center">{{film.language}}</td>
-        <td class="cell price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
+        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-year"></span></b>{{film.release_year}}</td>
+        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-rating"></span></b>{{film.rating}}</td>
+        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-category"></span></b>{{film.category}}</td>
+        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-language"></span></b>{{film.language}}</td>
+        <td class="cell price-cell mdl-data-table__cell align-center"><b><span class="before-price"></span></b>{{film.cost | currency}}</td>
         <td class = "cell button-cell">
 
           <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
@@ -78,14 +77,14 @@
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
-        <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center" class="link_style" (click)="openInfo(film.film_id)">{{film.film_title}}
+        <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center" class="link_style" (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b>{{film.film_title}}
 
         </td>
-        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
-        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center ">{{film.rating}}</td>
-        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
-        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center">{{film.language}}</td>
-        <td class="cell price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
+        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-year"></span></b>{{film.release_year}}</td>
+        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center "><b><span class="before-rating"></span></b>{{film.rating}}</td>
+        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-category"></span></b>{{film.category}}</td>
+        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-language"></span></b>{{film.language}}</td>
+        <td class="cell price-cell mdl-data-table__cell align-center"><b><span class="before-price"></span></b>{{film.cost | currency}}</td>
         <td class="cell button-cell">
           <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
