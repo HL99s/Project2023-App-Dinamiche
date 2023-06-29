@@ -1,31 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule }
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpClientModule}
   from '@angular/common/http';
-import { GraphQLModule } from './graphql.module';
-import { FilmsComponent } from './films/films.component';
-import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
-import { InfoComponent } from './info/info.component';
-import { RentalComponent } from './rental/rental.component';
+import {GraphQLModule} from './graphql.module';
+import {FilmsComponent} from './films/films.component';
+import {FormsModule} from '@angular/forms';
+import {HomeComponent} from './home/home.component';
+import {InfoFilmComponent} from './infoFilm/infoFilm.component';
+import {RentalComponent} from './rental/rental.component';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-import { MatInputModule } from '@angular/material/input';
-
+import {MatInputModule} from '@angular/material/input';
 
 
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
-
-
 
 
 @NgModule({
@@ -33,7 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     FilmsComponent,
     HomeComponent,
-    InfoComponent,
+    InfoFilmComponent,
     RentalComponent
 
   ],
@@ -54,4 +51,5 @@ import {MatSelectModule} from '@angular/material/select';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
