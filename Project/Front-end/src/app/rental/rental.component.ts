@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, inject } from '@angular/core';
-import { Apollo, ApolloModule } from 'apollo-angular';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Apollo } from 'apollo-angular';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
@@ -45,7 +45,7 @@ export class RentalComponent implements OnInit {
 
 @Component({
   selector: 'after_buy',
-  templateUrl: '../html_popup/after_buy.html',
+  templateUrl: '../rentalConfirmPopUp/after_buy.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, NgIf],
 })
