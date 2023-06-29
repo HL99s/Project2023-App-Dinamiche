@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {MatDialog} from '@angular/material/dialog';
-import {InfoComponent} from '../info/info.component';
+import {InfoFilmComponent} from '../infoFilm/infoFilm.component';
 import {RentalComponent} from '../rental/rental.component';
 
 
@@ -190,7 +190,7 @@ export class FilmsComponent implements OnInit {
   }
 
   openInfo(val: any) {
-    this.dialog.open(InfoComponent, {data: {film_id: val}})
+    this.dialog.open(InfoFilmComponent, {data: {film_id: val}})
   }
 
   openRental(id: any) {

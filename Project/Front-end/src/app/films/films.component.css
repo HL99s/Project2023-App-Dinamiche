@@ -30,15 +30,15 @@
 }
 
 
-.fixed-size-table{
-    width: 100%;
-    table-layout: fixed;
-    margin-bottom: 40px;
+.fixed-size-table {
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 40px;
 }
 
-.table-container{
-    display: flex;
-    justify-content: center;
+.table-container {
+  display: flex;
+  justify-content: center;
 }
 
 /*Cambio visualizzazione per schermi piccoli*/
@@ -46,9 +46,11 @@
   th, td {
     width: 100%;
   }
-  th{
+
+  th {
     font-size: 14px !important;
   }
+
   td:before {
     content: attr(data-label);
     font-weight: bold;
@@ -57,45 +59,45 @@
     margin-right: 5px;
   }
 
-  .film-title{
+  .film-title {
     font-size: 14px !important;
     z-index: 1;
   }
-  
-  .year-cell{
+
+  .year-cell {
     font-size: 10px !important;
-    padding-right: 0px !important;
+    padding-right: 0 !important;
     padding-left: 5px !important;
   }
 
-  .rating-cell{
-    padding-right: 0px !important;
+  .rating-cell {
+    padding-right: 0 !important;
   }
 
-  .category-cell{
-    padding-left: 0px !important;
+  .category-cell {
+    padding-left: 0 !important;
   }
 
-  .language-cell{
+  .language-cell {
     padding-left: 40px !important;
   }
 
-  .button-cell{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-}
+  .button-cell {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 
-  .button-info{
+  .button-info {
     display: flex;
     width: 1px !important;
     font-size: 10px !important;
   }
 
-.button-info{
-  /*width: 1% !important;*/
-  margin-top: 10px;
-}
- 
+  .button-info {
+    /*width: 1% !important;*/
+    margin-top: 10px;
+  }
+
 }
 
 /*Cambio visualizzazione per schermi piccoli 400*/
@@ -103,9 +105,11 @@
   th, td {
     width: 100%;
   }
-  th{
+
+  th {
     font-size: 10px !important;
   }
+
   td:before {
     content: attr(data-label);
     font-weight: bold;
@@ -114,75 +118,83 @@
     margin-right: 5px;
   }
 
-  .film-title{
+  .film-title {
     font-size: 9px !important;
     z-index: 1;
   }
-  
-  .year-cell{
+
+  .year-cell {
     font-size: 5px !important;
-    padding-right: 0px !important;
+    padding-right: 0 !important;
     padding-left: 5px !important;
   }
 
-  .rating-cell{
-    padding-right: 0px !important;
+  .rating-cell {
+    padding-right: 0 !important;
   }
 
-  .category-cell{
-    padding-left: 0px !important;
+  .category-cell {
+    padding-left: 0 !important;
   }
 
-  .language-cell{
+  .language-cell {
     padding-left: 40px !important;
   }
 
-  .button-cell{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-}
+  .button-cell {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 
-  .button-info{
+  .button-info {
     display: flex;
     width: 1px !important;
     font-size: 10px !important;
   }
 
-.button-info{
-  /*width: 1% !important;*/
+  .button-info {
+    /*width: 1% !important;*/
+    margin-top: 10px;
+  }
+
+}
+
+.button-info {
+  width: 100%;
   margin-top: 10px;
 }
- 
-}
-
-.button-info{
-    width: 100%;
-    margin-top: 10px;
-}
 
 
-.title-cell{
+.title-cell {
   white-space: pre-wrap;
 }
 
-.search-input-container{
-    display: block;
-    justify-content: center !important;
+.search-input-container {
+  display: block;
+  justify-content: center !important;
 }
 
 .container-search {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
-.film-title{
+.film-title {
   font-size: 17px;
 }
 
-a { color: black; }
-a:active { color: gray; }
-a:visited { color: grey; }
+a {
+  color: black;
+}
+
+a:active {
+  color: gray;
+}
+
+a:visited {
+  color: grey;
+}
 
 .mat-column-info {
   /*white-space: nowrap;*/
@@ -200,23 +212,23 @@ a:visited { color: grey; }
   align-items: center;
 }
 
-.search-input-container{
+.search-input-container {
   margin-right: 20px;
 }
 
-.paging{
+.paging {
   text-align: center;
 }
 
-.page-number{
+.page-number {
   font-size: 20px;
   margin-top: 10px;
 }
 
-.material-icons{
+.material-icons {
   font-size: 40px;
 }
 
-th{
+th {
   font-size: 20px;
 }
