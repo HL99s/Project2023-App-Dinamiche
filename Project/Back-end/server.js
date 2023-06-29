@@ -93,6 +93,8 @@ const schema = buildSchema(`
     type Store{
         store_id: Int,
         address: String,
+        city: String,
+        country: String,
     }
 `);
 
@@ -233,10 +235,14 @@ const root = {
 
     getAllStores: args => {
         return db.query(
-            `SELECT s.store_id, ad.address
+            `SELECT s.store_id, ad.address, ad.district, cit.city, cou.country
              FROM store AS s
-                      JOIN address AS ad
-                           ON s.address_id = ad.address_id`).then(
+             JOIN address AS ad
+             ON s.address_id = ad.address_id
+             JOIN city AS cit 
+             ON ad.city_id = cit.city_id
+             JOIN country AS cou
+             ON cit.country_id = cou.country_id`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
