@@ -11,6 +11,7 @@
       *ngIf="!la">, </span></span></li>
     <li><b>Price:</b> {{film.cost | currency}}</li>
     <li><b>Rental duration:</b> {{film.rental_duration}} days</li>
+    <li><b>Stores:</b> <span *ngFor="let store of stores; let la = last">{{store.address}}, {{store.city}} ({{store.country}})<br></span></li>
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions>

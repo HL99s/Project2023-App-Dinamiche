@@ -32,6 +32,16 @@ query getFilmActors($filmId: Int){
 }
 `;
 
+const STORE_INFO_DISP = gql`
+query getStoreDispByFilmId($filmId: Int){
+  getStoreDispByFilmId(filmId: $filmId){
+    address
+    city
+    country
+  }
+}
+`;
+
 @Component({
   selector: 'app-info',
   templateUrl: './infoFilm.component.html',
@@ -41,7 +51,7 @@ export class InfoFilmComponent implements OnInit {
 
   film: any;
   actors: any;
-
+  stores: any
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
   }
@@ -61,6 +71,14 @@ export class InfoFilmComponent implements OnInit {
     }).subscribe(({data, loading}) => {
       //@ts-ignore
       this.actors = data.getFilmActors
+    })
+
+    this.apollo.query({
+      query: STORE_INFO_DISP,
+      variables: {filmId: this.arg.film_id}
+    }).subscribe(({data, loading}) => {
+      //@ts-ignore
+      this.stores = data.getStoreDispByFilmId
     })
   }
 
