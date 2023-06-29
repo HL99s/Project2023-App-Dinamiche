@@ -49,22 +49,23 @@
       <th class="mdl-data-table__cell--non-numeric align-center"><b>Category</b></th>
       <th class="mdl-data-table__cell--non-numeric align-center"><b>Language</b></th>
       <th class="mdl-data-table__cell align-center"><b>Price</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b>Info</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center"><b>Rental</b></th>
     </tr>
 
     <ng-template [ngIf]="searchByTitle == ''">
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a href="openInfo:void(0);"
-                                                                                            (click)="openInfo(film.film_id)">{{film.film_title}}</a>
+        <td class="title-cell link_style film-title mdl-data-table__cell--non-numeric align-center "
+            (click)="openInfo(film.film_id)">
+          {{film.film_title}}
         </td>
         <td class="year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric align-center">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
         <td class="language-cell mdl-data-table__cell--non-numeric align-center">{{film.language}}</td>
         <td class="price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
-        <td>
+        <td class="button-cell">
           <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>
@@ -74,15 +75,16 @@
     <ng-template [ngIf]="searchByTitle != ''">
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-        <td class="title-cell film-title mdl-data-table__cell--non-numeric align-center"><a href="openInfo:void(0);"
-                                                                                            (click)="openInfo(film.film_id)">{{film.film_title}}</a>
+        <td class="link_style title-cell film-title mdl-data-table__cell--non-numeric align-center"
+            (click)="openInfo(film.film_id)">
+          {{film.film_title}}
         </td>
         <td class="year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
         <td class="rating-cell mdl-data-table__cell--non-numeric align-center ">{{film.rating}}</td>
         <td class="category-cell mdl-data-table__cell--non-numeric align-center">{{film.category}}</td>
         <td class="language-cell mdl-data-table__cell--non-numeric align-center">{{film.language}}</td>
         <td class="price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
-        <td>
+        <td class="button-cell">
           <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>

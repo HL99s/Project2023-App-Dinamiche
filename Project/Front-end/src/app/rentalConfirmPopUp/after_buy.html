@@ -1,0 +1,19 @@
+<div *ngIf="data.result; then thenBlock else elseBlock"></div>
+
+<ng-template #thenBlock>
+  <h1 mat-dialog-title>Done</h1>
+  <div mat-dialog-content>You have succesfully rented a film!</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</ng-template>
+
+<ng-template #elseBlock>
+  <h1 mat-dialog-title>Error</h1>
+  <div mat-dialog-content>An error has occured, please try again.</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</ng-template>
+
+
