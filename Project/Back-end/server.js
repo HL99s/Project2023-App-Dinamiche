@@ -75,7 +75,8 @@ const schema = buildSchema(`
         language: String, 
         cost: Float,
         description: String,
-        length: Int
+        length: Int,
+        rental_duration: Int
     }
 
     type Actor{
@@ -156,11 +157,13 @@ const root = {
                     f.title as film_title,
                     f.release_year as release_year,
                     f.length,
-                    description,
+                    f.description,
                     f.rating as rating,
                     ca.name as category,
                     l.name as language,
-                    f.rental_rate as cost
+                    f.rental_rate as cost,
+                    f.rental_duration
+                    
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
