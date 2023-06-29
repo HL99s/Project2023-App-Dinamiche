@@ -33,7 +33,8 @@ export class RentalComponent implements OnInit {
       query: FILM_BY_ID,
       variables: {id: this.arg.film_id}
     }).subscribe(({data, loading})=>{
-      this.film = data
+      //@ts-ignore
+      this.film = data.getFilmById
     })
   }
 
