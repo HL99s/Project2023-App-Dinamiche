@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, inject } from '@angular/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {NgIf} from '@angular/common';
 
 
 import  gql  from 'graphql-tag';
@@ -25,6 +25,7 @@ query getFilmById($id: Int){
 })
 export class RentalComponent implements OnInit {
   film: any;
+  res = false;
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class RentalComponent implements OnInit {
   }
 
   openPopup(){
-    this.dialog.open(AfterBuyDialog)
+    this.dialog.open(AfterBuyDialog, {data:{result: this.res}})
   }
 
 }
@@ -46,6 +47,9 @@ export class RentalComponent implements OnInit {
   selector: 'after_buy',
   templateUrl: '../html_popup/after_buy.html',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, NgIf],
 })
-export class AfterBuyDialog {}
+export class AfterBuyDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any){}
+}
+

@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
+
 import gql from 'graphql-tag';
 import { RentalComponent } from '../rental/rental.component';
 
@@ -18,6 +19,7 @@ query getFilmInfoById($filmId: Int){
     description
     rating
     cost
+    rental_duration
   }
 }
 `;
@@ -40,7 +42,7 @@ export class InfoComponent implements OnInit{
 
   film: any;
   actors: any;
-  size: Number;
+
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
@@ -48,14 +50,16 @@ export class InfoComponent implements OnInit{
       query: FILM_INFO_BY_ID,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading})=>{
-      this.film = data
+      //@ts-ignore
+      this.film = data.getFilmInfoById
     })
 
     this.apollo.query({
       query: FILM_ACTORS,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading})=>{
-      this.actors = data
+      //@ts-ignore
+      this.actors = data.getFilmActors
     })
   }
   openRental(){
