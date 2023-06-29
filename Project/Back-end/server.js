@@ -63,6 +63,7 @@ const schema = buildSchema(`
        getAllStores: [Store],
        getAllCategories: [FilmCategory],
        getFilmActors(filmId: Int): [Actor],
+       getStoreDispByFilmId(filmId: Int): [Store]
 
     }
  
@@ -93,6 +94,8 @@ const schema = buildSchema(`
     type Store{
         store_id: Int,
         address: String,
+        city: String,
+        country: String,
     }
 `);
 
@@ -233,10 +236,14 @@ const root = {
 
     getAllStores: args => {
         return db.query(
-            `SELECT s.store_id, ad.address
+            `SELECT s.store_id, ad.address, ad.district, cit.city, cou.country
              FROM store AS s
-                      JOIN address AS ad
-                           ON s.address_id = ad.address_id`).then(
+             JOIN address AS ad
+             ON s.address_id = ad.address_id
+             JOIN city AS cit 
+             ON ad.city_id = cit.city_id
+             JOIN country AS cou
+             ON cit.country_id = cou.country_id`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -250,6 +257,26 @@ const root = {
                       JOIN actor as act
                            ON fa.actor_id = act.actor_id
              WHERE fa.film_id = ${args.filmId}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getStoreDispByFilmId: args => {
+        return db.query(
+            `SELECT DISTINCT inv.store_id, ad.address, cit.city, cou.country
+            FROM inventory AS inv 
+            JOIN rental AS re ON inv.inventory_id = re.inventory_id
+            JOIN store AS st ON inv.store_id = st.store_id
+            JOIN address AS ad ON st.address_id = ad.address_id
+            JOIN city AS cit ON ad.city_id = cit.city_id
+            JOIN country AS cou ON cit.country_id = cou.country_id
+            WHERE inv.film_id=${args.filmId} AND inv.inventory_id  NOT IN (
+                SELECT inv.inventory_id
+                from inventory as inv
+                JOIN rental as re
+                ON inv.inventory_id = re.inventory_id
+                WHERE inv.film_id = ${args.filmId} and re.return_date is null)`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
