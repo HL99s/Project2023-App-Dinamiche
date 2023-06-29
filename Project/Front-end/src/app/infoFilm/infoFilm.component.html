@@ -7,7 +7,8 @@
     <li><b>Duration:</b> {{film.length}} min</li>
     <li><b>Category:</b> {{film.category}}</li>
     <li><b>Description:</b> {{film.description}}</li>
-    <li><b>Actors:</b> <span *ngFor="let actor of actors; let la = last">{{actor.first_name}} {{actor.last_name}}<span *ngIf="!la">, </span></span></li>
+    <li><b>Actors:</b> <span *ngFor="let actor of actors; let la = last">{{actor.first_name}} {{actor.last_name}}<span
+      *ngIf="!la">, </span></span></li>
     <li><b>Price:</b> {{film.cost | currency}}</li>
     <li><b>Rental duration:</b> {{film.rental_duration}} days</li>
   </ul>

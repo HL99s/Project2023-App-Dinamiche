@@ -56,6 +56,7 @@
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
+
         <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)">{{film.film_title}}
         </td>
         <td class="cell year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
@@ -64,6 +65,7 @@
         <td class="cell language-cell mdl-data-table__cell--non-numeric align-center">{{film.language}}</td>
         <td class="cell price-cell mdl-data-table__cell align-center">{{film.cost | currency}}</td>
         <td class = "cell button-cell">
+
           <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>
@@ -73,7 +75,9 @@
     <ng-template [ngIf]="searchByTitle != ''">
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
+
         <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center" class="link_style" (click)="openInfo(film.film_id)">{{film.film_title}}
+
         </td>
         <td class="cell year-cell mdl-data-table__cell--non-numeric align-center">{{film.release_year}}</td>
         <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center ">{{film.rating}}</td>
