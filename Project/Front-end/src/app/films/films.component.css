@@ -1,30 +1,7 @@
-/*.mat-column-title{
-  width: 50%;
-}
-
-.mat-column-year{
-  width: 10%;
-}
-.mat-column-rating{
-  width: 10%;
-}
-.mat-column-category{
-  width: 10%;
-}
-.mat-column-language{
-  width: 10%;
-}
-.mat-column-price{
-  width: 10%;
-}
-.mat-column-info{
-  width: 10%;
-}
-*/
 
 .link_style {
   /*display: inline-block !important;*/
-  text-decoration: none !important;
+  text-decoration: underline !important;
   color: black !important;
   cursor: pointer !important;
 }
@@ -101,13 +78,26 @@
 }
 
 /*Cambio visualizzazione per schermi piccoli 400*/
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+
+ 
+
+  .container-search {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+  }
+
   th, td {
     width: 100%;
   }
 
   th {
     font-size: 10px !important;
+  }
+
+  td{
+    font-size: 8px !important;
   }
 
   td:before {
@@ -118,15 +108,19 @@
     margin-right: 5px;
   }
 
-  .film-title {
+
+  .film-title{
+    text-align: left !important;
     font-size: 9px !important;
     z-index: 1;
   }
+  
+  .year-cell{
+    /*font-size: 5px !important;*/
+    text-align: left !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 
-  .year-cell {
-    font-size: 5px !important;
-    padding-right: 0 !important;
-    padding-left: 5px !important;
   }
 
   .rating-cell {
@@ -137,8 +131,10 @@
     padding-left: 0 !important;
   }
 
-  .language-cell {
-    padding-left: 40px !important;
+
+  .language-cell{
+    padding-left: 20px !important;
+
   }
 
   .button-cell {
@@ -152,10 +148,24 @@
     font-size: 10px !important;
   }
 
-  .button-info {
-    /*width: 1% !important;*/
-    margin-top: 10px;
-  }
+
+.button-info{
+  /*width: 1% !important;*/
+  margin-top: 10px;
+}
+
+.cell{
+  margin-top:0px !important;
+  margin-bottom:0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+ 
 
 }
 
