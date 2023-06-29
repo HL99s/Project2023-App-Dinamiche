@@ -80,6 +80,19 @@
   }
 
  
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
+
 }
 
 /* Schermo small (tablet verticali) */
@@ -163,6 +176,19 @@
     display: flex;
     align-items: center;
   }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
 }
 
 /* Schermo medium (tablet orizzontali) */
@@ -198,6 +224,22 @@
     margin-right: 30px;
   }
 
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
   
 }
 
@@ -234,7 +276,26 @@
     margin-right: 30px;
   }
 
+  .title-cell {
+    white-space: pre-wrap;
+  }
 
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
+
+  th {
+    font-size: 20px;
+  }
 
 }
 
@@ -269,6 +330,27 @@
 
   .search-input-container{
     margin-right: 30px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
+
+  th {
+    font-size: 20px;
   }
 
 }
