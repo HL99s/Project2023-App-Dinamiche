@@ -5,6 +5,7 @@ const app = express().use(cors());
 //Postgres DB
 const {db} = require('./db/connection')
 //GraphQL
+const fs = require('fs');
 const {buildSchema} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
 
@@ -20,81 +21,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
-/*
-const filmById = (id) => (
-    db.query(`SELECT *
-              FROM film
-              WHERE film_id = ${id}
-              ORDER BY film_id`).then(
-        (res) => (res.rowCount == 1 ? res.rows[0] : console.log("Sono più di uno"))
-    ).catch(
-        (error) => (console.log(error))
-    )
-)
-
-const Mutation = new GraphQLObjectType({
-    name: "Mutation",
-    fields: {
-        createFilm: {
-            type: FilmType,
-            args: {
-                title: {type: GraphQLString},
-            },
-            resolve(parent, args) {
-
-            }
-        }
-    }
-})
-
-const schema = new GraphQLSchema({query: RootQuery, mutation: Mutation})*/
-
-const schema = buildSchema(`
-    type Query {
-       getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
-       getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
-       getFilmById(id: Int): Film,
-       getFilmInfoById(filmId: Int): Film
-       
-       getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
-       getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
-
-       getAllStores: [Store],
-       getAllCategories: [FilmCategory],
-       getFilmActors(filmId: Int): [Actor],
-
-    }
- 
-    type Film{
-        film_id: Int,
-        film_title: String,
-        release_year: Int,
-        rating: String,
-        category: String,
-        language: String, 
-        cost: Float,
-        description: String,
-        length: Int,
-        rental_duration: Int
-    }
-
-    type Actor{
-        actor_id: Int,
-        first_name: String,
-        last_name: String
-    }
-
-    type FilmCategory{
-        category_id: Int,
-        category: String
-    }
-
-    type Store{
-        store_id: Int,
-        address: String,
-    }
-`);
+const schema = buildSchema(fs.readFileSync('schema.graphql', 'utf8'));
 
 const root = {
     getAllFilmsWithCategory: args => {
@@ -220,7 +147,7 @@ const root = {
         );
     },
 
-    getAllCategories: args => {
+    getAllCategories: () => {
         return db.query(
             `SELECT DISTINCT category_id, name as category
              FROM category
@@ -231,12 +158,16 @@ const root = {
         );
     },
 
-    getAllStores: args => {
+    getAllStores: () => {
         return db.query(
-            `SELECT s.store_id, ad.address
+            `SELECT s.store_id, ad.address, ad.district, cit.city, cou.country
              FROM store AS s
-                      JOIN address AS ad
-                           ON s.address_id = ad.address_id`).then(
+             JOIN address AS ad
+             ON s.address_id = ad.address_id
+             JOIN city AS cit 
+             ON ad.city_id = cit.city_id
+             JOIN country AS cou
+             ON cit.country_id = cou.country_id`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -254,6 +185,27 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
+    },
+
+    getStoreDispByFilmId: args => {
+        return db.query(
+            `SELECT DISTINCT inv.store_id, ad.address, cit.city, cou.country
+            FROM inventory AS inv 
+            JOIN rental AS re ON inv.inventory_id = re.inventory_id
+            JOIN store AS st ON inv.store_id = st.store_id
+            JOIN address AS ad ON st.address_id = ad.address_id
+            JOIN city AS cit ON ad.city_id = cit.city_id
+            JOIN country AS cou ON cit.country_id = cou.country_id
+            WHERE inv.film_id=${args.filmId} AND inv.inventory_id  NOT IN (
+                SELECT inv.inventory_id
+                from inventory as inv
+                JOIN rental as re
+                ON inv.inventory_id = re.inventory_id
+                WHERE inv.film_id = ${args.filmId} and re.return_date is null)`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
 }
 
@@ -264,13 +216,6 @@ app.use('/graphql', graphqlHTTP({
 
     })
 );
-
-// route for handling requests from the Angular client
-/*
-app.get('/api/message', (req, res) => {
-    db.query("select * from customer", (err, resd)=>{
-        res.json(resd.rows); 
-})})*/
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
