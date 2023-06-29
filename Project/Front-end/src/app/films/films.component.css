@@ -22,6 +22,12 @@
 }
 */
 
+.link_style {
+  display: inline-block !important;
+  text-decoration: none !important;
+  color: black !important;
+  cursor: pointer !important;
+}
 
 
 .fixed-size-table{
@@ -51,7 +57,7 @@
 
 .search-input-container{
     display: block;
-    justify-content: center !important;   
+    justify-content: center !important;
 }
 
 .container-search {
@@ -59,7 +65,7 @@
     flex-direction: row;
     justify-content: center;
   }
-  
+
 .film-title{
   font-size: 17px;
 }
