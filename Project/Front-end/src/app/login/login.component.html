@@ -1,20 +1,21 @@
+
 <form class="loginForm">
     <mat-form-field>
-      <input class="inputlogin" matInput placeholder="Email"  name="email" required>
+      <input class="inputlogin" [(ngModel)]="userName" matInput placeholder="Username"  name="username" required>
     </mat-form-field>
     <mat-form-field>
-      <input class="inputlogin" matInput [type]="hide ? 'password' : 'text'">
+      <input class="inputlogin" [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Login</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">Login</button>
 </form>
 
 
 
 
-    
+
 <!--
 
   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

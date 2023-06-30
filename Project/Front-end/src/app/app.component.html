@@ -1,3 +1,5 @@
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <div class="mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
@@ -11,20 +13,20 @@
         <!--Quelli in alto-->
         <li class="link_style mdl-navigation__link" routerLink="/">Home</li>
         <li class="link_style mdl-navigation__link" routerLink="/films">Films</li>
-        <!--<li
+        <li
           class="mdl-navigation__link"
-          *ngIf="!isAuthenticated"
-          (click)="login()"
+          *ngIf="!isLoggedIn"
+          routerLink="/login"
         >
           Login
         </li>
         <li
           class="mdl-navigation__link"
-          *ngIf="isAuthenticated"
-          (click)="logout()"
+          *ngIf="isLoggedIn"
+          (click)="logOut()"
         >
           Logout
-        </li> -->
+        </li>
       </ul>
     </div>
   </div>
@@ -33,20 +35,20 @@
     <ul class="mdl-navigation">
       <li class="link_style_side mdl-navigation__link" routerLink="/">Home</li>
       <li class="link_style_side mdl-navigation__link" routerLink="/films">Films</li>
-      <!--<li
+      <li
         class="mdl-navigation__link"
-        *ngIf="!isAuthenticated"
-        (click)="login()"
+        *ngIf="!isLoggedIn"
+        routerLink="/login"
       >
         Login
       </li>
       <li
         class="mdl-navigation__link"
-        *ngIf="isAuthenticated"
-        (click)="logout()"
+        *ngIf="isLoggedIn"
+        (click)="logOut()"
       >
         Logout
-      </li>  -->
+      </li>
     </ul>
   </div>
 
