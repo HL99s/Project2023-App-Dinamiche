@@ -217,6 +217,22 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
+    },
+    getRentalInfoByCustId: args => {
+        return db.query(
+            `SELECT re.customer_id, re.rental_id, f.title AS film_title, ad.address AS shop, 
+                pay.amount, pay.payment_date, re.rental_date, re.return_date 
+             FROM payment AS pay
+             JOIN rental AS re ON pay.rental_id = re.rental_id
+             JOIN inventory AS inv ON re.inventory_id = inv.inventory_id
+             JOIN film AS f ON inv.film_id = f.film_id
+             JOIN store AS sto ON inv.store_id = sto.store_id
+             JOIN address AS ad ON sto.address_id = ad.address_id
+             WHERE re.customer_id = ${args.customerId}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
 }
 

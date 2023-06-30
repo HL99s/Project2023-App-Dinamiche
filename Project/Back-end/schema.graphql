@@ -12,6 +12,8 @@ type Query {
    getFilmActors(filmId: Int): [Actor],
    getStoreDispByFilmId(filmId: Int): [Store]
 
+   getRentalInfoByCustId(customerId: Int): [RentalInfo]
+
 }
 
 type Film{
@@ -53,4 +55,17 @@ type Credentials{
     username: String,
     password: String,
     customer_id: Int
+}
+
+scalar Date
+
+type RentalInfo{
+    customer_id: Int,
+    rental_id: Int,
+    film_title: String,
+    shop: String,
+    amount: Float,
+    payment_date: Date,
+    rental_date: Date,
+    return_date: Date
 }
