@@ -44,3 +44,13 @@ type Store{
     city: String,
     country: String,
 }
+
+type Mutation{
+    signIn(username: String, password: String): Credentials
+}
+
+type Credentials{
+    username: String,
+    password: String,
+    customer_id: Int
+}
