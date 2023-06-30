@@ -78,7 +78,7 @@ export class HistoryComponent implements OnInit{
       
 
       //@ts-ignore
-      console.log(typeof(Object.entries(data.getRentalInfoByCustId)).map([Rental_Info]) => ({Rental_Info}));
+      console.log(typeof(Object.values(data.getRentalInfoByCustId)));
       /*
       this.RENTAL_DATA = new MatTableDataSource(data.getRentalInfoByCustId);
       this.RENTAL_DATA.sort = this.sort;
