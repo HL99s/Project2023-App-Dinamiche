@@ -189,11 +189,11 @@ export class FilmsComponent implements OnInit {
     this.queryRouting();
   }
 
-  openInfo(val: any) {
-    this.dialog.open(InfoFilmComponent, {data: {film_id: val}})
+  openInfo(id: number) {
+    this.dialog.open(InfoFilmComponent, {data: {film_id: id}})
   }
 
-  openRental(id: any) {
+  openRental(id: number) {
     this.dialog.open(RentalComponent, {data: {film_id: id}})
   }
 
