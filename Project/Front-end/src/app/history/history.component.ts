@@ -4,12 +4,13 @@ import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 
 
+
 export interface History {
   
   Rental_id: number;
   Amount: number,
   Rental_Date: Date,
-  Return_Data: Date,
+  Return_Date: Date,
   TotalDuration: Date
 
 }
@@ -17,7 +18,7 @@ const ELEMENT_DATA: History[] = [
   {Rental_id: 10,
     Amount: 7.99,
     Rental_Date: new Date(2022,10,10),
-    Return_Data: new Date(2022,10,20),
+    Return_Date: new Date(2022,10,20),
     TotalDuration: new Date(2022, 10, 10)},
   
 ];
@@ -30,10 +31,12 @@ const ELEMENT_DATA: History[] = [
   imports: [MatTableModule, MatSortModule],
 })
 export class HistoryComponent implements AfterViewInit {
+
+
   displayedColumns: string[] = ['Rental_id', 'Amount', 'Rental_Date', 'Return_Date', 'TotalDuration'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
