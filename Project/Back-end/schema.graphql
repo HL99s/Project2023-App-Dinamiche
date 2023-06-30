@@ -1,0 +1,46 @@
+type Query {
+   getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
+   getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
+   getFilmById(id: Int): Film,
+   getFilmInfoById(filmId: Int): Film
+
+   getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
+   getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
+
+   getAllStores: [Store],
+   getAllCategories: [FilmCategory],
+   getFilmActors(filmId: Int): [Actor],
+   getStoreDispByFilmId(filmId: Int): [Store]
+
+}
+
+type Film{
+    film_id: Int,
+    film_title: String,
+    release_year: Int,
+    rating: String,
+    category: String,
+    language: String,
+    cost: Float,
+    description: String,
+    length: Int,
+    rental_duration: Int
+}
+
+type Actor{
+    actor_id: Int,
+    first_name: String,
+    last_name: String
+}
+
+type FilmCategory{
+    category_id: Int,
+    category: String
+}
+
+type Store{
+    store_id: Int,
+    address: String,
+    city: String,
+    country: String,
+}

@@ -1,244 +1,356 @@
+/* Schermo extra small (telefoni) */
+@media screen and (max-width: 480px) {
+  /* Regole CSS per lo schermo extra small */
+  .link_style {
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
 
-.link_style {
-  /*display: inline-block !important;*/
-  text-decoration: underline !important;
-  color: black !important;
-  cursor: pointer !important;
-}
+  /*div that contains <table>*/
+  .table-container {
+    display:flex;
+    justify-content: center;
+    align-items: center; /* Opzionale: per allineare verticalmente al centro */
+  }
 
-
-.fixed-size-table {
-  width: 100%;
-  table-layout: fixed;
-  margin-bottom: 40px;
-}
-
-.table-container {
-  display: flex;
-  justify-content: center;
-}
-
-/*Cambio visualizzazione per schermi piccoli*/
-@media (max-width: 600px) {
-  th, td {
+  .fixed-size-table {
     width: 100%;
+    table-layout:auto;
+    margin-bottom: 40px;
   }
 
-  th {
-    font-size: 14px !important;
+  .title-cell {
+    white-space: pre-wrap;
   }
 
-  td:before {
-    content: attr(data-label);
-    font-weight: bold;
-    display: inline-block;
-    width: 50%;
-    margin-right: 5px;
-  }
-
-  .film-title {
-    font-size: 14px !important;
-    z-index: 1;
-  }
-
-  .year-cell {
-    font-size: 10px !important;
-    padding-right: 0 !important;
-    padding-left: 5px !important;
-  }
-
-  .rating-cell {
-    padding-right: 0 !important;
-  }
-
-  .category-cell {
-    padding-left: 0 !important;
-  }
-
-  .language-cell {
-    padding-left: 40px !important;
-  }
-
-  .button-cell {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .button-info {
+  
+  .mdl-data-table tr {
     display: flex;
-    width: 1px !important;
-    font-size: 10px !important;
+    flex-direction: column;
   }
 
-  .button-info {
-    /*width: 1% !important;*/
-    margin-top: 10px;
+  .mdl-data-table tr th,
+  .mdl-data-table tr td {
+    flex-basis: 100%;
+    text-align: center;
   }
 
-}
+  .head-title{
+    display:none;
+  }
 
-/*Cambio visualizzazione per schermi piccoli 400*/
-@media (max-width: 480px) {
+  .before-title::before{
+    content: "Title: ";
+    text-decoration: none !important;
+  }
+
+
+  .before-year::before{
+    content: "Year: ";
+  }
+
+  .before-rating::before{
+    content: "Rating: "
+  }
+
+  .before-category:before{
+    content: "Category: "
+  }
+
+  .before-language::before{
+    content: "Language: "
+  }
+
+  .before-price::before{
+    content: "Price: "
+  }
+
+  .tr, th{
+    display:none;
+  }
+
+  .cell{
+    width:100%;
+  }
+
+  .container-search{
+    display:center;
+    flex-direction: column;
+  }
 
  
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
 
-  .container-search {
-    display: flex !important;
-    flex-direction: column !important;
+}
+
+/* Schermo small (tablet verticali) */
+@media screen and (min-width: 480.01px) and (max-width: 767.98px) {
+  /* Regole CSS per lo schermo small */
+
+  .link_style {
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container {
+    display:flex;
+    justify-content: center;
+    align-items: center; /* Opzionale: per allineare verticalmente al centro */
+  }
+
+  .fixed-size-table {
+    width: 100%;
+    table-layout:auto;
+    margin-bottom: 40px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  
+  .mdl-data-table tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mdl-data-table tr th,
+  .mdl-data-table tr td {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .head-title{
+    display:none;
+  }
+
+  .before-title::before{
+    content: "Title: ";
+    text-decoration: none !important;
+  }
+
+
+  .before-year::before{
+    content: "Year: ";
+  }
+
+  .before-rating::before{
+    content: "Rating: "
+  }
+
+  .before-category:before{
+    content: "Category: "
+  }
+
+  .before-language::before{
+    content: "Language: "
+  }
+
+  .before-price::before{
+    content: "Price: "
+  }
+
+  .tr, th{
+    display:none;
+  }
+
+  .cell{
+    width:100%;
+  }
+
+  .container-search{
+    display: flex;
+    align-items: center;
+  }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
+}
+
+/* Schermo medium (tablet orizzontali) */
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  /* Regole CSS per lo schermo medium */
+
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
     justify-content: center;
   }
 
-  th, td {
+  /*All the <table>*/
+  .fixed-size-table{
     width: 100%;
+    table-layout:fixed;
+    margin-bottom: 40px;
+  }
+
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
+  }
+  
+}
+
+/* Schermo large (desktop) */
+@media screen and (min-width: 992px) and (max-width: 1199.98px) {
+  /* Regole CSS per lo schermo large */
+
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
+    justify-content: center;
+  }
+
+  /*All the <table>*/
+  .fixed-size-table{
+    width: 100%;
+    table-layout:fixed;
+    margin-bottom: 40px;
+  }
+
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .paging {
+    text-align: center;
+  }
+  
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
   }
 
   th {
-    font-size: 10px !important;
+    font-size: 20px;
   }
 
-  td{
-    font-size: 8px !important;
+}
+
+/* Schermo extra large (grandi desktop) */
+@media screen and (min-width: 1200px) {
+  /* Regole CSS per lo schermo extra large */
+
+  .link_style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
   }
 
-  td:before {
-    content: attr(data-label);
-    font-weight: bold;
-    display: inline-block;
-    width: 50%;
-    margin-right: 5px;
+  /*div that contains <table>*/
+  .table-container{
+    display:flex;
+    justify-content: center;
   }
 
+  /*All the <table>*/
+  .fixed-size-table{
+    width: 100%;
+    table-layout:fixed;
+    margin-bottom: 40px;
+  }
 
-  .film-title{
-    text-align: left !important;
-    font-size: 9px !important;
-    z-index: 1;
+  .container-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input-container{
+    margin-right: 30px;
+  }
+
+  .title-cell {
+    white-space: pre-wrap;
+  }
+
+  .paging {
+    text-align: center;
   }
   
-  .year-cell{
-    /*font-size: 5px !important;*/
-    text-align: left !important;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-
+  .page-number {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .material-icons {
+    font-size: 40px;
   }
 
-  .rating-cell {
-    padding-right: 0 !important;
+  th {
+    font-size: 20px;
   }
 
-  .category-cell {
-    padding-left: 0 !important;
-  }
-
-
-  .language-cell{
-    padding-left: 20px !important;
-
-  }
-
-  .button-cell {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .button-info {
-    display: flex;
-    width: 1px !important;
-    font-size: 10px !important;
-  }
-
-
-.button-info{
-  /*width: 1% !important;*/
-  margin-top: 10px;
-}
-
-.cell{
-  margin-top:0px !important;
-  margin-bottom:0px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
- 
-
-}
-
-.button-info {
-  width: 100%;
-  margin-top: 10px;
-}
-
-
-.title-cell {
-  white-space: pre-wrap;
-}
-
-.search-input-container {
-  display: block;
-  justify-content: center !important;
-}
-
-.container-search {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.film-title {
-  font-size: 17px;
-}
-
-a {
-  color: black;
-}
-
-a:active {
-  color: gray;
-}
-
-a:visited {
-  color: grey;
-}
-
-.mat-column-info {
-  /*white-space: nowrap;*/
-  width: auto;
-}
-
-.year-cell {
-  max-width: 100px; /* Regola la larghezza massima a tuo piacimento */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.align-center {
-  text-align: center;
-  align-items: center;
-}
-
-.search-input-container {
-  margin-right: 20px;
-}
-
-.paging {
-  text-align: center;
-}
-
-.page-number {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.material-icons {
-  font-size: 40px;
-}
-
-th {
-  font-size: 20px;
 }
