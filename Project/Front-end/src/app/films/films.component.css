@@ -7,6 +7,8 @@
     cursor: pointer;
   }
 
+  
+
   /*div that contains <table>*/
   .table-container {
     display:flex;
@@ -42,6 +44,10 @@
 
   .before-title::before{
     content: "Title: ";
+    text-decoration: none !important;
+  }
+
+  .before-title{
     text-decoration: none !important;
   }
 
@@ -93,6 +99,11 @@
     font-size: 40px;
   }
 
+  .cell-not-visible{
+    padding: 10px;
+    background-color: whitesmoke;
+  }
+
 }
 
 /* Schermo small (tablet verticali) */
@@ -140,8 +151,10 @@
 
   .before-title::before{
     content: "Title: ";
-    text-decoration: none !important;
+    /*text-decoration: none !important;*/
   }
+
+  
 
 
   .before-year::before{
@@ -188,6 +201,11 @@
   
   .material-icons {
     font-size: 40px;
+  }
+
+  .cell-not-visible{
+    padding: 10px;
+    background-color: whitesmoke;
   }
 }
 
@@ -239,6 +257,10 @@
   
   .material-icons {
     font-size: 40px;
+  }
+
+  td.cell-not-visible{
+    display:none;
   }
   
 }
@@ -297,6 +319,9 @@
     font-size: 20px;
   }
 
+  td.cell-not-visible{
+    display:none;
+  }
 }
 
 /* Schermo extra large (grandi desktop) */
@@ -351,6 +376,10 @@
 
   th {
     font-size: 20px;
+  }
+
+  td.cell-not-visible{
+    display:none;
   }
 
 }

@@ -24,6 +24,9 @@ import {MatInputModule} from '@angular/material/input';
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 
+import { CommonModule } from '@angular/common';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     NgFor,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
