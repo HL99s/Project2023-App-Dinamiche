@@ -58,7 +58,7 @@
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
 
-        <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b>{{film.film_title}}
+        <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b>{{film.film_title}}
         </td>
         <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-year"></span></b>{{film.release_year}}</td>
         <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-rating"></span></b>{{film.rating}}</td>
@@ -70,6 +70,7 @@
           <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>
+        <td class="cell-not-visible"></td>
       </tr>
     </ng-template>
 
@@ -89,6 +90,7 @@
           <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
           </button>
         </td>
+        <td class="cell-not-visible"><p></p></td>
       </tr>
     </ng-template>
 
