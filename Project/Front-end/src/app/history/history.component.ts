@@ -2,24 +2,36 @@ import {Component, AfterViewInit, ViewChild } from '@angular/core';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {CommonModule} from '@angular/common';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
+
 
 
 
 export interface History {
   
   Rental_id: number;
+  Title: string,
+  Shop: string,
   Amount: number,
-  Rental_Date: Date,
-  Return_Date: Date,
-  TotalDuration: Date
+  TotalDuration: number //numero di millisecondi
+ 
 
 }
+
+//Dati Fasulli
 const ELEMENT_DATA: History[] = [
-  {Rental_id: 10,
-    Amount: 7.99,
-    Rental_Date: new Date(2022,10,10),
-    Return_Date: new Date(2022,10,20),
-    TotalDuration: new Date(2022, 10, 10)},
+  { Rental_id: 10,
+    Title: "Cat is Angry!!",
+    Shop: "BorgoRoma Shop :->",
+    Amount: 100.99,
+    TotalDuration: 86400000},
+
+    { Rental_id: 10,
+      Title: "Cat is Happy!!",
+      Shop: "PoloZanotto Shop :->",
+      Amount: -88,
+      TotalDuration: 899400877}
   
 ];
 
@@ -28,12 +40,12 @@ const ELEMENT_DATA: History[] = [
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatSortModule],
+  imports: [MatTableModule, MatSortModule, CommonModule]
 })
 export class HistoryComponent implements AfterViewInit {
 
 
-  displayedColumns: string[] = ['Rental_id', 'Amount', 'Rental_Date', 'Return_Date', 'TotalDuration'];
+  displayedColumns: string[] = ['Rental_id', 'Title', 'Shop', 'Amount', 'TotalDuration'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   constructor(private _liveAnnouncer: LiveAnnouncer) { }
