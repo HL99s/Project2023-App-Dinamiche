@@ -24,15 +24,15 @@ export class AuthService {
     else this.isAuthenticated.next(false);
   }
 
-  logIn(email: string, password: string) {
+  logIn(username: string, password: string) {
     this.apollo
       .mutate({
         mutation: SIGN_IN_MUTATION,
-        variables: { email, password }
+        variables: { username, password }
       }).subscribe(
         ({ data }) => {
           // @ts-ignore
-          localStorage.setItem("token", data.signIn);
+          localStorage.setItem("token", username);
           this.isAuthenticated.next(true);
           window.location.href = "/";
         },
