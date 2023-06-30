@@ -25,6 +25,7 @@ import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 
 import { CommonModule } from '@angular/common';
+import { HistoryComponent } from './history/history.component';
 
 
 

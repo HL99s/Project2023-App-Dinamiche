@@ -1,47 +1,61 @@
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
        class="mat-elevation-z8">
 
-  <!-- Rental_id -->
-  <ng-container matColumnDef="Rental_id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rental_id">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="rental_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rental_id">
       Id
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.Rental_id}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.rental_id}} </td>
   </ng-container>
 
-  <!-- Title -->
-  <ng-container matColumnDef="Title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Amount">
-      Film Title
+  <ng-container matColumnDef="film_title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by film_title">
+      Title
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.film_title}} </td>
   </ng-container>
 
-  <!-- Shop -->
-  <ng-container matColumnDef="Shop">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rental_Date">
+
+  <ng-container matColumnDef="payment_date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by payment_date">
+      Payment Date
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.payment_date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">
+      Amount
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="shop">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by shop">
       Shop
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.Shop}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.shop}} </td>
   </ng-container>
 
-  <!-- Amount -->
-  <ng-container matColumnDef="Amount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Return_Date">
-      Total Amount
+
+  <ng-container matColumnDef="rental_date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rental_date">
+      Rental D.
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.Amount | currency}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.rental_date}} </td>
   </ng-container>
 
-  <!-- TotalDuration -->
-  <ng-container matColumnDef="TotalDuration">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by TotalDuration">
-      Total Duration
+  <ng-container matColumnDef="return_date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by return_date">
+      Return D.
     </th>
-    <td mat-cell *matCellDef="let element"> {{ element.TotalDuration | date:'dd' }} days, {{ element.TotalDuration | date:'HH' }} hours, {{ element.TotalDuration | date:'mm' }} minutes
-    </td>
+    <td mat-cell *matCellDef="let element"> {{element.return_date}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
