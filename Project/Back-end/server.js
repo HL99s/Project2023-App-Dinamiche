@@ -212,7 +212,7 @@ const root = {
         return db.query(
             `SELECT *
              FROM credentials             
-             WHERE username = ${args.username} AND password = ${args.password}`).then(
+             WHERE username = '${args.username}' AND password = '${args.password}'`).then(
             (res) => (res.rows[0])
         ).catch(
             (error) => (console.log(error))
