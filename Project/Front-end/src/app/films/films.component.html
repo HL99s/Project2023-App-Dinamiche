@@ -58,7 +58,7 @@
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
 
-        <td class="cell title-cell link_style film-title mdl-data-table__cell--non-numeric align-center " (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b>{{film.film_title}}
+        <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center" (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b><span class="link_style">{{film.film_title}}</span>
         </td>
         <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-year"></span></b>{{film.release_year}}</td>
         <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-rating"></span></b>{{film.rating}}</td>
@@ -78,7 +78,7 @@
       <tr *ngFor="let film of films">
         <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
 
-        <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center" class="link_style" (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b>{{film.film_title}}
+        <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center" (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b><span class="link_style">{{film.film_title}}</span>
 
         </td>
         <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span class="before-year"></span></b>{{film.release_year}}</td>
