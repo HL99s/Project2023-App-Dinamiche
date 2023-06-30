@@ -1,7 +1,11 @@
-<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+<p *ngFor="let rental of rentals">{{rental.film_title}}</p>
+
+
+<!--
+<table mat-table [dataSource]="rentals" matSort (matSortChange)="announceSortChange($event)"
        class="mat-elevation-z8">
 
-  <!-- Rental_id -->
+ 
   <ng-container matColumnDef="Rental_id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rental_id">
       Id
@@ -9,7 +13,7 @@
     <td mat-cell *matCellDef="let element"> {{element.Rental_id}} </td>
   </ng-container>
 
-  <!-- Title -->
+
   <ng-container matColumnDef="Title">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Amount">
       Film Title
@@ -17,7 +21,7 @@
     <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
   </ng-container>
 
-  <!-- Shop -->
+
   <ng-container matColumnDef="Shop">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rental_Date">
       Shop
@@ -25,7 +29,15 @@
     <td mat-cell *matCellDef="let element"> {{element.Shop}} </td>
   </ng-container>
 
-  <!-- Amount -->
+
+  <ng-container matColumnDef="Payment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Payment">
+      Payment
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.Payment | date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  
   <ng-container matColumnDef="Amount">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Return_Date">
       Total Amount
@@ -33,7 +45,7 @@
     <td mat-cell *matCellDef="let element"> {{element.Amount | currency}} </td>
   </ng-container>
 
-  <!-- TotalDuration -->
+  
   <ng-container matColumnDef="TotalDuration">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by TotalDuration">
       Total Duration
@@ -42,6 +54,9 @@
     </td>
   </ng-container>
 
+  
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+-->
