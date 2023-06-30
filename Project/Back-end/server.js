@@ -206,6 +206,17 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
+    },
+
+    signIn: args =>{
+        return db.query(
+            `SELECT *
+             FROM credentials             
+             WHERE username = ${args.username} AND password = ${args.password}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
 }
 
