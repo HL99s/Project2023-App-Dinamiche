@@ -14,15 +14,15 @@
         <li class="link_style mdl-navigation__link" routerLink="/">Home</li>
         <li class="link_style mdl-navigation__link" routerLink="/films">Films</li>
         <li
-          class="mdl-navigation__link"
-          *ngIf="!isLoggedIn"
+          class="link_style mdl-navigation__link"
+          *ngIf="!logged"
           routerLink="/login"
         >
           Login
         </li>
         <li
-          class="mdl-navigation__link"
-          *ngIf="isLoggedIn"
+          class="link_style mdl-navigation__link"
+          *ngIf="logged"
           (click)="logOut()"
         >
           Logout
@@ -36,15 +36,15 @@
       <li class="link_style_side mdl-navigation__link" routerLink="/">Home</li>
       <li class="link_style_side mdl-navigation__link" routerLink="/films">Films</li>
       <li
-        class="mdl-navigation__link"
-        *ngIf="!isLoggedIn"
+        class="link_style_side mdl-navigation__link"
+        *ngIf="!logged"
         routerLink="/login"
       >
         Login
       </li>
       <li
-        class="mdl-navigation__link"
-        *ngIf="isLoggedIn"
+        class="link_style_side mdl-navigation__link"
+        *ngIf="logged"
         (click)="logOut()"
       >
         Logout

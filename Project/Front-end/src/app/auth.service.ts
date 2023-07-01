@@ -1,30 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
 
-const SIGN_IN_MUTATION = gql`
-  mutation signIn($username: String!, $password: String!) {
-    signIn(username: $username, password: $password) {
-      username
-      password
-      customer_id
-    }
-  }
-`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private apollo: Apollo) {
-    if (localStorage.getItem("token")) this.isAuthenticated.next(true);
-    else this.isAuthenticated.next(false);
+  private userId: string = "";
+
+  _isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  get isAuthenticated(): Observable<boolean> {
+    return this._isAuthenticated.asObservable();
   }
 
-  logIn(username: string, password: string) {
+  constructor(private apollo: Apollo) {
+    /*if (localStorage.getItem("token")) this._isAuthenticated.next(true);
+    else this._isAuthenticated.next(false);*/
+  }
+
+  saveUserData(id: number, token: string) {
+
+    localStorage.setItem("ID", String(id));
+    localStorage.setItem("TOKEN", token);
+    this.setUserId(String(id));
+  }
+
+  setUserId(id: string) {
+    this.userId = id;
+
+    this._isAuthenticated.next(true);
+  }
+
+  /*logIn(username: string, password: string) {
     this.apollo
       .mutate({
         mutation: SIGN_IN_MUTATION,
@@ -33,17 +43,27 @@ export class AuthService {
         ({ data }) => {
           // @ts-ignore
           localStorage.setItem("token", username);
-          this.isAuthenticated.next(true);
+          this._isAuthenticated.next(true);
           window.location.href = "/";
         },
         error => {
           console.log("there was an error sending the query", error);
         }
       );
-  }
+  }*/
+
   logOut() {
-    localStorage.removeItem("token");
-    this.isAuthenticated.next(false);
+    localStorage.removeItem("ID");
+    localStorage.removeItem("TOKEN");
+    this.userId = "";
+    this._isAuthenticated.next(false);
     window.location.href = "/";
+  }
+
+  autoLogin() {
+    const id = localStorage.getItem("ID");
+    if (id) {
+      this.setUserId(id);
+    }
   }
 }
