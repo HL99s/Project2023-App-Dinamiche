@@ -12,20 +12,23 @@ import {HomeComponent} from './home/home.component';
 import {InfoFilmComponent} from './infoFilm/infoFilm.component';
 import {RentalComponent} from './rental/rental.component';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
-
+import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 
 import { CommonModule } from '@angular/common';
 import { HistoryComponent } from './history/history.component';
+import { HistoprovaComponent } from './histoprova/histoprova.component';
 
 
 
@@ -35,7 +38,8 @@ import { HistoryComponent } from './history/history.component';
     FilmsComponent,
     HomeComponent,
     InfoFilmComponent,
-    RentalComponent
+    RentalComponent,
+    HistoprovaComponent
 
   ],
   imports: [
@@ -51,8 +55,11 @@ import { HistoryComponent } from './history/history.component';
     NgFor,
     MatSelectModule,
     MatDialogModule,
-    CommonModule
-    
+    CommonModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

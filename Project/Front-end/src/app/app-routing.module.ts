@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {FilmsComponent} from './films/films.component';
 import {LoginComponent} from './login/login.component';
 import { HistoryComponent } from './history/history.component';
+import { HistoprovaComponent } from './histoprova/histoprova.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'rental_history',
     component: HistoryComponent
+  },
+  {
+    path: 'hist',
+    component: HistoprovaComponent
   }
 ];
 
