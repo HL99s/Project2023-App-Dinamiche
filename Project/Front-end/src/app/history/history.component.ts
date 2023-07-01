@@ -62,10 +62,10 @@ export class HistoryComponent implements OnInit{
   constructor(private apollo: Apollo, private _liveAnnouncer: LiveAnnouncer) { }
 
 
-  
+
 
   ngOnInit(){
-    
+
     this.updateAllRents(117);
   }
 
@@ -75,7 +75,7 @@ export class HistoryComponent implements OnInit{
       query: RENTALS_BY_ID_QUERY,
       variables: {customerId: customer_id}
     }).subscribe(({data, loading}) => {
-      
+
 
       //@ts-ignore
       console.log(typeof(Object.values(data.getRentalInfoByCustId)));
@@ -99,8 +99,8 @@ export class HistoryComponent implements OnInit{
   }
   */
 
-  
-  
+
+
 
   //Non funzionante
   /*
