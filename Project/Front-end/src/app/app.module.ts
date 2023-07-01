@@ -16,8 +16,9 @@ import {RentalComponent} from './rental/rental.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+
 import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -57,6 +58,7 @@ import { HistoprovaComponent } from './histoprova/histoprova.component';
     CommonModule,
     MatTableModule,
     MatSortModule,
+    MatPaginatorModule
 
   ],
   providers: [],

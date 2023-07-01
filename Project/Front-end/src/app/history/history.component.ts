@@ -76,14 +76,12 @@ export class HistoryComponent implements OnInit{
       variables: {customerId: customer_id}
     }).subscribe(({data, loading}) => {
 
-
       //@ts-ignore
-      console.log(typeof(Object.values(data.getRentalInfoByCustId)));
-      /*
-      this.RENTAL_DATA = new MatTableDataSource(data.getRentalInfoByCustId);
-      this.RENTAL_DATA.sort = this.sort;
+      this.rentals = data.getRentalInfoByCustId
+      this.dataSource = new MatTableDataSource(this.rentals);
+      this.dataSource.sort = this.sort;
       console.log(this.RENTAL_DATA);
-      */
+
     })
   }
 

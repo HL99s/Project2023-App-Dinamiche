@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
@@ -39,6 +40,8 @@ export class HistoprovaComponent implements OnInit{
   dataSource: MatTableDataSource<RentalData>;
 
   @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatPaginator) pagination: MatPaginator
+
   rental_data: any;
 
   constructor(private apollo: Apollo){ }
@@ -51,7 +54,17 @@ export class HistoprovaComponent implements OnInit{
       this.rental_data = data.getRentalInfoByCustId
       this.dataSource = new MatTableDataSource(this.rental_data)
       this.dataSource.sort = this.sort
+      this.dataSource.paginator = this.pagination
     })
+
+  }
+  titleFilter(event: Event){
+    const titleValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = titleValue.trim().toLowerCase()
+
+    if(this.dataSource.paginator){
+      this.dataSource.paginator.firstPage()
+    }
   }
 
 }
