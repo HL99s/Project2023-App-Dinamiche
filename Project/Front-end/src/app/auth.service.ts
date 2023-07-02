@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import { Apollo } from "apollo-angular";
 
 
 @Injectable({
@@ -16,9 +15,7 @@ export class AuthService {
     return this._isAuthenticated.asObservable();
   }
 
-  constructor(private apollo: Apollo) {
-    /*if (localStorage.getItem("token")) this._isAuthenticated.next(true);
-    else this._isAuthenticated.next(false);*/
+  constructor() {
   }
 
   saveUserData(id: number, token: string) {
@@ -34,30 +31,12 @@ export class AuthService {
     this._isAuthenticated.next(true);
   }
 
-  /*logIn(username: string, password: string) {
-    this.apollo
-      .mutate({
-        mutation: SIGN_IN_MUTATION,
-        variables: { username, password }
-      }).subscribe(
-        ({ data }) => {
-          // @ts-ignore
-          localStorage.setItem("token", username);
-          this._isAuthenticated.next(true);
-          window.location.href = "/";
-        },
-        error => {
-          console.log("there was an error sending the query", error);
-        }
-      );
-  }*/
-
   logOut() {
     localStorage.removeItem("ID");
     localStorage.removeItem("TOKEN");
     this.userId = "";
     this._isAuthenticated.next(false);
-    window.location.href = "/";
+    window.location.href = "/login";
   }
 
   autoLogin() {
