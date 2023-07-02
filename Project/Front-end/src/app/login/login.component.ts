@@ -13,7 +13,7 @@ const SIGN_IN_MUTATION = gql`
   mutation signIn($username: String!, $password: String!) {
     signIn(username: $username, password: $password) {
       username
-      password
+      token
       customer_id
     }
   }
@@ -21,7 +21,7 @@ const SIGN_IN_MUTATION = gql`
 
 interface SignInMutationResponse {
   username: string;
-  password: string;
+  token: string;
   customer_id: number;
 }
 
@@ -53,7 +53,9 @@ export class LoginComponent {
         // @ts-ignore
         const id = data.signIn.customer_id;
         console.log(id);
-        const token = "tokenProva" //TODO: Add token generator and check if username+password are right
+        // @ts-ignore
+        const token = data.signIn.token;
+        console.log(token);
         this.authService.saveUserData(id, token);
         window.location.href = "/";
       },
