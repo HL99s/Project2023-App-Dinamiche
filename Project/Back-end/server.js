@@ -8,6 +8,9 @@ const {db} = require('./db/connection')
 const fs = require('fs');
 const {buildSchema} = require('graphql')
 const {graphqlHTTP} = require('express-graphql')
+//bcrypt
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 //DB Connection
 db.connect();
@@ -27,12 +30,12 @@ const root = {
     getAllFilmsWithCategory: args => {
         return db.query(
             `SELECT f.film_id,
-                    f.title as film_title,
+                    f.title        as film_title,
                     f.release_year as release_year,
-                    f.rating as rating,
-                    ca.name as category,
-                    l.name as language,
-                    f.rental_rate as cost
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
@@ -48,12 +51,12 @@ const root = {
     getFilmsByTitle: args => {
         return db.query(
             `SELECT f.film_id,
-                    f.title as film_title,
+                    f.title        as film_title,
                     f.release_year as release_year,
-                    f.rating as rating,
-                    ca.name as category,
-                    l.name as language,
-                    f.rental_rate as cost
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
@@ -81,16 +84,16 @@ const root = {
     getFilmInfoById: args => {
         return db.query(
             `SELECT f.film_id,
-                    f.title as film_title,
+                    f.title        as film_title,
                     f.release_year as release_year,
                     f.length,
                     f.description,
-                    f.rating as rating,
-                    ca.name as category,
-                    l.name as language,
-                    f.rental_rate as cost,
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost,
                     f.rental_duration
-                    
+
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
@@ -105,12 +108,12 @@ const root = {
     getFilmsByCategory: args => {
         return db.query(
             `SELECT f.film_id,
-                    f.title as film_title,
+                    f.title        as film_title,
                     f.release_year as release_year,
-                    f.rating as rating,
-                    ca.name as category,
-                    l.name as language,
-                    f.rental_rate as cost
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
@@ -127,12 +130,12 @@ const root = {
     getFilmsByCategoryAndTitle: args => {
         return db.query(
             `SELECT f.film_id,
-                    f.title as film_title,
+                    f.title        as film_title,
                     f.release_year as release_year,
-                    f.rating as rating,
-                    ca.name as category,
-                    l.name as language,
-                    f.rental_rate as cost
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost
              FROM film AS f
                       JOIN film_category AS fc ON f.film_id = fc.film_id
                       JOIN category AS ca ON fc.category_id = ca.category_id
@@ -162,12 +165,12 @@ const root = {
         return db.query(
             `SELECT s.store_id, ad.address, ad.district, cit.city, cou.country
              FROM store AS s
-             JOIN address AS ad
-             ON s.address_id = ad.address_id
-             JOIN city AS cit 
-             ON ad.city_id = cit.city_id
-             JOIN country AS cou
-             ON cit.country_id = cou.country_id`).then(
+                      JOIN address AS ad
+                           ON s.address_id = ad.address_id
+                      JOIN city AS cit
+                           ON ad.city_id = cit.city_id
+                      JOIN country AS cou
+                           ON cit.country_id = cou.country_id`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -190,44 +193,65 @@ const root = {
     getStoreDispByFilmId: args => {
         return db.query(
             `SELECT DISTINCT inv.store_id, ad.address, cit.city, cou.country
-            FROM inventory AS inv 
-            JOIN rental AS re ON inv.inventory_id = re.inventory_id
-            JOIN store AS st ON inv.store_id = st.store_id
-            JOIN address AS ad ON st.address_id = ad.address_id
-            JOIN city AS cit ON ad.city_id = cit.city_id
-            JOIN country AS cou ON cit.country_id = cou.country_id
-            WHERE inv.film_id=${args.filmId} AND inv.inventory_id  NOT IN (
-                SELECT inv.inventory_id
-                from inventory as inv
-                JOIN rental as re
-                ON inv.inventory_id = re.inventory_id
-                WHERE inv.film_id = ${args.filmId} and re.return_date is null)`).then(
+             FROM inventory AS inv
+                      JOIN rental AS re ON inv.inventory_id = re.inventory_id
+                      JOIN store AS st ON inv.store_id = st.store_id
+                      JOIN address AS ad ON st.address_id = ad.address_id
+                      JOIN city AS cit ON ad.city_id = cit.city_id
+                      JOIN country AS cou ON cit.country_id = cou.country_id
+             WHERE inv.film_id = ${args.filmId}
+               AND inv.inventory_id NOT IN (SELECT inv.inventory_id
+                                            from inventory as inv
+                                                     JOIN rental as re
+                                                          ON inv.inventory_id = re.inventory_id
+                                            WHERE inv.film_id = ${args.filmId}
+                                              and re.return_date is null)`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
         );
     },
 
-    signIn: args =>{
+    signIn: args => {
         return db.query(
             `SELECT *
-             FROM credentials             
-             WHERE username = '${args.username}' AND password = '${args.password}'`).then(
-            (res) => (res.rows[0])
+             FROM credentials
+             WHERE username = '${args.username}'`).then(
+            (res) => {
+                /*bcrypt.hash("password", 10, function(err, hash) {
+                    console.log(hash);
+                });*/
+                bcrypt.compare(args.password, res.rows[0].password, function (err, result) {
+                    console.log(result);
+                    if (result) {
+                        res.rows[0].token = jwt.sign({username: res.rows[0].username}, 'supersecret', {expiresIn: 120});
+                        console.log(res.rows[0].token);
+                        return res.rows[0];
+                    }
+                });
+                console.log(res.rows[0]);
+            }
         ).catch(
             (error) => (console.log(error))
         );
     },
+
     getRentalInfoByCustId: args => {
         return db.query(
-            `SELECT re.customer_id, re.rental_id, f.title AS film_title, ad.address AS shop, 
-                pay.amount, pay.payment_date, re.rental_date, re.return_date 
+            `SELECT re.customer_id,
+                    re.rental_id,
+                    f.title    AS film_title,
+                    ad.address AS shop,
+                    pay.amount,
+                    pay.payment_date,
+                    re.rental_date,
+                    re.return_date
              FROM payment AS pay
-             JOIN rental AS re ON pay.rental_id = re.rental_id
-             JOIN inventory AS inv ON re.inventory_id = inv.inventory_id
-             JOIN film AS f ON inv.film_id = f.film_id
-             JOIN store AS sto ON inv.store_id = sto.store_id
-             JOIN address AS ad ON sto.address_id = ad.address_id
+                      JOIN rental AS re ON pay.rental_id = re.rental_id
+                      JOIN inventory AS inv ON re.inventory_id = inv.inventory_id
+                      JOIN film AS f ON inv.film_id = f.film_id
+                      JOIN store AS sto ON inv.store_id = sto.store_id
+                      JOIN address AS ad ON sto.address_id = ad.address_id
              WHERE re.customer_id = ${args.customerId}`).then(
             (res) => (res.rows)
         ).catch(
@@ -240,7 +264,6 @@ app.use('/graphql', graphqlHTTP({
         schema,
         rootValue: root,
         graphiql: true
-
     })
 );
 

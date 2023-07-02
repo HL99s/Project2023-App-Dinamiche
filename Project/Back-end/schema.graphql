@@ -53,7 +53,7 @@ type Mutation{
 
 type Credentials{
     username: String,
-    password: String,
+    token: String,
     customer_id: Int
 }
 
