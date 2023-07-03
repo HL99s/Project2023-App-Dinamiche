@@ -10,9 +10,11 @@ type Query {
    getAllStores: [Store],
    getAllCategories: [FilmCategory],
    getFilmActors(filmId: Int): [Actor],
-   getStoreDispByFilmId(filmId: Int): [Store]
+   getStoreDispByFilmId(filmId: Int): [Store],
 
-   getRentalInfoByCustId(customerId: Int): [RentalInfo]
+   getRentalInfoByCustId(customerId: Int): [RentalInfo],
+   getRentalInfoByRenId(rentalId: Int): RentalInfo,
+   getStoreById(storeId: Int): Store
 
 }
 
@@ -63,9 +65,13 @@ type RentalInfo{
     customer_id: Int,
     rental_id: Int,
     film_title: String,
+    store_id: Int,
     shop: String,
     amount: Float,
     payment_date: Date,
     rental_date: Date,
-    return_date: Date
+    return_date: Date,
+    staff_first_name: String,
+    staff_last_name: String,
+    staff_email: String
 }
