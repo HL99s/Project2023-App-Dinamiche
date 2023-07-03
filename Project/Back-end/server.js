@@ -242,6 +242,7 @@ const root = {
                     re.rental_id,
                     f.title    AS film_title,
                     ad.address AS shop,
+                    inv.store_id,
                     pay.amount,
                     pay.payment_date,
                     re.rental_date,
@@ -254,6 +255,36 @@ const root = {
                       JOIN address AS ad ON sto.address_id = ad.address_id
              WHERE re.customer_id = ${args.customerId}`).then(
             (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getRentalInfoByRenId: args => {
+        return db.query(
+            `SELECT re.rental_id, f.title as film_title, inv.store_id, pay.amount, re.rental_date, re.return_date, pay.payment_date, st.first_name as staff_first_name, st.last_name as staff_last_name, st.email as staff_email 
+             FROM staff AS st 
+             JOIN payment AS pay ON st.staff_id = pay.staff_id
+             JOIN rental AS re ON pay.rental_id = re.rental_id
+             JOIN inventory AS inv ON re.inventory_id = inv.inventory_id
+             JOIN film AS f  ON inv.film_id = f.film_id
+             WHERE re.rental_id = ${args.rentalId}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getStoreById: args => {
+        return db.query(
+            `SELECT s.store_id, ad.address, ad.district, cit.city, cou.country
+             FROM store AS s
+             JOIN address AS ad
+             ON s.address_id = ad.address_id
+             JOIN city AS cit
+             ON ad.city_id = cit.city_id
+             JOIN country AS cou
+             ON cit.country_id = cou.country_id
+             WHERE s.store_id = ${args.storeId}`).then(
+            (res) => (res.rows[0])
         ).catch(
             (error) => (console.log(error))
         );
