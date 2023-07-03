@@ -1,17 +1,28 @@
+<h1>Rentals History</h1>
+
+<mat-form-field class="order-by">
+  <mat-label>Order By</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let col of displayedColumns" [value]="col">
+      {{col}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
-       class="mat-elevation-z8">
+       class="mat-elevation-z8 full-width-table">
 
 
   <!-- Position Column -->
   <ng-container matColumnDef="rental_id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rental_id">
+    <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rental_id">
       Id
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.rental_id}} </td>
+    <td class = "link-style" mat-cell *matCellDef="let element"> {{element.rental_id}} </td>
   </ng-container>
 
   <ng-container matColumnDef="film_title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by film_title">
+    <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by film_title">
       Title
     </th>
     <td mat-cell *matCellDef="let element"> {{element.film_title}} </td>
@@ -19,43 +30,53 @@
 
 
   <ng-container matColumnDef="payment_date">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by payment_date">
+    <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by payment_date">
       Payment Date
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.payment_date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.payment_date | date: 'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="amount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">
+    <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">
       Amount
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="shop">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by shop">
+    <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by shop">
       Shop
     </th>
     <td mat-cell *matCellDef="let element"> {{element.shop}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="duration">
+    <th class="tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by duration">
+      Duration
+    </th>
+    <td mat-cell *matCellDef="let element"> {{ element.duration | date:'dd' }} days, {{ element.duration | date:'HH' }} hours, {{ element.duration | date:'mm' }} minutes </td>
+  </ng-container>
 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;" class="tableHeaderCellDiv"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
+
+ <!--
   <ng-container matColumnDef="rental_date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rental_date">
       Rental D.
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.rental_date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.rental_date | date: 'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="return_date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by return_date">
       Return D.
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.return_date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.return_date | date: 'dd/MM/yyyy'}} </td>
   </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
+-->

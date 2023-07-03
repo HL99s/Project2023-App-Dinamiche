@@ -1,7 +1,150 @@
-table {
+/*table {
     width: 100%;
   }
   
   th.mat-sort-header-sorted {
     color: black;
   }
+  */
+
+  /* Schermo extra small (telefoni) */
+@media screen and (max-width: 480px) {
+  /* Regole CSS per lo schermo extra small */
+  
+  table {
+    width: 100% !important;
+  }
+
+  th{
+    font-size: 20px;
+  }
+
+  .full-width-table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .link-style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+
+
+}
+
+/* Schermo small (tablet verticali) */
+@media screen and (min-width: 480.01px) and (max-width: 767.98px) {
+  /* Regole CSS per lo schermo small */
+
+  table {
+    width: 100% !important;
+  }
+
+  th{
+    font-size: 20px;
+  }
+
+  .full-width-table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .link-style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  
+  
+}
+
+/* Schermo medium (tablet orizzontali) */
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  /* Regole CSS per lo schermo medium */
+
+  table {
+    width: 100% !important;
+  }
+
+  th{
+    font-size: 20px;
+  }
+
+  .full-width-table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .link-style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  .order-by{
+    display: none;
+  }
+  
+  
+}
+
+/* Schermo large (desktop) */
+@media screen and (min-width: 992px) and (max-width: 1199.98px) {
+  /* Regole CSS per lo schermo large */
+
+  table {
+    width: 100% !important;
+  }
+
+  th{
+    font-size: 20px;
+  }
+
+  .full-width-table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .link-style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  .order-by{
+    display: none;
+  }
+
+}
+
+/* Schermo extra large (grandi desktop) */
+@media screen and (min-width: 1200px) {
+  /* Regole CSS per lo schermo extra large */
+
+  table {
+    width: 100% !important;
+  }
+
+  th{
+    font-size: 20px;
+  }
+
+  .full-width-table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .link-style{
+    text-decoration: underline;
+    color: black;
+    cursor: pointer;
+  }
+
+  .order-by{
+    display: none;
+  }
+
+}

@@ -30,6 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { HistoryComponent } from './history/history.component';
 import { HistoprovaComponent } from './histoprova/histoprova.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -60,7 +61,8 @@ import { HistoprovaComponent } from './histoprova/histoprova.component';
     CommonModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule
 
   ],
   providers: [],
