@@ -71,7 +71,6 @@ export class HistoprovaComponent implements OnInit{
   }
 
   openInfo(rentalId: Number, shop: Number){
-    console.log(shop)
     this.dialog.open(InfoRentalComponent, {data: {rental_id: rentalId, store_id: shop}})
   }
 
