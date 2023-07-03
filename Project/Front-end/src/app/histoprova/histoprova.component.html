@@ -8,8 +8,8 @@
   <table mat-table matSort [dataSource]="dataSource">
 
     <ng-container matColumnDef="rental_id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rental id</th>
-      <td mat-cell *matCellDef="let row">{{row.rental_id}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Rental id</th>
+      <td mat-cell  *matCellDef="let row" (click)="openInfo(row.rental_id, row.store_id)">{{row.rental_id}}</td>
     </ng-container>
     <ng-container matColumnDef="film_title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>

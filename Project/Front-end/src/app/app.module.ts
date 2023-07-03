@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 import {InfoFilmComponent} from './infoFilm/infoFilm.component';
 import {RentalComponent} from './rental/rental.component';
+import { InfoRentalComponent } from './info-rental/info-rental.component';
 
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -39,7 +40,8 @@ import { HistoprovaComponent } from './histoprova/histoprova.component';
     HomeComponent,
     InfoFilmComponent,
     RentalComponent,
-    HistoprovaComponent
+    HistoprovaComponent,
+    InfoRentalComponent
 
   ],
   imports: [

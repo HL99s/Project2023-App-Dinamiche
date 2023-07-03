@@ -4,6 +4,8 @@ import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Apollo } from 'apollo-angular';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
 
 export interface RentalData{
@@ -23,6 +25,7 @@ query getRentalInfoByCustId($customerId : Int!) {
     film_title
     payment_date
     amount
+    store_id
     shop
     rental_date
     return_date
@@ -44,11 +47,11 @@ export class HistoprovaComponent implements OnInit{
 
   rental_data: any;
 
-  constructor(private apollo: Apollo){ }
+  constructor(private apollo: Apollo, public dialog: MatDialog){ }
   ngOnInit(): void {
     this.apollo.query({
       query: RENTALS_BY_ID_QUERY,
-      variables: {customerId: 367}
+      variables: {customerId: 554}
     }).subscribe(({data, loading})=>{
       //@ts-ignore
       this.rental_data = data.getRentalInfoByCustId
@@ -65,6 +68,11 @@ export class HistoprovaComponent implements OnInit{
     if(this.dataSource.paginator){
       this.dataSource.paginator.firstPage()
     }
+  }
+
+  openInfo(rentalId: Number, shop: Number){
+    console.log(shop)
+    this.dialog.open(InfoRentalComponent, {data: {rental_id: rentalId, store_id: shop}})
   }
 
 }
