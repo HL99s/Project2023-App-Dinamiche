@@ -8,6 +8,15 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs';
 
+
+
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+
 //const username = localStorage.getItem("token");
 
 const RENTALS_BY_ID_QUERY = gql`
@@ -49,12 +58,13 @@ export interface Rensponse{
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatSortModule, CommonModule]
+  imports: [MatTableModule, MatSortModule, CommonModule,   
+    MatFormFieldModule, MatSelectModule, NgFor, MatInputModule, FormsModule]
 })
 export class HistoryComponent implements OnInit{
 
-
-  displayedColumns: string[] = ['rental_id', 'film_title', 'payment_date', 'amount', 'shop','rental_date','return_date', 'duration'];
+  displayedColumns: string[] = ['rental_id', 'film_title', 'payment_date', 'amount', 'shop', 'duration'];
+  //displayedColumns: string[] = ['rental_id', 'film_title', 'payment_date', 'amount', 'shop','rental_date','return_date', 'duration'];
   rentals: any;
   RENTAL_DATA: Rental_Info[];
   dataSource: MatTableDataSource<Rental_Info>;
