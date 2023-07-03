@@ -11,4 +11,4 @@ CREATE TABLE credentials (
 );
 
 
-INSERT INTO credentials(username, password, customer_id) VALUES('Prova','Password',1); 
+INSERT INTO credentials(username, password, customer_id) VALUES('Prova','$2b$10$WffTkGHgAjtye9rGXRzZ1enMJLE/b9qEXHDhus1BG84gBfOWv4Y3q',1);
