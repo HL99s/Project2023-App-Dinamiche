@@ -14,7 +14,8 @@ type Query {
 
    getRentalInfoByCustId(customerId: Int): [RentalInfo],
    getRentalInfoByRenId(rentalId: Int): RentalInfo,
-   getStoreById(storeId: Int): Store
+   getStoreById(storeId: Int): Store,
+   getAllFilm: [Film]
 
 }
 

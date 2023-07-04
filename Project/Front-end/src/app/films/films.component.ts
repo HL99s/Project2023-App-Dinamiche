@@ -1,9 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {MatDialog} from '@angular/material/dialog';
+import { MatTable} from '@angular/material/table';
+import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import {InfoFilmComponent} from '../infoFilm/infoFilm.component';
 import {RentalComponent} from '../rental/rental.component';
+
+
+
+export interface FilmData{
+  film_id: Number,
+  film_title: String,
+  release_year: Number,
+  rating: String,
+  category: String,
+  language: String,
+  cost: Number
+}
 
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
@@ -71,6 +87,22 @@ const CATEGORY_QUERY = gql`
   }
 `;
 
+const ALL_FILM_QUERY = gql`
+query getAllFilm{
+  getAllFilm{
+    film_id
+    film_title
+    release_year
+    rating
+    category
+    language
+    cost
+  }
+}
+`;
+
+
+
 @Component({
   selector: 'app-films',
   templateUrl: './films.component.html',
@@ -80,9 +112,14 @@ const CATEGORY_QUERY = gql`
 export class FilmsComponent implements OnInit {
   page: number = 0;
   films: any;
+  displayedColumn: String[] = ['film_title', 'release_year', 'rating', 'category', 'language', 'cost', 'rental'];
+  dataSource: MatTableDataSource<FilmData>
 
-  searchByTitle: string = "";
-  selectedCategoryOption: string = "All";
+
+  @ViewChild(MatSort) sort: MatSort
+  @ViewChild(MatPaginator) pagination: MatPaginator
+  //searchByTitle: string = "";
+  //selectedCategoryOption: string = "All";
 
   filmCategory: any;
 
@@ -90,8 +127,25 @@ export class FilmsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.updateAllFilms()
-    this.updateCategory()
+    //this.updateAllFilms()
+    //this.updateCategory()
+    this.apollo.query({
+      query: ALL_FILM_QUERY,
+    }).subscribe(({data, loading}) => {
+      // @ts-ignore
+      this.films = data.getAllFilm;
+      this.dataSource = new MatTableDataSource(this.films);
+      this.dataSource.sort = this.sort
+      this.dataSource.paginator = this.pagination;
+    })
+  }
+
+  openInfo(filmId: number) {
+    this.dialog.open(InfoFilmComponent, {data: {film_id: filmId}})
+  }
+
+  openRental(filmId: number) {
+    this.dialog.open(RentalComponent, {data: {film_id: filmId}})
   }
 
   updateCategory() {
@@ -147,7 +201,7 @@ export class FilmsComponent implements OnInit {
       console.log(this.films);
     })
   }
-
+  /*
   queryRouting() {
     if (this.selectedCategoryOption == "All") {
       if (this.searchByTitle != "") {
@@ -189,12 +243,7 @@ export class FilmsComponent implements OnInit {
     this.queryRouting();
   }
 
-  openInfo(id: number) {
-    this.dialog.open(InfoFilmComponent, {data: {film_id: id}})
-  }
 
-  openRental(id: number) {
-    this.dialog.open(RentalComponent, {data: {film_id: id}})
-  }
+  */
 
 }
