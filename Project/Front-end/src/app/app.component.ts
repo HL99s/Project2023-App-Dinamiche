@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "./auth.service";
+import {AuthService} from "./auth/auth.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,9 +10,6 @@ export class AppComponent implements OnInit {
 
   logged: boolean = false;
   constructor(private authService: AuthService) {
-    /*this.authService.isAuthenticated.subscribe(value => {
-      this.isLoggedIn = value;
-    });*/
   }
 
   logOut() {
