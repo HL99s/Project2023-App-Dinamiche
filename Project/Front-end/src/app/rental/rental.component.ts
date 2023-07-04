@@ -1,39 +1,38 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 
 
-import  gql  from 'graphql-tag';
+import gql from 'graphql-tag';
 
-
-const username = localStorage.getItem("token");
+const id = localStorage.getItem("ID");
 
 const FILM_INFO_BY_ID = gql`
-query getFilmInfoById($filmId: Int){
-  getFilmInfoById(filmId: $filmId){
-    film_title
-    release_year
-    language
-    length
-    category
-    description
-    rating
-    cost
-    rental_duration
+  query getFilmInfoById($filmId: Int){
+    getFilmInfoById(filmId: $filmId){
+      film_title
+      release_year
+      language
+      length
+      category
+      description
+      rating
+      cost
+      rental_duration
+    }
   }
-}
 `;
 
 const STORE_INFO_DISP = gql`
-query getStoreDispByFilmId($filmId: Int){
-  getStoreDispByFilmId(filmId: $filmId){
-    address
-    city
-    country
+  query getStoreDispByFilmId($filmId: Int){
+    getStoreDispByFilmId(filmId: $filmId){
+      address
+      city
+      country
+    }
   }
-}
 `;
 
 @Component({
@@ -47,9 +46,9 @@ export class RentalComponent implements OnInit {
   stores: any;
   rental_dates: any;
 
+  constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
+  }
 
-
-  constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
     this.apollo.query({
       query: FILM_INFO_BY_ID,
@@ -69,15 +68,16 @@ export class RentalComponent implements OnInit {
     this.get_rental_dates()
   }
 
-  openPopup(){
-    this.dialog.open(AfterBuyDialog, {data:{result: this.res}})
+  openPopup() {
+    this.dialog.open(AfterBuyDialog, {data: {result: this.res}})
   }
-  get_rental_dates(){
+
+  get_rental_dates() {
     let re_d = [];
     let now = new Date()
     re_d.push(now.toDateString())
     for (let i = 0; i < 2; i++) {
-      now.setDate(now.getDate()+1)
+      now.setDate(now.getDate() + 1)
       re_d.push(now.toDateString())
     }
     this.rental_dates = re_d
@@ -92,6 +92,7 @@ export class RentalComponent implements OnInit {
   imports: [MatDialogModule, MatButtonModule, NgIf],
 })
 export class AfterBuyDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 }
 
