@@ -164,7 +164,7 @@ const root = {
                       JOIN category AS ca ON fc.category_id = ca.category_id
                       JOIN language as l ON l.language_id = f.language_id
              WHERE ca.name = '${args.categoryName}'
-               AND f.title ILIKE '%${args.filmTitle}%'
+              
              ORDER BY f.title`).then(
             (res) => (res.rows)
         ).catch(

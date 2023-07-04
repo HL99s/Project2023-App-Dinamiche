@@ -159,7 +159,11 @@ export class FilmsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.films);
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.pagination;
-      
+      this.dataSource.paginator.pageIndex = 0
+      this.dataSource.filterPredicate = (data:
+        FilmData, filterValue: string) =>
+        data.film_title.trim().toLowerCase().indexOf(filterValue) != -1;
+      console.log(this.films)
     })
   }
 
@@ -173,7 +177,8 @@ export class FilmsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.films);
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.pagination;
-      this.dataSource.paginator.pageIndex = 0
+      this.dataSource.paginator.pageIndex = 0;
+      console.log(this.films)
     })
   }
 
@@ -188,21 +193,26 @@ export class FilmsComponent implements OnInit {
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.pagination;
       this.dataSource.paginator.pageIndex = 0
+      console.log(this.films)
     })
   }
 
   updateFilmsByCategoryAndTitle(category: string, title: string) {
     this.apollo.query({
       query: FILMS_BY_CATEGORY_AND_TITLE_QUERY,
-      variables: {categoryName: category, filmTitle: title}
+      variables: {categoryName: category}
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
 
+      // @ts-ignore
       this.films = data.getFilmsByCategoryAndTitle;
       this.dataSource = new MatTableDataSource(this.films);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.pagination;
-      this.dataSource.paginator.pageIndex = 0
+      this.dataSource.paginator.pageIndex = 0;
+      this.dataSource.filterPredicate = (data:
+        FilmData, filterValue: string) =>
+        data.film_title.trim().toLowerCase().indexOf(filterValue) !== -1;
+      console.log("All",this.films)
 
     })
   }
@@ -248,7 +258,16 @@ export class FilmsComponent implements OnInit {
     this.queryRouting();
   }
 
+  titleFilter(event: Event){
+    const titleValue = (event.target as HTMLInputElement).value;
+    let filterValue: any;
+    filterValue = titleValue.trim(); // Remove whitespace
+    console.log("DDDD", filterValue)
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    this.searchByTitle = filterValue;
 
+  }
 
 
 }
