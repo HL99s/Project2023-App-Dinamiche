@@ -1,7 +1,25 @@
 
+<div class="container-search">
+  <div class="search-input-container">
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Search By Title" #box (keyup.enter)="searchFilmByTitle(box.value)">
+    </mat-form-field>
+</div>
+
+
+  <mat-form-field>
+    <mat-label>Film Category</mat-label>
+    <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange()">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <div class="mat-elevation-z8">
 
-  <table mat-table matSort [dataSource]="dataSource">
+  <table mat-table matSort [dataSource]="dataSource" class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
 
     <ng-container matColumnDef="film_title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
@@ -37,9 +55,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
     <tr mat-row *matRowDef="let row;columns: displayedColumn"></tr>
 
-    <!--<tr *matNoDataRow>
-      <td class="mat-cell" colspan="4">No title named {{input.value}}</td>
-    </tr>-->
+    <tr *matNoDataRow>
+      <td class="mat-cell" colspan="4">No film found</td>
+    </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-labels="select page of rentals"></mat-paginator>
 </div>
