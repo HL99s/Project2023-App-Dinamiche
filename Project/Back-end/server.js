@@ -87,8 +87,7 @@ const root = {
                       JOIN category AS ca ON fc.category_id = ca.category_id
                       JOIN language as l ON l.language_id = f.language_id
              WHERE title ILIKE '%${args.filmTitle}%'
-             ORDER BY title
-             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+             ORDER BY title`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -144,8 +143,7 @@ const root = {
                       JOIN category AS ca ON fc.category_id = ca.category_id
                       JOIN language as l ON l.language_id = f.language_id
              WHERE ca.name = '${args.categoryName}'
-             ORDER BY title
-             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+             ORDER BY title`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -167,8 +165,7 @@ const root = {
                       JOIN language as l ON l.language_id = f.language_id
              WHERE ca.name = '${args.categoryName}'
                AND f.title ILIKE '%${args.filmTitle}%'
-             ORDER BY f.title
-             LIMIT ${args.limit} OFFSET ${args.offset}`).then(
+             ORDER BY f.title`).then(
             (res) => (res.rows)
         ).catch(
             (error) => (console.log(error))
@@ -326,7 +323,26 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
-    }
+    },
+    getAllFilm: args => {
+        return db.query(
+            `SELECT f.film_id,
+                    f.title        as film_title,
+                    f.release_year as release_year,
+                    f.rating       as rating,
+                    ca.name        as category,
+                    l.name         as language,
+                    f.rental_rate  as cost
+             FROM film AS f
+                      JOIN film_category AS fc ON f.film_id = fc.film_id
+                      JOIN category AS ca ON fc.category_id = ca.category_id
+                      JOIN language as l ON l.language_id = f.language_id
+             ORDER BY title`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
 }
 
 app.use('/graphql', graphqlHTTP({
