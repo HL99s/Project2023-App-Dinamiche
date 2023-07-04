@@ -4,8 +4,8 @@ type Query {
    getFilmById(id: Int): Film,
    getFilmInfoById(filmId: Int): Film
 
-   getFilmsByCategory(categoryName: String): [Film],
-   getFilmsByCategoryAndTitle(filmTitle: String, categoryName: String): [Film],
+   getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
+   getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
 
    getAllStores: [Store],
    getAllCategories: [FilmCategory],
@@ -14,8 +14,7 @@ type Query {
 
    getRentalInfoByCustId(customerId: Int): [RentalInfo],
    getRentalInfoByRenId(rentalId: Int): RentalInfo,
-   getStoreById(storeId: Int): Store,
-   getAllFilm: [Film]
+   getStoreById(storeId: Int): Store
 
 }
 
