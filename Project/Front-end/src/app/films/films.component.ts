@@ -83,8 +83,8 @@ export class FilmsComponent implements OnInit {
 
   searchByTitle: string = "";
   selectedCategoryOption: string = "All";
-
   filmCategory: any;
+  pending: Boolean = false;
 
   constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
@@ -179,9 +179,10 @@ export class FilmsComponent implements OnInit {
   }
 
   searchFilmByTitle(filmTitle: string) {
-    this.page = 0;
-    this.searchByTitle = filmTitle;
-    this.queryRouting();
+      console.log("Name: ",filmTitle)
+      this.page = 0;
+      this.searchByTitle = filmTitle;
+      this.queryRouting();
   }
 
   onCategoryChange() {
@@ -200,9 +201,15 @@ export class FilmsComponent implements OnInit {
   onInput(event: Event){
     let filter: string;
     filter = (<HTMLInputElement>event.target).value
-    console.log("Name: ",filter)
-    this.searchFilmByTitle(filter)
-
+    if(!this.pending){
+      this.pending=true
+      this.searchFilmByTitle(filter)
+      setTimeout(()=>{
+        this.pending = false
+      },2000)
   }
+  }
+
+
 
 }

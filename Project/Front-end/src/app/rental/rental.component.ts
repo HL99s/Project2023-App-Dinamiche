@@ -7,7 +7,7 @@ import {NgIf} from '@angular/common';
 
 import gql from 'graphql-tag';
 
-const id = localStorage.getItem("ID");
+
 
 const FILM_INFO_BY_ID = gql`
   query getFilmInfoById($filmId: Int){

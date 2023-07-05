@@ -326,7 +326,17 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
-    }
+    },
+    getUsernameByCustId: args => {
+        return db.query(
+            `select username 
+            from credentials 
+            WHERE customer_id=${args.customerId}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
 }
 
 app.use('/graphql', graphqlHTTP({
