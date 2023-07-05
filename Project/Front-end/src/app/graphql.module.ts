@@ -8,11 +8,11 @@ import {ApolloLink,} from "apollo-link";
 const uri = 'http://localhost:3000/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): { cache: InMemoryCache; link: ApolloLink } {
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("TOKEN");
 
   // @ts-ignore
-  const auth = setContext((operation, context) => {
-    if (token === null) {
+  const auth = setContext(() => {
+    if (token == null) {
       return {};
     } else {
       return {
