@@ -84,7 +84,7 @@ export class FilmsComponent implements OnInit {
   searchByTitle: string = "";
   selectedCategoryOption: string = "All";
   filmCategory: any;
-  pending: Boolean = false;
+  //pending: Boolean = false;
 
   constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
@@ -201,13 +201,13 @@ export class FilmsComponent implements OnInit {
   onInput(event: Event){
     let filter: string;
     filter = (<HTMLInputElement>event.target).value
-    if(!this.pending){
-      this.pending=true
-      this.searchFilmByTitle(filter)
-      setTimeout(()=>{
-        this.pending = false
-      },2000)
-  }
+    //if(!this.pending){
+    //this.pending=true
+    this.searchFilmByTitle(filter)
+      //setTimeout(()=>{
+      //  this.pending = false
+      //},2000)
+  //}
   }
 
 
