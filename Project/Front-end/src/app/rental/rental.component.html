@@ -9,33 +9,48 @@
       <li><b>Category:</b> {{film.category}}</li>
       <li><b>Description:</b> {{film.description}}</li>
     </ul>
-    <mat-form-field>
-      <mat-label>Select a store</mat-label>
-      <mat-select name="store" required="true" #select_store>
-        <mat-option *ngFor="let store of stores" [value]="store.address">
-          {{store.address}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Select a date</mat-label>
-      <mat-select name="rental_date" required="true" #select_date>
-        <mat-option *ngFor="let date of rental_dates" [value]="date">
-          {{date}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <div *ngIf="select_store.value!=null && select_date.value!=null; then enabled else disabled"></div>
-  </mat-dialog-actions>
+    <div *ngIf="available; then disp else noDisp"></div>
+    <ng-template #disp>
+      <mat-form-field>
+        <mat-label>Select a store</mat-label>
+        <mat-select [(value)]="selected_store" name="store" required="true" #select_store >
+          <mat-option *ngFor="let store of stores" [value]="store.store_id">
+            {{store.address}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select a date</mat-label>
+        <mat-select name="rental_date" required="true" #select_date>
+          <mat-option *ngFor="let date of rental_dates" [value]="date">
+            {{date}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<ng-template #enabled>
-  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial (click)="openPopup()" color="primary">Buy</button>
-</ng-template>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <div *ngIf="select_store.value!=null && select_date.value!=null; then enabled else disabled"></div>
+      </mat-dialog-actions>
 
-<ng-template #disabled>
-  <button mat-raised-button disabled [mat-dialog-close]="true" cdkFocusInitial>Buy</button>
-</ng-template>
+      <ng-template #enabled>
+        <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial (click)="openPopup()" color="primary">Buy</button>
+      </ng-template>
+
+      <ng-template #disabled>
+        <button mat-raised-button disabled [mat-dialog-close]="true" cdkFocusInitial>Buy</button>
+      </ng-template>
+    </ng-template>
+
+    <ng-template #noDisp>
+      <span>RENTAL NOT AVAILABLE></span>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+      </mat-dialog-actions>
+    </ng-template>
+
+
+
+
 
 
