@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
     return this._isAuthenticated.asObservable();
   }
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   saveUserData(id: number, token: string) {
@@ -36,7 +36,8 @@ export class AuthService {
     localStorage.removeItem("TOKEN");
     this.userId = "";
     this._isAuthenticated.next(false);
-    window.location.href = "/login";
+    //window.location.href = "/login";
+    this.router.navigate(['/login']);
   }
 
   autoLogin() {

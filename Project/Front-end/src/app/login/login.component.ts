@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
 import {Apollo} from "apollo-angular";
 import gql from "graphql-tag";
+import {Router} from "@angular/router";
 
 const SIGN_IN_MUTATION = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -41,7 +42,8 @@ export class LoginComponent {
   password: string;
 
   constructor(private authService: AuthService,
-              private apollo: Apollo) {
+              private apollo: Apollo,
+              private router: Router) {
   }
 
   onSubmit() {
@@ -58,7 +60,8 @@ export class LoginComponent {
           const token = data.signIn.token;
           console.log(token);
           this.authService.saveUserData(id, token);
-          window.location.href = "/";
+          //window.location.href = "/";
+          this.router.navigate(['/']);
         }
       },
       error => {
