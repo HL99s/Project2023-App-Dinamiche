@@ -1,19 +1,12 @@
-<!--<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Search Film</mat-label>
-    <input matInput placeholder="Film title" value="" (input)="searchByFilm($event)">
-  </mat-form-field>
-</form>-->
-
 <!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
 
 <div class="container-search">
   <div class="search-input-container">
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Search By Title" #box (keyup.enter)="searchFilmByTitle(box.value)">
+    <mat-form-field>
+      <mat-label>Search By Title</mat-label>
+      <input matInput (input)="onInput($event)"/>
     </mat-form-field>
-</div>
-
+  </div>
 
   <mat-form-field>
     <mat-label>Film Category</mat-label>
@@ -24,8 +17,6 @@
     </mat-select>
   </mat-form-field>
 </div>
-
-
 
 
 <div class="table-container">
