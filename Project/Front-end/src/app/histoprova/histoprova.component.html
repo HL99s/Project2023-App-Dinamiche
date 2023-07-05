@@ -35,6 +35,12 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Return date</th>
       <td mat-cell *matCellDef="let row">{{row.return_date}}</td>
     </ng-container>
+    <ng-container matColumnDef="duration">
+      <th class="tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by duration">
+        Duration
+      </th>
+      <td mat-cell *matCellDef="let row"> {{ row.duration | date:'dd' }} days, {{ row.duration | date:'HH' }} hours, {{ row.duration | date:'mm' }} minutes </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="dispayedColumn"></tr>
     <tr mat-row *matRowDef="let row; columns: dispayedColumn"></tr>
 

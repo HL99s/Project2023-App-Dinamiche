@@ -103,10 +103,6 @@ export class RentalComponent implements OnInit {
     })
 
 
-
-
-
-
   }
 
   get_rental_dates() {
