@@ -11,10 +11,14 @@
       *ngIf="!la">, </span></span></li>
     <li><b>Price:</b> {{film.cost | currency}}</li>
     <li><b>Rental duration:</b> {{film.rental_duration}} days</li>
-    <li><b>Available in:</b> <ul *ngFor="let store of stores; let la = last"><li>{{store.address}}, {{store.city}} ({{store.country}})</li></ul></li>
+    <li><span *ngIf="stores.length != 0; then store_true else store_false"></span></li>
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="openRental()">Rental</button>
 </mat-dialog-actions>
+
+
+<ng-template #store_true><b>Available in:</b><ul *ngFor="let store of stores; let la = last"><li>{{store.address}}, {{store.city}} ({{store.country}})</li></ul></ng-template>
+<ng-template #store_false><b>Not available in stores</b></ng-template>

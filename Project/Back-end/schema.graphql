@@ -14,7 +14,9 @@ type Query {
 
    getRentalInfoByCustId(customerId: Int): [RentalInfo],
    getRentalInfoByRenId(rentalId: Int): RentalInfo,
-   getStoreById(storeId: Int): Store
+   getStoreById(storeId: Int): Store,
+   getUsernameByCustId(customerId: Int): User,
+   getBuyDisp(filmId: Int, storeId: Int): [Inventory]
 
 }
 
@@ -74,4 +76,14 @@ type RentalInfo{
     staff_first_name: String,
     staff_last_name: String,
     staff_email: String
+}
+
+type User{
+    id: Int,
+    customer_id: Int,
+    username: String
+}
+
+type Inventory{
+    inventory_id: Int
 }

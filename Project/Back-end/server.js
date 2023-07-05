@@ -326,6 +326,26 @@ const root = {
         ).catch(
             (error) => (console.log(error))
         );
+    },
+    getUsernameByCustId: args => {
+        return db.query(
+            `SELECT username 
+             FROM credentials 
+             WHERE customer_id=${args.customerId}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getBuyDisp: args => {
+        return db.query(
+            `SELECT inventory_id 
+            from inventory
+            WHERE film_id=${args.filmId} AND store_id=${args.storeId}`).then(
+            (res) => (res.rows)
+        ).catch(
+            (error) => (console.log(error))
+        );
     }
 }
 

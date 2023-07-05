@@ -32,6 +32,7 @@ query getRentalInfoByCustId($customerId : Int!) {
   }
 }
 `;
+const cust_id = localStorage.getItem("ID");
 
 @Component({
   selector: 'app-histoprova',
@@ -49,21 +50,25 @@ export class HistoprovaComponent implements OnInit{
 
   constructor(private apollo: Apollo, public dialog: MatDialog){ }
   ngOnInit(): void {
+
     this.apollo.query({
       query: RENTALS_BY_ID_QUERY,
-      variables: {customerId: 554}
+      variables: {customerId: Number(cust_id)}
     }).subscribe(({data, loading})=>{
       //@ts-ignore
       this.rental_data = data.getRentalInfoByCustId
       this.dataSource = new MatTableDataSource(this.rental_data)
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.pagination
+      this.dataSource.filterPredicate = (data:
+        RentalData, filterValue: string) =>
+        data.film_title.trim().toLowerCase().indexOf(filterValue) !== -1;
     })
 
   }
   titleFilter(event: Event){
     const titleValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = titleValue.trim().toLowerCase()
+    this.dataSource.filter = titleValue.trim().toLowerCase();
 
     if(this.dataSource.paginator){
       this.dataSource.paginator.firstPage()
