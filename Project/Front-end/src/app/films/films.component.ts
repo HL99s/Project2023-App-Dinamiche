@@ -197,4 +197,12 @@ export class FilmsComponent implements OnInit {
     this.dialog.open(RentalComponent, {data: {film_id: id}})
   }
 
+  onInput(event: Event){
+    let filter: string;
+    filter = (<HTMLInputElement>event.target).value
+    console.log("Name: ",filter)
+    this.searchFilmByTitle(filter)
+
+  }
+
 }
