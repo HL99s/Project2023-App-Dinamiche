@@ -20,16 +20,16 @@
           <li class="link_style mdl-navigation__link" routerLink="/" tabindex="0">Home</li>
           <li class="link_style mdl-navigation__link" routerLink="/films" tabindex="0">Films</li>
           <li class="link_style mdl-navigation__link" routerLink="/rentals_history" tabindex="0">Rentals history</li>
-          <li class="link_style mdl-navigation__link" (click)="logOut()" (keypress)="logOut()" tabindex="0">Logout</li>
+          <li class="link_style mdl-navigation__link" (click)="logOut()" (keydown)="logOut()" tabindex="0">Logout</li>
         </ul>
       </ng-template>
 
       <ng-template [ngIf]="!logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Home</li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Films</li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Rentals history</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Home</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Films</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Rentals history</li>
           <li class="link_style mdl-navigation__link" routerLink="/login" tabindex="0">Login</li>
         </ul>
       </ng-template>
@@ -43,15 +43,15 @@
         <li class="link_style_side mdl-navigation__link" routerLink="/" tabindex="0">Home</li>
         <li class="link_style_side mdl-navigation__link" routerLink="/films" tabindex="0">Films</li>
         <li class="link_style_side mdl-navigation__link" routerLink="/rentals_history" tabindex="0">Rentals history</li>
-        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keypress)="logOut()" tabindex="0">Logout</li>
+        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown)="logOut()" tabindex="0">Logout</li>
       </ul>
     </ng-template>
 
     <ng-template [ngIf]="!logged">
       <ul class="mdl-navigation">
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Home</li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Films</li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keypress)="isNotLogged()" tabindex="0">Rentals history</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Home</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Films</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Rentals history</li>
         <li class="link_style_side mdl-navigation__link" routerLink="/login" >Login</li>
       </ul>
     </ng-template>
