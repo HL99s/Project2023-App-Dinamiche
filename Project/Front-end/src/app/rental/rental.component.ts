@@ -8,13 +8,12 @@ import {NgIf} from '@angular/common';
 import gql from 'graphql-tag';
 
 const GET_BUY_DISP = gql`
-query getBuyDisp($filmId: Int, $storeId: Int){
-  getBuyDisp(filmId: $filmId, storeId: $storeId){
-    inventory_id
+  query getBuyDisp($filmId: Int, $storeId: Int){
+    getBuyDisp(filmId: $filmId, storeId: $storeId){
+      inventory_id
+    }
   }
-}
 `;
-
 
 
 const FILM_INFO_BY_ID = gql`
@@ -76,11 +75,7 @@ export class RentalComponent implements OnInit {
     }).subscribe(({data, loading}) => {
       //@ts-ignore
       this.stores = data.getStoreDispByFilmId;
-      if(this.stores.length!=0){
-        this.available = true;
-      }
-      else
-        this.available = false;
+      this.available = this.stores.length != 0;
     })
     this.get_rental_dates()
   }
@@ -93,16 +88,10 @@ export class RentalComponent implements OnInit {
       //@ts-ignore
       this.disp_store = data.getBuyDisp
       console.log(this.disp_store)
-      if(this.disp_store.length!=0){
-        this.res = true;
-      }
-      else{
-        this.res = false;
-      }
+      this.res = this.disp_store.length != 0;
       this.dialog.open(AfterBuyDialog, {data: {result: this.res}});
     })
-
-
+    
   }
 
   get_rental_dates() {

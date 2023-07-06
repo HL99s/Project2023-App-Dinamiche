@@ -11,26 +11,24 @@ import {FormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 import {InfoFilmComponent} from './infoFilm/infoFilm.component';
 import {RentalComponent} from './rental/rental.component';
-import { InfoRentalComponent } from './info-rental/info-rental.component';
+import {InfoRentalComponent} from './info-rental/info-rental.component';
 
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
+import {MatTableModule} from '@angular/material/table';
 
-import { MatSortModule } from '@angular/material/sort';
+import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {NgFor} from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 
-import { CommonModule } from '@angular/common';
-import { HistoryComponent } from './history/history.component';
-import { HistoprovaComponent } from './histoprova/histoprova.component';
-
+import {CommonModule} from '@angular/common';
+import {HistoprovaComponent} from './histoprova/histoprova.component';
 
 
 @NgModule({

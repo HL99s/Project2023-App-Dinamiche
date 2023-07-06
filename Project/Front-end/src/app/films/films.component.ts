@@ -7,59 +7,59 @@ import {RentalComponent} from '../rental/rental.component';
 
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
-query getAllFilmsWithCategory($offset: Int!) {
-  getAllFilmsWithCategory(offset: $offset, limit: 10) {
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getAllFilmsWithCategory($offset: Int!) {
+    getAllFilmsWithCategory(offset: $offset, limit: 10) {
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_TITLE_QUERY = gql`
-query getFilmsByTitle($offset: Int, $filmTitle: String){
-  getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByTitle($offset: Int, $filmTitle: String){
+    getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_CATEGORY_QUERY = gql`
-query getFilmsByCategory($offset: Int, $categoryName: String!) {
-  getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByCategory($offset: Int, $categoryName: String!) {
+    getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
-query getFilmsByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
-  getFilmsByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
+    getFilmsByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const CATEGORY_QUERY = gql`
@@ -84,7 +84,7 @@ export class FilmsComponent implements OnInit {
   searchByTitle: string = "";
   selectedCategoryOption: string = "All";
   filmCategory: any;
-  //pending: Boolean = false;
+  pending: boolean = false;
 
   constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
@@ -178,11 +178,24 @@ export class FilmsComponent implements OnInit {
     }
   }
 
-  searchFilmByTitle(filmTitle: string) {
-      console.log("Name: ",filmTitle)
+  searchFilmByTitle(event: Event) {
+    this.searchByTitle = (<HTMLInputElement>event.target).value;
+
+    if (!this.pending) {
+      this.pending = true;
       this.page = 0;
-      this.searchByTitle = filmTitle;
-      this.queryRouting();
+
+      setTimeout(() => {
+        this.queryRouting();
+        this.pending = false;
+
+        if (this.searchByTitle != (<HTMLInputElement>event.target).value) {
+          this.queryRouting();
+        }
+
+      }, 2000);
+
+    }
   }
 
   onCategoryChange() {
@@ -197,19 +210,5 @@ export class FilmsComponent implements OnInit {
   openRental(id: number) {
     this.dialog.open(RentalComponent, {data: {film_id: id}})
   }
-
-  onInput(event: Event){
-    let filter: string;
-    filter = (<HTMLInputElement>event.target).value
-    //if(!this.pending){
-    //this.pending=true
-    this.searchFilmByTitle(filter)
-      //setTimeout(()=>{
-      //  this.pending = false
-      //},2000)
-  //}
-  }
-
-
 
 }
