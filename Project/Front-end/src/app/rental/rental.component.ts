@@ -113,6 +113,7 @@ export class RentalComponent implements OnInit {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, NgIf],
 })
+
 export class AfterBuyDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
   }

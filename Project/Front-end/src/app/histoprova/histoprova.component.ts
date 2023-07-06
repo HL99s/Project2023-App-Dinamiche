@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Apollo } from 'apollo-angular';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,7 +31,6 @@ query getRentalInfoByCustId($customerId : Int!) {
   }
 }
 `;
-const cust_id = localStorage.getItem("ID");
 
 @Component({
   selector: 'app-histoprova',
@@ -47,13 +45,13 @@ export class HistoprovaComponent implements OnInit{
   @ViewChild(MatPaginator) pagination: MatPaginator
 
   rental_data: any;
-
+  cust_id = localStorage.getItem("ID");
   constructor(private apollo: Apollo, public dialog: MatDialog){ }
   ngOnInit(): void {
-
+    console.log(this.cust_id);
     this.apollo.query({
       query: RENTALS_BY_ID_QUERY,
-      variables: {customerId: Number(cust_id)}
+      variables: {customerId: Number(this.cust_id)}
     }).subscribe(({data, loading})=>{
       //@ts-ignore
       this.rental_data = data.getRentalInfoByCustId

@@ -1,9 +1,14 @@
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <div class="mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title" routerLink="/">
+      <span class="mdl-layout-title" *ngIf="logged" routerLink="/">
+        <i class="material-icons">home</i> Movie Shop
+      </span>
+      <span class="mdl-layout-title" *ngIf="!logged" (click)="isNotLogged()">
         <i class="material-icons">home</i> Movie Shop
       </span>
       <!-- Add spacer, to align navigation to the right in desktop -->
@@ -11,45 +16,28 @@
       <!-- Navigation -->
       <ul class="mdl-navigation">
         <!--Quelli in alto-->
-        <li class="link_style mdl-navigation__link" routerLink="/">Home</li>
-        <li class="link_style mdl-navigation__link" routerLink="/films">Films</li>
-        <li class="link_style mdl-navigation__link" routerLink="/rentals_history">Rentals history</li>
-        <li
-          class="link_style mdl-navigation__link"
-          *ngIf="!logged"
-          routerLink="/login"
-        >
-          Login
-        </li>
-        <li
-          class="link_style mdl-navigation__link"
-          *ngIf="logged"
-          (click)="logOut()"
-        >
-          Logout
-        </li>
+        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Home</li>
+        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/">Home</li>
+        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Films</li>
+        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/films">Films</li>
+        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Rentals history</li>
+        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/rentals_history">Rentals history</li>
+        <li class="link_style mdl-navigation__link" *ngIf="!logged" routerLink="/login">Login</li>
+        <li class="link_style mdl-navigation__link" *ngIf="logged" (click)="logOut()">Logout</li>
       </ul>
     </div>
   </div>
 
   <div class="mdl-layout__drawer">
     <ul class="mdl-navigation">
-      <li class="link_style_side mdl-navigation__link" routerLink="/">Home</li>
-      <li class="link_style_side mdl-navigation__link" routerLink="/films">Films</li>
-      <li class="link_style_side mdl-navigation__link" routerLink="/rentals_history">Rentals history</li>
-      <li
-        class="link_style_side mdl-navigation__link"
-        *ngIf="!logged"
-        routerLink="/login"
-      >
-        Login
-      </li>
-      <li
-        class="link_style_side mdl-navigation__link"
-        *ngIf="logged"
-        (click)="logOut()"
-      >
-        Logout
+      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Home</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/">Home</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Films</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/films">Films</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Rentals history</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/rentals_history">Rentals history</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" routerLink="/login">Login</li>
+      <li class="link_style_side mdl-navigation__link" *ngIf="logged" (click)="logOut()">Logout
       </li>
     </ul>
   </div>
