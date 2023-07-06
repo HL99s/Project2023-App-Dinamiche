@@ -40,6 +40,7 @@ export class LoginComponent {
 
   userName: string;
   password: string;
+  credentialsWrong: boolean = false;
 
   constructor(private authService: AuthService,
               private apollo: Apollo,
@@ -55,12 +56,7 @@ export class LoginComponent {
       }).subscribe(
       ({data}) => {
         if (data != null) {
-          const id = data.signIn.customer_id;
-          console.log(id);
-          const token = data.signIn.token;
-          console.log(token);
-          this.authService.saveUserData(id, token);
-          //window.location.href = "/";
+          this.authService.saveUserData(data.signIn.customer_id, data.signIn.token, data.signIn.username);
           this.router.navigate(['/']);
         }
       },
