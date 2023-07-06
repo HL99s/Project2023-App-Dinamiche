@@ -19,7 +19,6 @@
 
 <div class="table-container">
   <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
-    <caption id="table_hint">Rent a film</caption>
     <colgroup>
       <col class="mat-column-title mdl-data-table__cell--non-numeric">
       <col class="mat-column-year mdl-data-table__cell--non-numeric">
@@ -45,8 +44,8 @@
         class="head-title">Rental</b></th>
     </tr>
 
-    <tr *ngFor="let film of films; last as isLast">
-      <ng-template [ngIf]="!isLast">
+    <tr *ngFor="let film of films; index as i">
+      <ng-template [ngIf]="i!=10">
         <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center" name="Titolo">
           <b class="no-underline"><span class="before-title"></span></b>
           <a class="link_style" (keydown.enter)="openInfo(film.film_id)" (click)="openInfo(film.film_id)" scope="row"
