@@ -18,12 +18,10 @@
   </mat-form-field>
 </div>
 
-
 <div class="table-container">
   <table
     class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
     <colgroup>
-      <!--<col class="mat-column-film-id mdl-data-table__cell--non-numeric">-->
       <col class="mat-column-title mdl-data-table__cell--non-numeric">
       <col class="mat-column-year mdl-data-table__cell--non-numeric">
       <col class="mat-column-rating mdl-data-table__cell--non-numeric">
@@ -31,10 +29,8 @@
       <col class="mat-column-language mdl-data-table__cell--non-numeric">
       <col class="mat-column-price mdl-data-table__cell">
       <col class="mat-column-rent mdl-data-table__cell--non-numeric">
-
     </colgroup>
     <tr>
-      <!--<th class="mdl-data-table__cell--non-numeric">Film_id</th>-->
       <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Title</b></th>
       <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Year</b></th>
       <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rating</b></th>
@@ -44,61 +40,27 @@
       <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rental</b></th>
     </tr>
 
-    <ng-template [ngIf]="searchByTitle == ''">
-      <tr *ngFor="let film of films">
-        <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-
-
-        <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center"
-            (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b><span
-          class="link_style">{{film.film_title}}</span>
-        </td>
-        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-year"></span></b>{{film.release_year}}</td>
-        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-rating"></span></b>{{film.rating}}</td>
-        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-category"></span></b>{{film.category}}</td>
-        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-language"></span></b>{{film.language}}</td>
-        <td class="cell price-cell mdl-data-table__cell align-center"><b><span
-          class="before-price"></span></b>{{film.cost | currency}}</td>
-        <td class="cell button-cell">
-
-          <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
-          </button>
-        </td>
-        <td class="cell-not-visible"></td>
-      </tr>
-    </ng-template>
-
-    <ng-template [ngIf]="searchByTitle != ''">
-      <tr *ngFor="let film of films">
-        <!--<td class="mdl-data-table__cell--non-numeric">{{film.film_id}}</td>-->
-
-        <td class="cell title-cell film-title mdl-data-table__cell--non-numeric align-center"
-            (click)="openInfo(film.film_id)"><b><span class="before-title"></span></b><span
-          class="link_style">{{film.film_title}}</span>
-
-        </td>
-        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-year"></span></b>{{film.release_year}}</td>
-        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center "><b><span
-          class="before-rating"></span></b>{{film.rating}}</td>
-        <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-category"></span></b>{{film.category}}</td>
-        <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span
-          class="before-language"></span></b>{{film.language}}</td>
-        <td class="cell price-cell mdl-data-table__cell align-center"><b><span
-          class="before-price"></span></b>{{film.cost | currency}}</td>
-        <td class="cell button-cell">
-          <button class="button-info" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
-          </button>
-        </td>
-        <td class="cell-not-visible"><p></p></td>
-      </tr>
-    </ng-template>
-
+    <tr *ngFor="let film of films">
+      <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center"
+          (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b><span
+        class="link_style">{{film.film_title}}</span>
+      </td>
+      <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span
+        class="before-year"></span></b>{{film.release_year}}</td>
+      <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span
+        class="before-rating"></span></b>{{film.rating}}</td>
+      <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span
+        class="before-category"></span></b>{{film.category}}</td>
+      <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span
+        class="before-language"></span></b>{{film.language}}</td>
+      <td class="cell price-cell mdl-data-table__cell align-center"><b><span
+        class="before-price"></span></b>{{film.cost | currency}}</td>
+      <td class="cell button-cell">
+        <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
+        </button>
+      </td>
+      <td class="cell-not-visible"></td>
+    </tr>
 
   </table>
 </div>

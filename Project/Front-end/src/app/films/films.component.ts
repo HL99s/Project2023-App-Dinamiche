@@ -84,7 +84,7 @@ export class FilmsComponent implements OnInit {
   searchByTitle: string = "";
   selectedCategoryOption: string = "All";
   filmCategory: any;
-  pending: Boolean = false;
+  pending: boolean = false;
 
   constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
