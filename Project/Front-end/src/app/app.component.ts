@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
 @Component({
   selector: 'notLogged',
-  templateUrl: './notLoggedPopUp/notLogged.html',
+  templateUrl: './notLoggedPopUp/notLoggedPopUp.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })

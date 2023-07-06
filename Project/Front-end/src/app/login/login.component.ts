@@ -59,21 +59,20 @@ export class LoginComponent {
         .mutate<SignInMutationResponse>({
           mutation: SIGN_IN_MUTATION,
           variables: {username: this.userName, password: this.password}
-        }).subscribe(
-        ({data}) => {
-          if (data != null) {
-            if (data.signIn != null) {
-              this.authService.saveUserData(data.signIn.customer_id, data.signIn.token, data.signIn.username);
-              this.router.navigate(['/']);
-            } else {
-              this.wrongCredentials = true;
-            }
+        }).subscribe({
+        next: (res) => {
+          if (res.data?.signIn) {
+            console.log(res.data);
+            this.authService.saveUserData(res.data.signIn.customer_id, res.data.signIn.token, res.data.signIn.username);
+            this.router.navigate(['/']);
+          } else {
+            this.wrongCredentials = true;
           }
         },
-        error => {
-          console.log("there was an error sending the query", error);
+        error: (e) => {
+          console.log("there was an error sending the query", e);
         }
-      );
+      });
     }
   }
 }

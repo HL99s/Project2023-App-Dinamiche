@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
@@ -91,7 +91,7 @@ export class RentalComponent implements OnInit {
       this.res = this.disp_store.length != 0;
       this.dialog.open(AfterBuyDialog, {data: {result: this.res}});
     })
-    
+
   }
 
   get_rental_dates() {
@@ -109,7 +109,7 @@ export class RentalComponent implements OnInit {
 
 @Component({
   selector: 'after_buy',
-  templateUrl: '../rentalConfirmPopUp/after_buy.html',
+  templateUrl: '../rentalConfirmPopUp/rentalConfirmPopUp.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, NgIf],
 })

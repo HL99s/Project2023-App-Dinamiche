@@ -9,13 +9,13 @@ export class AuthService {
 
   private userId: string = "";
 
+  constructor(private router: Router) {
+  }
+
   _isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   get isAuthenticated(): Observable<boolean> {
     return this._isAuthenticated.asObservable();
-  }
-
-  constructor(private router: Router) {
   }
 
   saveUserData(id: number, token: string, username: string) {

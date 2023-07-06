@@ -4,13 +4,13 @@
   <div class="search-input-container">
     <mat-form-field>
       <mat-label>Search By Title</mat-label>
-      <input id="fil" matInput (input)="searchFilmByTitle($event)" tabindex="0"/>
+      <input (input)="searchFilmByTitle($event)" id="fil" matInput tabindex="0"/>
     </mat-form-field>
   </div>
 
   <mat-form-field>
     <mat-label>Film Category</mat-label>
-    <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange()" tabindex="0">
+    <mat-select (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption" tabindex="0">
       <mat-option value="All">All</mat-option>
       <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}</mat-option>
     </mat-select>
@@ -48,14 +48,14 @@
       <ng-template [ngIf]="i!=10">
         <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center" name="Titolo">
           <b class="no-underline"><span class="before-title"></span></b>
-          <a class="link_style" (keydown.enter)="openInfo(film.film_id)" (click)="openInfo(film.film_id)" scope="row"
+          <a (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id)" class="link_style" scope="row"
              tabindex="0">{{film.film_title}}</a>
         </td>
-        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0" name="year">
+        <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" name="year" scope="row" tabindex="0">
           <b><span class="before-year"></span></b>{{film.release_year}}
         </td>
-        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0"
-            id="rating">
+        <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" id="rating" scope="row"
+            tabindex="0">
           <b><span class="before-rating"></span></b>{{film.rating}}
         </td>
         <td class="cell category-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0">
@@ -68,7 +68,7 @@
           <b><span class="before-price"></span></b>{{film.cost | currency}}
         </td>
         <td class="cell button-cell" scope="row">
-          <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)" tabindex="0">
+          <button (click)="openRental(film.film_id)" class="button-rent" color="primary" mat-raised-button tabindex="0">
             Rental
           </button>
         </td>
@@ -83,16 +83,16 @@
   <div *ngIf="page==0 then disabled else enabled"></div>
   <ng-template #enabled>
     <button
-      class="mdl-button mdl-js-button mdl-button--colored"
-      (click)="prevPage()" tabindex="0">
+      (click)="prevPage()"
+      class="mdl-button mdl-js-button mdl-button--colored" tabindex="0">
       <i class="material-icons">arrow_back</i>
     </button>
   </ng-template>
 
   <ng-template #disabled>
     <button
-      class="mdl-button mdl-js-button mdl-button--colored"
-      (click)="prevPage()" disabled>
+      (click)="prevPage()"
+      class="mdl-button mdl-js-button mdl-button--colored" disabled>
       <i class="material-icons">arrow_back</i>
     </button>
   </ng-template>
@@ -101,16 +101,16 @@
   <div *ngIf="films.length==11 then notLastPage else lastPage"></div>
   <ng-template #notLastPage>
     <button
-      class="mdl-button mdl-js-button mdl-button--colored"
-      (click)="nextPage()" tabindex="0">
+      (click)="nextPage()"
+      class="mdl-button mdl-js-button mdl-button--colored" tabindex="0">
       <i class="material-icons">arrow_forward</i>
     </button>
   </ng-template>
 
   <ng-template #lastPage>
     <button
-      class="mdl-button mdl-js-button mdl-button--colored"
-      (click)="nextPage()" disabled>
+      (click)="nextPage()"
+      class="mdl-button mdl-js-button mdl-button--colored" disabled>
       <i class="material-icons">arrow_forward</i>
     </button>
   </ng-template>
