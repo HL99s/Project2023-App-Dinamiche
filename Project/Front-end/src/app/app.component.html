@@ -14,32 +14,47 @@
       <!-- Add spacer, to align navigation to the right in desktop -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
-      <ul class="mdl-navigation">
-        <!--Quelli in alto-->
-        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Home</li>
-        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/">Home</li>
-        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Films</li>
-        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/films">Films</li>
-        <li class="link_style mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Rentals history</li>
-        <li class="link_style mdl-navigation__link" *ngIf="logged" routerLink="/rentals_history">Rentals history</li>
-        <li class="link_style mdl-navigation__link" *ngIf="!logged" routerLink="/login">Login</li>
-        <li class="link_style mdl-navigation__link" *ngIf="logged" (click)="logOut()">Logout</li>
-      </ul>
+      <ng-template [ngIf]="logged">
+        <ul class="mdl-navigation">
+          <!--Quelli in alto-->
+          <li class="link_style mdl-navigation__link" routerLink="/">Home</li>
+          <li class="link_style mdl-navigation__link" routerLink="/films">Films</li>
+          <li class="link_style mdl-navigation__link" routerLink="/rentals_history">Rentals history</li>
+          <li class="link_style mdl-navigation__link" (click)="logOut()">Logout</li>
+        </ul>
+      </ng-template>
+
+      <ng-template [ngIf]="!logged">
+        <ul class="mdl-navigation">
+          <!--Quelli in alto-->
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()">Home</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()">Films</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()">Rentals history</li>
+          <li class="link_style mdl-navigation__link" routerLink="/login">Login</li>
+        </ul>
+      </ng-template>
+
     </div>
   </div>
 
   <div class="mdl-layout__drawer">
-    <ul class="mdl-navigation">
-      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Home</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/">Home</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Films</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/films">Films</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" (click)="isNotLogged()">Rentals history</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="logged" routerLink="/rentals_history">Rentals history</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="!logged" routerLink="/login">Login</li>
-      <li class="link_style_side mdl-navigation__link" *ngIf="logged" (click)="logOut()">Logout
-      </li>
-    </ul>
+    <ng-template [ngIf]="logged">
+      <ul class="mdl-navigation">
+        <li class="link_style_side mdl-navigation__link" routerLink="/">Home</li>
+        <li class="link_style_side mdl-navigation__link" routerLink="/films">Films</li>
+        <li class="link_style_side mdl-navigation__link" routerLink="/rentals_history">Rentals history</li>
+        <li class="link_style_side mdl-navigation__link" (click)="logOut()">Logout</li>
+      </ul>
+    </ng-template>
+
+    <ng-template [ngIf]="!logged">
+      <ul class="mdl-navigation">
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()">Home</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()">Films</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()">Rentals history</li>
+        <li class="link_style_side mdl-navigation__link" routerLink="/login">Login</li>
+      </ul>
+    </ng-template>
   </div>
 
   <div class="mdl-layout__content content">
