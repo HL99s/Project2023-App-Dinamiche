@@ -6,33 +6,37 @@
     height: 100hv;
 }*/
 
-h1{
-    font-size: 30px;
-    margin-bottom: 20px;
+h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.invalid {
+  color: red;
 }
 
 .text-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-  }
-  
-  .form-signin {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
 
-  .mat-input-element{
-    width: 100% !important;
-  }
-  
-  
+.form-signin {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-input-element {
+  width: 100% !important;
+}
+
+
 

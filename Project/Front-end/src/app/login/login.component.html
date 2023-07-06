@@ -4,7 +4,7 @@
     <h1 class="h3 mb-3 font-weight-normal">Please Log-In to access the services</h1>
 
     <mat-form-field>
-      <mat-label class="sr-only">Email address</mat-label>
+      <mat-label class="sr-only">Username</mat-label>
       <input
         matInput
         type="userName"
@@ -29,6 +29,13 @@
         [(ngModel)]="password"
       />
     </mat-form-field>
+    <ng-template [ngIf]="nullCredentials">
+      <p id="invalidCredentials" class="invalid"> Please insert <b>both</b> Username and Password.</p>
+    </ng-template>
+
+    <ng-template [ngIf]="wrongCredentials">
+      <p id="credentialsRequired" class="invalid"> Login <b>failed</b>. Credentials Error.</p>
+    </ng-template>
 
     <button mat-raised-button color = "primary" class="btn btn-lg btn-primary btn-block" type="submit">
       Sign in
