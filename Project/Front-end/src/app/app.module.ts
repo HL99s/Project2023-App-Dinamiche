@@ -31,6 +31,7 @@ import {CommonModule} from '@angular/common';
 import {HistoprovaComponent} from './histoprova/histoprova.component';
 
 import { ConvertiDurataPipe } from './converti-durata-pipe.pipe';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ConvertiDurataPipe } from './converti-durata-pipe.pipe';
     CommonModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSlideToggleModule
 
   ],
   providers: [],

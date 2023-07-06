@@ -8,6 +8,7 @@ import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
 import { map } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -45,8 +46,10 @@ query getRentalInfoByCustId($customerId : Int!) {
 export class HistoprovaComponent implements OnInit{
 
   dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop','duration'];
-  //dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
   dataSource: MatTableDataSource<RentalData>;
+  //
+  ordineSelezionato: string;
+  isOrderAsc: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort
   @ViewChild(MatPaginator) pagination: MatPaginator
@@ -98,6 +101,24 @@ export class HistoprovaComponent implements OnInit{
     console.log(shop)
     this.dialog.open(InfoRentalComponent, {data: {rental_id: rentalId, store_id: shop}})
   }
+
+
+  onOrdineChange(){
+    if (this.ordineSelezionato) {
+      this.dataSource.sort = this.sort;
+      this.dataSource.sort.active = this.ordineSelezionato;
+
+      if(this.isOrderAsc === true){
+        this.dataSource.sort.direction = 'asc';
+      }
+      else{
+        this.dataSource.sort.direction = 'desc';
+      }
+      
+      this.dataSource.sort.sortChange.emit();
+    }
+  }
+  
 
 }
 
