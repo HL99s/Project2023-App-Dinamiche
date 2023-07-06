@@ -91,7 +91,7 @@ export class RentalComponent implements OnInit {
       this.res = this.disp_store.length != 0;
       this.dialog.open(AfterBuyDialog, {data: {result: this.res}});
     })
-
+    
   }
 
   get_rental_dates() {
