@@ -8,12 +8,23 @@
  @media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
   
-  table {
-    width: 100% !important;
+  table{
+    width: 100%;
   }
 
-  th{
-    font-size: 20px;
+  .tableHeaderCellDiv{
+    display:none;
+  }
+
+  td{
+    display: block;
+  }
+
+  .cell{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .full-width-table{
@@ -27,26 +38,43 @@
     cursor: pointer;
   }
 
+  .form-container{
+    display: flex;
+    flex-direction: column;
+  }
+
 
 
 }
 
+/*QUI*/
 /* Schermo small (tablet verticali) */
 @media screen and (min-width: 480.01px) and (max-width: 767.98px) {
   /* Regole CSS per lo schermo small */
 
-  table {
-    width: 100% !important;
+  table{
+    width: 100%;
   }
 
-  th{
-    font-size: 20px;
+  .tableHeaderCellDiv{
+    display:none;
+  }
+
+  td{
+    display: block;
+  }
+
+  .cell{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
   }
 
   .full-width-table{
     width: 100%;
-    /*table-layout: fixed;*/
-    display: flexbox;
+    table-layout: fixed;
   }
 
   .link-style{
@@ -55,19 +83,11 @@
     cursor: pointer;
   }
 
-  /*New features*/
-  .tableHeaderCellDiv{
-    display:none;
+  .form-container{
+    display: flex;
+    flex-direction: column;
   }
 
-  .table-container {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center;
-  }
-
-  
-    
   
   
 }
@@ -99,6 +119,9 @@
     display: none;
   }
   
+  .head-before{
+    display: none;
+  }
   
 }
 
@@ -129,6 +152,10 @@
     display: none;
   }
 
+  .head-before{
+    display: none;
+  }
+
 }
 
 /* Schermo extra large (grandi desktop) */
@@ -155,6 +182,10 @@
   }
 
   .order-by{
+    display: none;
+  }
+
+  .head-before{
     display: none;
   }
 

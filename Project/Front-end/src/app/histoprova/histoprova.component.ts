@@ -42,8 +42,8 @@ query getRentalInfoByCustId($customerId : Int!) {
 })
 export class HistoprovaComponent implements OnInit{
 
-
-  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
+  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop','duration'];
+  //dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
   dataSource: MatTableDataSource<RentalData>;
 
   @ViewChild(MatSort) sort: MatSort
