@@ -4,45 +4,43 @@
 */
 
 
- /* Schermo extra small (telefoni) */
- @media screen and (max-width: 480px) {
+/* Schermo extra small (telefoni) */
+@media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
-  
-  table{
+  table {
     width: 100%;
   }
 
-  .tableHeaderCellDiv{
-    display:none;
+  .tableHeaderCellDiv {
+    display: none;
   }
 
-  td{
+  td {
     display: block;
   }
 
-  .cell{
+  .cell {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .full-width-table{
+  .full-width-table {
     width: 100%;
     table-layout: fixed;
   }
 
-  .link-style{
+  .link-style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
-  .form-container{
+  .form-container {
     display: flex;
     flex-direction: column;
   }
-
 
 
 }
@@ -51,44 +49,43 @@
 /* Schermo small (tablet verticali) */
 @media screen and (min-width: 480.01px) and (max-width: 767.98px) {
   /* Regole CSS per lo schermo small */
-
-  table{
+  table {
     width: 100%;
   }
 
-  .tableHeaderCellDiv{
-    display:none;
+  .tableHeaderCellDiv {
+    display: none;
   }
 
-  td{
+  td {
     display: block;
   }
 
-  .cell{
+  .cell {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
   }
 
-  .full-width-table{
+  .full-width-table {
     width: 100%;
     table-layout: fixed;
   }
 
-  .link-style{
+  .link-style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
-  .form-container{
+  .form-container {
     display: flex;
     flex-direction: column;
   }
 
-  .slider{
+  .slider {
     display: flex;
     justify-content: center;
 
@@ -96,71 +93,68 @@
     margin-bottom: 20px;
   }
 
-  
-  
+
 }
 
 /* Schermo medium (tablet orizzontali) */
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
   /* Regole CSS per lo schermo medium */
-
   table {
     width: 100% !important;
   }
 
-  th{
+  th {
     font-size: 20px;
   }
 
-  .full-width-table{
+  .full-width-table {
     width: 100%;
     table-layout: fixed;
   }
 
-  .link-style{
+  .link-style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
-  .order-by{
+  .order-by {
     display: none;
   }
-  
-  .head-before{
+
+  .head-before {
     display: none;
   }
-  
+
 }
 
 /* Schermo large (desktop) */
 @media screen and (min-width: 992px) and (max-width: 1199.98px) {
   /* Regole CSS per lo schermo large */
-
   table {
     width: 100% !important;
   }
 
-  th{
+  th {
     font-size: 20px;
   }
 
-  .full-width-table{
+  .full-width-table {
     width: 100%;
     table-layout: fixed;
   }
 
-  .link-style{
+  .link-style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
-  .order-by{
+  .order-by {
     display: none;
   }
 
-  .head-before{
+  .head-before {
     display: none;
   }
 
@@ -169,31 +163,30 @@
 /* Schermo extra large (grandi desktop) */
 @media screen and (min-width: 1200px) {
   /* Regole CSS per lo schermo extra large */
-
   table {
     width: 100% !important;
   }
 
-  th{
+  th {
     font-size: 20px;
   }
 
-  .full-width-table{
+  .full-width-table {
     width: 100%;
     table-layout: fixed;
   }
 
-  .link-style{
+  .link-style {
     text-decoration: underline;
     color: black;
     cursor: pointer;
   }
 
-  .order-by{
+  .order-by {
     display: none;
   }
 
-  .head-before{
+  .head-before {
     display: none;
   }
 

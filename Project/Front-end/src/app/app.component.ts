@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
 
   logged: boolean = false;
 
-  constructor(private authService: AuthService, public dialog: MatDialog) {
+  constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -31,11 +32,14 @@ export class AppComponent implements OnInit {
     this.dialog.open(NotLogged);
   }
 
+  redirectTo(path: string) {
+    this.router.navigate([path]);
+  }
 }
 
 @Component({
   selector: 'notLogged',
-  templateUrl: './notLoggedPopUp/notLogged.html',
+  templateUrl: './notLoggedPopUp/notLoggedPopUp.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })

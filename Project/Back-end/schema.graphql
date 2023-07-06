@@ -1,22 +1,20 @@
 type Query {
-   getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
-   getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
-   getFilmById(id: Int): Film,
-   getFilmInfoById(filmId: Int): Film
+    getAllFilmsWithCategory(offset:Int=0, limit:Int = 10): [Film],
+    getFilmsByTitle(offset: Int=0, limit: Int = 10, filmTitle: String): [Film],
+    getFilmById(id: Int): Film,
+    getFilmInfoById(filmId: Int): Film
+    getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
+    getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
 
-   getFilmsByCategory(offset:Int=0, limit:Int = 10, categoryName: String): [Film],
-   getFilmsByCategoryAndTitle(offset: Int=0, limit: Int = 10, filmTitle: String, categoryName: String): [Film],
+    getAllStores: [Store],
+    getAllCategories: [FilmCategory],
+    getFilmActors(filmId: Int): [Actor],
 
-   getAllStores: [Store],
-   getAllCategories: [FilmCategory],
-   getFilmActors(filmId: Int): [Actor],
-   getStoreDispByFilmId(filmId: Int): [Store],
-
-   getRentalInfoByCustId(customerId: Int): [RentalInfo],
-   getRentalInfoByRenId(rentalId: Int): RentalInfo,
-   getStoreById(storeId: Int): Store,
-   getUsernameByCustId(customerId: Int): User,
-   getBuyDisp(filmId: Int, storeId: Int): [Inventory]
+    getStoreDispByFilmId(filmId: Int): [Store],
+    getRentalInfoByCustId(customerId: Int): [RentalInfo],
+    getRentalInfoByRenId(rentalId: Int): RentalInfo,
+    getStoreById(storeId: Int): Store,
+    getBuyDisp(filmId: Int, storeId: Int): [Inventory]
 
 }
 
@@ -76,12 +74,6 @@ type RentalInfo{
     staff_first_name: String,
     staff_last_name: String,
     staff_email: String
-}
-
-type User{
-    id: Int,
-    customer_id: Int,
-    username: String
 }
 
 type Inventory{
