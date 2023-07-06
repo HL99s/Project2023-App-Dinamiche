@@ -6,6 +6,7 @@ import { Apollo } from 'apollo-angular';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
+import { map } from 'rxjs';
 
 export interface RentalData{
   rental_id: number,
@@ -38,7 +39,7 @@ query getRentalInfoByCustId($customerId : Int!) {
   styleUrls: ['./histoprova.component.css']
 })
 export class HistoprovaComponent implements OnInit{
-  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date'];
+  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
   dataSource: MatTableDataSource<RentalData>;
 
   @ViewChild(MatSort) sort: MatSort
@@ -54,7 +55,21 @@ export class HistoprovaComponent implements OnInit{
       variables: {customerId: Number(this.cust_id)}
     }).subscribe(({data, loading})=>{
       //@ts-ignore
-      this.rental_data = data.getRentalInfoByCustId
+
+
+      //this.rental_data = data.getRentalInfoByCustId
+      this.rental_data = data.getRentalInfoByCustId.map((rental:{
+        rental_date: string | number | Date; return_date: string | number | Date;
+      })=>{
+        const startDate: Date = new Date(rental.rental_date);
+        const endDate: Date = new Date(rental.return_date);
+
+        const differenceInMilliseconds = endDate.getTime() - startDate.getTime();
+
+        // Creazione di una copia dell'oggetto rental con la proprietà duration aggiunta
+        // i ... fanno una copia di rental
+        return { ...rental, duration: differenceInMilliseconds };
+      })
       this.dataSource = new MatTableDataSource(this.rental_data)
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.pagination
