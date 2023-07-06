@@ -1,43 +1,42 @@
-
 <div class="text-center">
-  <form class="form-signin" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" class="form-signin">
     <h1 class="h3 mb-3 font-weight-normal">Please Log-In to access the services</h1>
 
     <mat-form-field>
       <mat-label class="sr-only">Username</mat-label>
       <input
-        matInput
-        type="userName"
-        name="userName"
+        [(ngModel)]="userName"
+        autofocus
         class="form-control"
+        matInput
+        name="userName"
         placeholder="userName"
         required
-        autofocus
-        [(ngModel)]="userName"
+        type="userName"
       />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label class="sr-only">Password</mat-label>
       <input
-        matInput
-        type="password"
-        name="password"
+        [(ngModel)]="password"
         class="form-control"
+        matInput
+        name="password"
         placeholder="Password"
         required
-        [(ngModel)]="password"
+        type="password"
       />
     </mat-form-field>
     <ng-template [ngIf]="nullCredentials">
-      <p id="invalidCredentials" class="invalid"> Please insert <b>both</b> Username and Password.</p>
+      <p class="invalid" id="invalidCredentials"> Please insert <b>both</b> Username and Password.</p>
     </ng-template>
 
     <ng-template [ngIf]="wrongCredentials">
-      <p id="credentialsRequired" class="invalid"> Login <b>failed</b>. Credentials Error.</p>
+      <p class="invalid" id="credentialsRequired"> Login <b>failed</b>. Credentials Error.</p>
     </ng-template>
 
-    <button mat-raised-button color = "primary" class="btn btn-lg btn-primary btn-block" type="submit">
+    <button class="btn btn-lg btn-primary btn-block" color="primary" mat-raised-button type="submit">
       Sign in
     </button>
 

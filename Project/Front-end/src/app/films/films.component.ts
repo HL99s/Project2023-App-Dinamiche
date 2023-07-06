@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {MatDialog} from '@angular/material/dialog';
-import {InfoFilmComponent} from '../infoFilm/infoFilm.component';
+import {Film_infoComponent} from '../film_info/film_info.component';
 import {RentalComponent} from '../rental/rental.component';
 
 
@@ -194,7 +194,7 @@ export class FilmsComponent implements OnInit {
           this.queryRouting();
         }
 
-      }, 2000);
+      }, 500);
 
     }
   }
@@ -205,7 +205,7 @@ export class FilmsComponent implements OnInit {
   }
 
   openInfo(id: number) {
-    this.dialog.open(InfoFilmComponent, {data: {film_id: id}})
+    this.dialog.open(Film_infoComponent, {data: {film_id: id}})
   }
 
   openRental(id: number) {
