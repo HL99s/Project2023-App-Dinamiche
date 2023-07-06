@@ -2,64 +2,64 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {MatDialog} from '@angular/material/dialog';
-import {InfoFilmComponent} from '../infoFilm/infoFilm.component';
+import {Film_infoComponent} from '../film_info/film_info.component';
 import {RentalComponent} from '../rental/rental.component';
 
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
-query getAllFilmsWithCategory($offset: Int!) {
-  getAllFilmsWithCategory(offset: $offset, limit: 10) {
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getAllFilmsWithCategory($offset: Int!) {
+    getAllFilmsWithCategory(offset: $offset, limit: 11) {
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_TITLE_QUERY = gql`
-query getFilmsByTitle($offset: Int, $filmTitle: String){
-  getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByTitle($offset: Int, $filmTitle: String){
+    getFilmsByTitle(offset: $offset, limit: 11, filmTitle: $filmTitle){
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_CATEGORY_QUERY = gql`
-query getFilmsByCategory($offset: Int, $categoryName: String!) {
-  getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByCategory($offset: Int, $categoryName: String!) {
+    getFilmsByCategory(offset: $offset, limit: 11, categoryName: $categoryName) {
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
-query getFilmsByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
-  getFilmsByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
-    film_id
-    film_title
-    release_year
-    rating
-    category,
-    language,
-    cost
+  query getFilmsByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
+    getFilmsByCategoryAndTitle(offset: $offset, limit: 11, filmTitle: $filmTitle, categoryName: $categoryName){
+      film_id
+      film_title
+      release_year
+      rating
+      category,
+      language,
+      cost
+    }
   }
-}
 `;
 
 const CATEGORY_QUERY = gql`
@@ -83,8 +83,8 @@ export class FilmsComponent implements OnInit {
 
   searchByTitle: string = "";
   selectedCategoryOption: string = "All";
-
   filmCategory: any;
+  pending: boolean = false;
 
   constructor(private apollo: Apollo, public dialog: MatDialog) {
   }
@@ -116,6 +116,7 @@ export class FilmsComponent implements OnInit {
   }
 
   updateFilmsByTitle(filmTitle: string) {
+    console.log("filter: ", filmTitle)
     this.apollo.query({
       query: FILMS_BY_TITLE_QUERY,
       variables: {offset: 10 * this.page, filmTitle: filmTitle}
@@ -165,7 +166,7 @@ export class FilmsComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.films.length == 10) {
+    if (this.films.length == 11) {
       this.page++;
       this.queryRouting();
     }
@@ -178,10 +179,24 @@ export class FilmsComponent implements OnInit {
     }
   }
 
-  searchFilmByTitle(filmTitle: string) {
-    this.page = 0;
-    this.searchByTitle = filmTitle;
-    this.queryRouting();
+  searchFilmByTitle(event: Event) {
+    this.searchByTitle = (<HTMLInputElement>event.target).value;
+
+    if (!this.pending) {
+      this.pending = true;
+      this.page = 0;
+
+      setTimeout(() => {
+        this.queryRouting();
+        this.pending = false;
+
+        if (this.searchByTitle != (<HTMLInputElement>event.target).value) {
+          this.queryRouting();
+        }
+
+      }, 500);
+
+    }
   }
 
   onCategoryChange() {
@@ -190,7 +205,7 @@ export class FilmsComponent implements OnInit {
   }
 
   openInfo(id: number) {
-    this.dialog.open(InfoFilmComponent, {data: {film_id: id}})
+    this.dialog.open(Film_infoComponent, {data: {film_id: id}})
   }
 
   openRental(id: number) {

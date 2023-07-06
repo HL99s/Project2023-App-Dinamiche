@@ -8,6 +8,8 @@ import {FormsModule} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
 import {Apollo} from "apollo-angular";
 import gql from "graphql-tag";
+import {Router} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 const SIGN_IN_MUTATION = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -33,37 +35,44 @@ interface SignInMutationResponse {
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, FormsModule, NgIf],
 })
 export class LoginComponent {
 
-  userName: string;
-  password: string;
+  userName: string = "";
+  password: string = "";
+  wrongCredentials: boolean = false;
+  nullCredentials: boolean = false;
 
   constructor(private authService: AuthService,
-              private apollo: Apollo) {
+              private apollo: Apollo,
+              private router: Router) {
   }
 
   onSubmit() {
-
-    this.apollo
-      .mutate<SignInMutationResponse>({
-        mutation: SIGN_IN_MUTATION,
-        variables: {username: this.userName, password: this.password}
-      }).subscribe(
-      ({data}) => {
-        if (data != null) {
-          const id = data.signIn.customer_id;
-          console.log(id);
-          const token = data.signIn.token;
-          console.log(token);
-          this.authService.saveUserData(id, token);
-          window.location.href = "/";
+    this.wrongCredentials = false;
+    if (this.userName == "" || this.password == "") {
+      this.nullCredentials = true;
+    } else {
+      this.nullCredentials = false;
+      this.apollo
+        .mutate<SignInMutationResponse>({
+          mutation: SIGN_IN_MUTATION,
+          variables: {username: this.userName, password: this.password}
+        }).subscribe({
+        next: (res) => {
+          if (res.data?.signIn) {
+            console.log(res.data);
+            this.authService.saveUserData(res.data.signIn.customer_id, res.data.signIn.token, res.data.signIn.username);
+            this.router.navigate(['/']);
+          } else {
+            this.wrongCredentials = true;
+          }
+        },
+        error: (e) => {
+          console.log("there was an error sending the query", e);
         }
-      },
-      error => {
-        console.log("there was an error sending the query", error);
-      }
-    );
+      });
+    }
   }
 }

@@ -1,53 +1,52 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {Apollo} from 'apollo-angular';
-import {MatDialog} from '@angular/material/dialog';
 
 
 import gql from 'graphql-tag';
 import {RentalComponent} from '../rental/rental.component';
 
 const FILM_INFO_BY_ID = gql`
-query getFilmInfoById($filmId: Int){
-  getFilmInfoById(filmId: $filmId){
-    film_title
-    release_year
-    language
-    length
-    category
-    description
-    rating
-    cost
-    rental_duration
+  query getFilmInfoById($filmId: Int){
+    getFilmInfoById(filmId: $filmId){
+      film_title
+      release_year
+      language
+      length
+      category
+      description
+      rating
+      cost
+      rental_duration
+    }
   }
-}
 `;
 
 const FILM_ACTORS = gql`
-query getFilmActors($filmId: Int){
-  getFilmActors(filmId: $filmId){
-    first_name
-    last_name
+  query getFilmActors($filmId: Int){
+    getFilmActors(filmId: $filmId){
+      first_name
+      last_name
+    }
   }
-}
 `;
 
 const STORE_INFO_DISP = gql`
-query getStoreDispByFilmId($filmId: Int){
-  getStoreDispByFilmId(filmId: $filmId){
-    address
-    city
-    country
+  query getStoreDispByFilmId($filmId: Int){
+    getStoreDispByFilmId(filmId: $filmId){
+      address
+      city
+      country
+    }
   }
-}
 `;
 
 @Component({
   selector: 'app-info',
-  templateUrl: './infoFilm.component.html',
-  styleUrls: ['./infoFilm.component.css']
+  templateUrl: './film_info.component.html',
+  styleUrls: ['./film_info.component.css']
 })
-export class InfoFilmComponent implements OnInit {
+export class Film_infoComponent implements OnInit {
 
   film: any;
   actors: any;
