@@ -8,7 +8,7 @@ import {RentalComponent} from '../rental/rental.component';
 
 const FILMS_WITH_CATEGORY_QUERY = gql`
   query getAllFilmsWithCategory($offset: Int!) {
-    getAllFilmsWithCategory(offset: $offset, limit: 10) {
+    getAllFilmsWithCategory(offset: $offset, limit: 11) {
       film_id
       film_title
       release_year
@@ -22,7 +22,7 @@ const FILMS_WITH_CATEGORY_QUERY = gql`
 
 const FILMS_BY_TITLE_QUERY = gql`
   query getFilmsByTitle($offset: Int, $filmTitle: String){
-    getFilmsByTitle(offset: $offset, limit: 10, filmTitle: $filmTitle){
+    getFilmsByTitle(offset: $offset, limit: 11, filmTitle: $filmTitle){
       film_id
       film_title
       release_year
@@ -36,7 +36,7 @@ const FILMS_BY_TITLE_QUERY = gql`
 
 const FILMS_BY_CATEGORY_QUERY = gql`
   query getFilmsByCategory($offset: Int, $categoryName: String!) {
-    getFilmsByCategory(offset: $offset, limit: 10, categoryName: $categoryName) {
+    getFilmsByCategory(offset: $offset, limit: 11, categoryName: $categoryName) {
       film_id
       film_title
       release_year
@@ -50,7 +50,7 @@ const FILMS_BY_CATEGORY_QUERY = gql`
 
 const FILMS_BY_CATEGORY_AND_TITLE_QUERY = gql`
   query getFilmsByCategoryAndTitle($offset: Int, $filmTitle: String, $categoryName: String!){
-    getFilmsByCategoryAndTitle(offset: $offset, limit: 10, filmTitle: $filmTitle, categoryName: $categoryName){
+    getFilmsByCategoryAndTitle(offset: $offset, limit: 11, filmTitle: $filmTitle, categoryName: $categoryName){
       film_id
       film_title
       release_year
@@ -116,7 +116,7 @@ export class FilmsComponent implements OnInit {
   }
 
   updateFilmsByTitle(filmTitle: string) {
-    console.log("filter: ",filmTitle)
+    console.log("filter: ", filmTitle)
     this.apollo.query({
       query: FILMS_BY_TITLE_QUERY,
       variables: {offset: 10 * this.page, filmTitle: filmTitle}
@@ -166,7 +166,7 @@ export class FilmsComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.films.length == 10) {
+    if (this.films.length == 11) {
       this.page++;
       this.queryRouting();
     }

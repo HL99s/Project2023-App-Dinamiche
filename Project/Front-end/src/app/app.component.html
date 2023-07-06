@@ -17,42 +17,73 @@
       <ng-template [ngIf]="logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" routerLink="/" tabindex="0">Home</li>
-          <li class="link_style mdl-navigation__link" routerLink="/films" tabindex="0">Films</li>
-          <li class="link_style mdl-navigation__link" routerLink="/rentals_history" tabindex="0">Rentals history</li>
-          <li class="link_style mdl-navigation__link" (click)="logOut()" (keydown)="logOut()" tabindex="0">Logout</li>
+          <li class="link_style mdl-navigation__link" (click)="redirectTo('/')"
+              (keydown.enter)="redirectTo('/')" tabindex="0">Home
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="redirectTo('/films')"
+              (keydown.enter)="redirectTo('/films')" tabindex="0">Films
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="redirectTo('/rentals_history')"
+              (keydown.enter)="redirectTo('/rentals_history')" tabindex="0">Rentals history
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="logOut()"
+              (keydown.enter)="logOut()" tabindex="0">Logout
+          </li>
         </ul>
       </ng-template>
 
       <ng-template [ngIf]="!logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Home</li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Films</li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Rentals history</li>
-          <li class="link_style mdl-navigation__link" routerLink="/login" tabindex="0">Login</li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+              tabindex="0">Home
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+              tabindex="0">Films
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+              tabindex="0">Rentals history
+          </li>
+          <li class="link_style mdl-navigation__link" (click)="redirectTo('/login')"
+              (keydown.enter)="redirectTo('/login')" tabindex="0">Login
+          </li>
         </ul>
       </ng-template>
-
     </div>
   </div>
 
   <div class="mdl-layout__drawer">
     <ng-template [ngIf]="logged">
       <ul class="mdl-navigation">
-        <li class="link_style_side mdl-navigation__link" routerLink="/" tabindex="0">Home</li>
-        <li class="link_style_side mdl-navigation__link" routerLink="/films" tabindex="0">Films</li>
-        <li class="link_style_side mdl-navigation__link" routerLink="/rentals_history" tabindex="0">Rentals history</li>
-        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown)="logOut()" tabindex="0">Logout</li>
+        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/')"
+            (keydown.enter)="redirectTo('/')" tabindex="0">Home
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/films')"
+            (keydown.enter)="redirectTo('/films')" tabindex="0">Films
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/rentals_history')"
+            (keydown.enter)="redirectTo('/rentals_history')" tabindex="0">Rentals history
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown.enter)="logOut()" tabindex="0">
+          Logout
+        </li>
       </ul>
     </ng-template>
 
     <ng-template [ngIf]="!logged">
       <ul class="mdl-navigation">
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Home</li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Films</li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown)="isNotLogged()" tabindex="0">Rentals history</li>
-        <li class="link_style_side mdl-navigation__link" routerLink="/login" >Login</li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+            tabindex="0">Home
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+            tabindex="0">Films
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
+            tabindex="0">Rentals history
+        </li>
+        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/login')"
+            (keydown.enter)="redirectTo('/login')">Login
+        </li>
       </ul>
     </ng-template>
   </div>
