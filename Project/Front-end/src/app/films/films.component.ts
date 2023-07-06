@@ -116,6 +116,7 @@ export class FilmsComponent implements OnInit {
   }
 
   updateFilmsByTitle(filmTitle: string) {
+    console.log("filter: ",filmTitle)
     this.apollo.query({
       query: FILMS_BY_TITLE_QUERY,
       variables: {offset: 10 * this.page, filmTitle: filmTitle}
