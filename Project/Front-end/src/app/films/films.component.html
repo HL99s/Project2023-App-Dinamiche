@@ -2,11 +2,10 @@
 
 <div class="container-search">
   <div class="search-input-container">
-    <p id="filter_hint" hidden>Here you can search a film by title</p>
 
     <mat-form-field>
       <mat-label>Search By Title</mat-label>
-      <input id="fil" matInput (input)="searchFilmByTitle($event)" aria-describedby="filter_hint" tabindex="0"/>
+      <input id="fil" matInput (input)="searchFilmByTitle($event)" tabindex="0"/>
     </mat-form-field>
   </div>
 
@@ -46,7 +45,7 @@
     <tr *ngFor="let film of films; index as i">
       <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center" name="Titolo"><b class="no-underline">
         <span class="before-title"></span></b><a
-        class="link_style" (keypress)="openInfo(film.film_id)" (click)="openInfo(film.film_id)"  scope="row" tabindex="0">{{film.film_title}}</a>
+        class="link_style" (keydown)="openInfo(film.film_id)" (click)="openInfo(film.film_id)"  scope="row" tabindex="0">{{film.film_title}}</a>
       </td>
       <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0" name="year"><b><span
         class="before-year"></span></b>{{film.release_year}}</td>
