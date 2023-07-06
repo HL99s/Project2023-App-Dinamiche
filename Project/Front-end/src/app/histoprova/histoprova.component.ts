@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
 import { map } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 
 
@@ -72,7 +74,7 @@ export class HistoprovaComponent implements OnInit{
 
         // Creazione di una copia dell'oggetto rental con la proprietà duration aggiunta
         // i ... fanno una copia di rental
-        return { ...rental, duration: convertiMillisecondi(differenceInMilliseconds) };
+        return { ...rental, duration: differenceInMilliseconds };
       })
       this.dataSource = new MatTableDataSource(this.rental_data)
       this.dataSource.sort = this.sort
@@ -100,43 +102,16 @@ export class HistoprovaComponent implements OnInit{
 }
 
 
-export interface Duration extends Comparable{
-  milliseconds: number, 
-  giorni: number, 
-  ore: number, 
-  minuti: number
-}
-
-interface Comparable {
-  compareTo(other: Comparable): number;
-}
-
-class ComparableDuration implements Comparable {
-  constructor(public milliseconds: number, public giorni: number, public ore: number, public minuti: number) {}
-
-  compareTo(other: Comparable): number {
-    if (other instanceof ComparableDuration) {
-      return this.milliseconds - other.milliseconds;
-    }
-    return 0;
-  }
-}
 
 
-function convertiMillisecondi(millisecondi: number): Duration {
-  const secondi = Math.floor(millisecondi / 1000);
-  const minuti = Math.floor(secondi / 60);
-  const ore = Math.floor(minuti / 60);
-  const giorni = Math.floor(ore / 24);
 
-  const rimanentiOre = ore % 24;
-  const rimanentiMinuti = minuti % 60;
 
-  return new ComparableDuration(
-    millisecondi,
-    giorni,
-    rimanentiOre,
-    rimanentiMinuti
-  );
-}
+
+
+
+
+
+
+
+
 
