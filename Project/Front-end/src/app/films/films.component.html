@@ -2,9 +2,11 @@
 
 <div class="container-search">
   <div class="search-input-container">
+    <p id="filter_hint" hidden>Here you can search a film by title</p>
+
     <mat-form-field>
       <mat-label>Search By Title</mat-label>
-      <input matInput (input)="searchFilmByTitle($event)"/>
+      <input id="fil" matInput (input)="searchFilmByTitle($event)" aria-describedby="filter_hint"/>
     </mat-form-field>
   </div>
 
@@ -20,7 +22,8 @@
 
 <div class="table-container">
   <table
-    class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
+    class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table" aria-describedby="table_hint">
+    <caption id="table_hint">Rent a film</caption>
     <colgroup>
       <col class="mat-column-title mdl-data-table__cell--non-numeric">
       <col class="mat-column-year mdl-data-table__cell--non-numeric">
@@ -31,32 +34,32 @@
       <col class="mat-column-rent mdl-data-table__cell--non-numeric">
     </colgroup>
     <tr>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Title</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Year</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rating</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Category</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Language</b></th>
-      <th class="mdl-data-table__cell align-center"><b class="head-title">Price</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center"><b class="head-title">Rental</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Title</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Year</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Rating</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Category</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Language</b></th>
+      <th class="mdl-data-table__cell align-center" scope="col" tabindex="0"><b class="head-title">Price</b></th>
+      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Rental</b></th>
     </tr>
 
-    <tr *ngFor="let film of films">
-      <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center"
-          (click)="openInfo(film.film_id)"><b class="no-underline"><span class="before-title"></span></b><span
-        class="link_style">{{film.film_title}}</span>
+    <tr *ngFor="let film of films; index as i">
+      <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center" name="Titolo"><b class="no-underline">
+        <span class="before-title"></span></b><a
+        class="link_style" (keypress)="openInfo(film.film_id)" (click)="openInfo(film.film_id)"  scope="row" tabindex="0">{{film.film_title}}</a>
       </td>
-      <td class="cell year-cell mdl-data-table__cell--non-numeric align-center"><b><span
+      <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0" name="year"><b><span
         class="before-year"></span></b>{{film.release_year}}</td>
-      <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center"><b><span
+      <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0" id="rating"><b><span
         class="before-rating"></span></b>{{film.rating}}</td>
-      <td class="cell category-cell mdl-data-table__cell--non-numeric align-center"><b><span
+      <td class="cell category-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0"><b><span
         class="before-category"></span></b>{{film.category}}</td>
-      <td class="cell language-cell mdl-data-table__cell--non-numeric align-center"><b><span
+      <td class="cell language-cell mdl-data-table__cell--non-numeric align-center" scope="row" tabindex="0"><b><span
         class="before-language"></span></b>{{film.language}}</td>
-      <td class="cell price-cell mdl-data-table__cell align-center"><b><span
+      <td class="cell price-cell mdl-data-table__cell align-center" scope="row" tabindex="0"><b><span
         class="before-price"></span></b>{{film.cost | currency}}</td>
-      <td class="cell button-cell">
-        <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)">Rental
+      <td class="cell button-cell" scope="row">
+        <button class="button-rent" mat-raised-button color="primary" (click)="openRental(film.film_id)" tabindex="0">Rental
         </button>
       </td>
       <td class="cell-not-visible"></td>
@@ -66,19 +69,27 @@
 </div>
 
 <div class="paging">
-
-  <button
-    class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="prevPage()"
-  >
-    <i class="material-icons">arrow_back</i>
-  </button>
+  <div *ngIf="page==0 then disabled else enabled"></div>
+  <ng-template #enabled>
+    <button
+      class="mdl-button mdl-js-button mdl-button--colored"
+      (click)="prevPage()" tabindex="0">
+      <i class="material-icons">arrow_back</i>
+    </button>
+  </ng-template>
+  <ng-template #disabled>
+    <button
+      class="mdl-button mdl-js-button mdl-button--colored"
+      (click)="prevPage()" disabled>
+      <i class="material-icons">arrow_back</i>
+    </button>
+  </ng-template>
 
   <span class="page-number">Page {{page + 1}}</span>
 
   <button
     class="mdl-button mdl-js-button mdl-button--colored"
-    (click)="nextPage()"
+    (click)="nextPage()" tabindex="0"
   >
     <i class="material-icons">arrow_forward</i>
   </button>
