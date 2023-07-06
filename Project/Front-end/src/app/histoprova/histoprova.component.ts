@@ -8,6 +8,8 @@ import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
 import { map } from 'rxjs';
 
+
+
 export interface RentalData{
   rental_id: number,
   film_title: String,
@@ -39,6 +41,8 @@ query getRentalInfoByCustId($customerId : Int!) {
   styleUrls: ['./histoprova.component.css']
 })
 export class HistoprovaComponent implements OnInit{
+
+
   dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
   dataSource: MatTableDataSource<RentalData>;
 
@@ -68,7 +72,7 @@ export class HistoprovaComponent implements OnInit{
 
         // Creazione di una copia dell'oggetto rental con la proprietà duration aggiunta
         // i ... fanno una copia di rental
-        return { ...rental, duration: differenceInMilliseconds };
+        return { ...rental, duration: convertiMillisecondi(differenceInMilliseconds) };
       })
       this.dataSource = new MatTableDataSource(this.rental_data)
       this.dataSource.sort = this.sort
@@ -94,3 +98,20 @@ export class HistoprovaComponent implements OnInit{
   }
 
 }
+
+function convertiMillisecondi(millisecondi: number): { giorni: number, ore: number, minuti: number } {
+  const secondi = Math.floor(millisecondi / 1000);
+  const minuti = Math.floor(secondi / 60);
+  const ore = Math.floor(minuti / 60);
+  const giorni = Math.floor(ore / 24);
+
+  const rimanentiOre = ore % 24;
+  const rimanentiMinuti = minuti % 60;
+
+  return {
+    giorni,
+    ore: rimanentiOre,
+    minuti: rimanentiMinuti
+  };
+}
+
