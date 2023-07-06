@@ -5,9 +5,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../auth/auth.service";
 import {Apollo} from "apollo-angular";
 import gql from "graphql-tag";
+import {Router} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 const SIGN_IN_MUTATION = gql`
   mutation signIn($username: String!, $password: String!) {
@@ -20,9 +22,11 @@ const SIGN_IN_MUTATION = gql`
 `;
 
 interface SignInMutationResponse {
-  username: string;
-  token: string;
-  customer_id: number;
+  signIn: {
+    username: string;
+    token: string;
+    customer_id: number;
+  }
 }
 
 /** @title Simple form field */
@@ -31,37 +35,45 @@ interface SignInMutationResponse {
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, FormsModule, NgIf],
 })
 export class LoginComponent {
 
-  hide = true;
-  userName: string;
-  password: string;
+  userName: string = "";
+  password: string = "";
+  wrongCredentials: boolean = false;
+  nullCredentials: boolean = false;
 
   constructor(private authService: AuthService,
-              private apollo: Apollo) {}
+              private apollo: Apollo,
+              private router: Router) {
+  }
 
   onSubmit() {
-
-    this.apollo
-      .mutate<SignInMutationResponse>({
-        mutation: SIGN_IN_MUTATION,
-        variables: { username: this.userName, password: this.password}
-      }).subscribe(
-      ({ data }) => {
-        // @ts-ignore
-        const id = data.signIn.customer_id;
-        console.log(id);
-        // @ts-ignore
-        const token = data.signIn.token;
-        console.log(token);
-        this.authService.saveUserData(id, token);
-        window.location.href = "/";
-      },
-      error => {
-        console.log("there was an error sending the query", error);
-      }
-    );
+    this.wrongCredentials = false;
+    if (this.userName == "" || this.password == "") {
+      this.nullCredentials = true;
+    } else {
+      this.nullCredentials = false;
+      this.apollo
+        .mutate<SignInMutationResponse>({
+          mutation: SIGN_IN_MUTATION,
+          variables: {username: this.userName, password: this.password}
+        }).subscribe(
+        ({data}) => {
+          if (data != null) {
+            if (data.signIn != null) {
+              this.authService.saveUserData(data.signIn.customer_id, data.signIn.token, data.signIn.username);
+              this.router.navigate(['/']);
+            } else {
+              this.wrongCredentials = true;
+            }
+          }
+        },
+        error => {
+          console.log("there was an error sending the query", error);
+        }
+      );
+    }
   }
 }

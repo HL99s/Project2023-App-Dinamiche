@@ -1,39 +1,46 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 
 
-import  gql  from 'graphql-tag';
+import gql from 'graphql-tag';
 
+const GET_BUY_DISP = gql`
+  query getBuyDisp($filmId: Int, $storeId: Int){
+    getBuyDisp(filmId: $filmId, storeId: $storeId){
+      inventory_id
+    }
+  }
+`;
 
-const username = localStorage.getItem("token");
 
 const FILM_INFO_BY_ID = gql`
-query getFilmInfoById($filmId: Int){
-  getFilmInfoById(filmId: $filmId){
-    film_title
-    release_year
-    language
-    length
-    category
-    description
-    rating
-    cost
-    rental_duration
+  query getFilmInfoById($filmId: Int){
+    getFilmInfoById(filmId: $filmId){
+      film_title
+      release_year
+      language
+      length
+      category
+      description
+      rating
+      cost
+      rental_duration
+    }
   }
-}
 `;
 
 const STORE_INFO_DISP = gql`
-query getStoreDispByFilmId($filmId: Int){
-  getStoreDispByFilmId(filmId: $filmId){
-    address
-    city
-    country
+  query getStoreDispByFilmId($filmId: Int){
+    getStoreDispByFilmId(filmId: $filmId){
+      store_id
+      address
+      city
+      country
+    }
   }
-}
 `;
 
 @Component({
@@ -43,13 +50,16 @@ query getStoreDispByFilmId($filmId: Int){
 })
 export class RentalComponent implements OnInit {
   film: any;
-  res = true;
+  res: boolean;
   stores: any;
   rental_dates: any;
+  selected_store: any;
+  disp_store: any;
+  available: boolean;
 
+  constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
+  }
 
-
-  constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog){}
   ngOnInit(): void {
     this.apollo.query({
       query: FILM_INFO_BY_ID,
@@ -64,20 +74,32 @@ export class RentalComponent implements OnInit {
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
       //@ts-ignore
-      this.stores = data.getStoreDispByFilmId
+      this.stores = data.getStoreDispByFilmId;
+      this.available = this.stores.length != 0;
     })
     this.get_rental_dates()
   }
 
-  openPopup(){
-    this.dialog.open(AfterBuyDialog, {data:{result: this.res}})
+  openPopup() {
+    this.apollo.query({
+      query: GET_BUY_DISP,
+      variables: {filmId: this.arg.film_id, storeId: Number(this.selected_store)}
+    }).subscribe(({data, loading}) => {
+      //@ts-ignore
+      this.disp_store = data.getBuyDisp
+      console.log(this.disp_store)
+      this.res = this.disp_store.length != 0;
+      this.dialog.open(AfterBuyDialog, {data: {result: this.res}});
+    })
+    
   }
-  get_rental_dates(){
+
+  get_rental_dates() {
     let re_d = [];
     let now = new Date()
     re_d.push(now.toDateString())
     for (let i = 0; i < 2; i++) {
-      now.setDate(now.getDate()+1)
+      now.setDate(now.getDate() + 1)
       re_d.push(now.toDateString())
     }
     this.rental_dates = re_d
@@ -91,7 +113,9 @@ export class RentalComponent implements OnInit {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, NgIf],
 })
+
 export class AfterBuyDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 }
 

@@ -1,10 +1,10 @@
 
 <div class="text-center">
   <form class="form-signin" (ngSubmit)="onSubmit()">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    
+    <h1 class="h3 mb-3 font-weight-normal">Please Log-In to access the services</h1>
+
     <mat-form-field>
-      <mat-label class="sr-only">Email address</mat-label>
+      <mat-label class="sr-only">Username</mat-label>
       <input
         matInput
         type="userName"
@@ -16,8 +16,6 @@
         [(ngModel)]="userName"
       />
     </mat-form-field>
-
-
 
     <mat-form-field>
       <mat-label class="sr-only">Password</mat-label>
@@ -31,44 +29,17 @@
         [(ngModel)]="password"
       />
     </mat-form-field>
+    <ng-template [ngIf]="nullCredentials">
+      <p id="invalidCredentials" class="invalid"> Please insert <b>both</b> Username and Password.</p>
+    </ng-template>
 
+    <ng-template [ngIf]="wrongCredentials">
+      <p id="credentialsRequired" class="invalid"> Login <b>failed</b>. Credentials Error.</p>
+    </ng-template>
 
     <button mat-raised-button color = "primary" class="btn btn-lg btn-primary btn-block" type="submit">
       Sign in
     </button>
-    
+
   </form>
 </div>
-
-<!--
-<form class="loginForm">
-    <mat-form-field>
-      <input class="inputlogin" [(ngModel)]="userName" matInput placeholder="Username"  name="username" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input class="inputlogin" [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit">Login</button>
-</form>
--->
-
-<!--
-
-  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-
-
-  <form class="loginForm">
-    <mat-form-field>
-      <input matInput placeholder="Email"  name="email" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Password" name="password" type="password" required>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Login</button>
-</form>
--->
