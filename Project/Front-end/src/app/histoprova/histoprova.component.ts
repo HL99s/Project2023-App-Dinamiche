@@ -99,7 +99,31 @@ export class HistoprovaComponent implements OnInit{
 
 }
 
-function convertiMillisecondi(millisecondi: number): { giorni: number, ore: number, minuti: number } {
+
+export interface Duration extends Comparable{
+  milliseconds: number, 
+  giorni: number, 
+  ore: number, 
+  minuti: number
+}
+
+interface Comparable {
+  compareTo(other: Comparable): number;
+}
+
+class ComparableDuration implements Comparable {
+  constructor(public milliseconds: number, public giorni: number, public ore: number, public minuti: number) {}
+
+  compareTo(other: Comparable): number {
+    if (other instanceof ComparableDuration) {
+      return this.milliseconds - other.milliseconds;
+    }
+    return 0;
+  }
+}
+
+
+function convertiMillisecondi(millisecondi: number): Duration {
   const secondi = Math.floor(millisecondi / 1000);
   const minuti = Math.floor(secondi / 60);
   const ore = Math.floor(minuti / 60);
@@ -108,10 +132,11 @@ function convertiMillisecondi(millisecondi: number): { giorni: number, ore: numb
   const rimanentiOre = ore % 24;
   const rimanentiMinuti = minuti % 60;
 
-  return {
+  return new ComparableDuration(
+    millisecondi,
     giorni,
-    ore: rimanentiOre,
-    minuti: rimanentiMinuti
-  };
+    rimanentiOre,
+    rimanentiMinuti
+  );
 }
 
