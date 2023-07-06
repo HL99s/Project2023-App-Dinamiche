@@ -6,13 +6,13 @@
 
     <mat-form-field>
       <mat-label>Search By Title</mat-label>
-      <input id="fil" matInput (input)="searchFilmByTitle($event)" aria-describedby="filter_hint"/>
+      <input id="fil" matInput (input)="searchFilmByTitle($event)" aria-describedby="filter_hint" tabindex="0"/>
     </mat-form-field>
   </div>
 
   <mat-form-field>
     <mat-label>Film Category</mat-label>
-    <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange()">
+    <mat-select [(value)]="selectedCategoryOption" (selectionChange)="onCategoryChange()" tabindex="0">
       <mat-option value="All">All</mat-option>
       <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}
       </mat-option>
@@ -22,7 +22,7 @@
 
 <div class="table-container">
   <table
-    class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table" aria-describedby="table_hint">
+    class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
     <caption id="table_hint">Rent a film</caption>
     <colgroup>
       <col class="mat-column-title mdl-data-table__cell--non-numeric">
