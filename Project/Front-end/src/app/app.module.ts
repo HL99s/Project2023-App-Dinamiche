@@ -30,6 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {CommonModule} from '@angular/common';
 import {HistoprovaComponent} from './histoprova/histoprova.component';
 
+import { ConvertiDurataPipe } from './converti-durata-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import {HistoprovaComponent} from './histoprova/histoprova.component';
     InfoFilmComponent,
     RentalComponent,
     HistoprovaComponent,
-    InfoRentalComponent
+    InfoRentalComponent,
+    ConvertiDurataPipe
+    
 
   ],
   imports: [

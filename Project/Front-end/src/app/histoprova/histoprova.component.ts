@@ -7,6 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { InfoRentalComponent } from '../info-rental/info-rental.component';
 import gql from 'graphql-tag';
 import { map } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
+
+
+
 
 export interface RentalData{
   rental_id: number,
@@ -39,7 +43,9 @@ query getRentalInfoByCustId($customerId : Int!) {
   styleUrls: ['./histoprova.component.css']
 })
 export class HistoprovaComponent implements OnInit{
-  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
+
+  dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop','duration'];
+  //dispayedColumn: String[] = ['rental_id','film_title', 'payment_date', 'amount', 'shop', 'rental_date', 'return_date','duration'];
   dataSource: MatTableDataSource<RentalData>;
 
   @ViewChild(MatSort) sort: MatSort
@@ -94,3 +100,18 @@ export class HistoprovaComponent implements OnInit{
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
