@@ -8,14 +8,26 @@
 
   <mat-form-field class="order-by">
     <mat-label>Order By</mat-label>
-    <mat-select (selectionChange)="onOrdineChange()" [(ngModel)]="ordineSelezionato" tabindex="0">
+    <!--(selectionChange)="onOrdineChange()"-->
+    <mat-select [(ngModel)]="ordineSelezionato" tabindex="0">
       <mat-option *ngFor="let col of dispayedColumn" [value]="col">
         {{col}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-slide-toggle [(ngModel)]="isOrderAsc" class="slider order-by" tabindex="0">Ordinamento</mat-slide-toggle>
+  
+
+  <mat-slide-toggle [(ngModel)]="isOrderAsc" class="slider order-by" tabindex="0"><span *ngIf="isOrderAsc; else descending">Ascending order</span></mat-slide-toggle>
+
+  
+  <ng-template #descending>
+    <span>Descending order</span>
+  </ng-template>
+  
+  <button (click)="onOrdinaClick()" class="order-button order-by" mat-raised-button color="primary">Ordina</button>
+  
+
 </div>
 
 
