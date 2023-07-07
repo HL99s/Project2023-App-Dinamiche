@@ -3,6 +3,7 @@
 </head>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  
   <div class="mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title" *ngIf="logged" routerLink="/">
@@ -17,16 +18,16 @@
       <ng-template [ngIf]="logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/')"
+          <li class="link-top link_style mdl-navigation__link" (click)="redirectTo('/')"
               (keydown.enter)="redirectTo('/')" tabindex="0" aria-label="press to go to homepage">Home
           </li>
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/films')"
+          <li class="link-top link_style mdl-navigation__link" (click)="redirectTo('/films')"
               (keydown.enter)="redirectTo('/films')" tabindex="0" aria-label="press to go to film list">Films
           </li>
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/rentals_history')"
+          <li class="link-top link_style mdl-navigation__link" (click)="redirectTo('/rentals_history')"
               (keydown.enter)="redirectTo('/rentals_history')" tabindex="0" aria-label="press to go to rental history">Rentals history
           </li>
-          <li class="link_style mdl-navigation__link" (click)="logOut()"
+          <li class="link-top link_style mdl-navigation__link" (click)="logOut()"
               (keydown.enter)="logOut()" tabindex="0" aria-label="press to logout">Logout
           </li>
         </ul>
