@@ -18,16 +18,16 @@
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
           <li class="link_style mdl-navigation__link" (click)="redirectTo('/')"
-              (keydown.enter)="redirectTo('/')" tabindex="0">Home
+              (keydown.enter)="redirectTo('/')" tabindex="0" aria-label="press to go to homepage">Home
           </li>
           <li class="link_style mdl-navigation__link" (click)="redirectTo('/films')"
-              (keydown.enter)="redirectTo('/films')" tabindex="0">Films
+              (keydown.enter)="redirectTo('/films')" tabindex="0" aria-label="press to go to film list">Films
           </li>
           <li class="link_style mdl-navigation__link" (click)="redirectTo('/rentals_history')"
-              (keydown.enter)="redirectTo('/rentals_history')" tabindex="0">Rentals history
+              (keydown.enter)="redirectTo('/rentals_history')" tabindex="0" aria-label="press to go to rental history">Rentals history
           </li>
           <li class="link_style mdl-navigation__link" (click)="logOut()"
-              (keydown.enter)="logOut()" tabindex="0">Logout
+              (keydown.enter)="logOut()" tabindex="0" aria-label="press to logout">Logout
           </li>
         </ul>
       </ng-template>
@@ -36,16 +36,16 @@
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
           <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0">Home
+              tabindex="0" aria-label="press to go to homepage">Home
           </li>
           <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0">Films
+              tabindex="0" aria-label="press to go to film list">Films
           </li>
           <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0">Rentals history
+              tabindex="0" aria-label="press to go to rental history">Rentals history
           </li>
           <li class="link_style mdl-navigation__link" (click)="redirectTo('/login')"
-              (keydown.enter)="redirectTo('/login')" tabindex="0">Login
+              (keydown.enter)="redirectTo('/login')" tabindex="0" aria-label="press to login">Login
           </li>
         </ul>
       </ng-template>
@@ -56,15 +56,15 @@
     <ng-template [ngIf]="logged">
       <ul class="mdl-navigation">
         <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/')"
-            (keydown.enter)="redirectTo('/')" tabindex="0">Home
+            (keydown.enter)="redirectTo('/')" tabindex="0" aria-label="press to go to homepage">Home
         </li>
         <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/films')"
-            (keydown.enter)="redirectTo('/films')" tabindex="0">Films
+            (keydown.enter)="redirectTo('/films')" tabindex="0" aria-label="press to go to film list">Films
         </li>
         <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/rentals_history')"
-            (keydown.enter)="redirectTo('/rentals_history')" tabindex="0">Rentals history
+            (keydown.enter)="redirectTo('/rentals_history')" tabindex="0" aria-label="press to go to rental history">Rentals history
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown.enter)="logOut()" tabindex="0">
+        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown.enter)="logOut()" tabindex="0" aria-label="press to logout">
           Logout
         </li>
       </ul>
@@ -73,16 +73,16 @@
     <ng-template [ngIf]="!logged">
       <ul class="mdl-navigation">
         <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0">Home
+            tabindex="0" aria-label="press to go to homepage">Home
         </li>
         <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0">Films
+            tabindex="0" aria-label="press to go to film list">Films
         </li>
         <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0">Rentals history
+            tabindex="0" aria-label="press to go to rental history">Rentals history
         </li>
         <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/login')"
-            (keydown.enter)="redirectTo('/login')">Login
+            (keydown.enter)="redirectTo('/login')" aria-label="press to login">Login
         </li>
       </ul>
     </ng-template>

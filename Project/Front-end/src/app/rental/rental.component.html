@@ -29,7 +29,7 @@
     </mat-form-field>
 
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close aria-label="close the rental page">Cancel</button>
+      <button mat-button mat-dialog-close aria-label="press to close the rental page">Cancel</button>
       <div *ngIf="select_store.value!=null && select_date.value!=null; then enabled else disabled"></div>
     </mat-dialog-actions>
 
@@ -46,7 +46,7 @@
   <ng-template #noDisp>
     <h2 tabindex="0">RENTAL NOT AVAILABLE</h2>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close aria-label="close the rental page">Cancel</button>
+      <button mat-button mat-dialog-close aria-label="press to close the rental page">Cancel</button>
     </mat-dialog-actions>
   </ng-template>
 

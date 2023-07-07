@@ -9,15 +9,15 @@
     <li tabindex="0"><b>Amount:</b> {{rental_info.amount | currency}}</li>
     <li tabindex="0"><b>Seller:</b>
       <ul>
-        <li tabindex="0"><b>First name:</b> {{rental_info.staff_first_name}}</li>
-        <li tabindex="0"><b>Last name:</b> {{rental_info.staff_last_name}}</li>
-        <li tabindex="0"><b>Email:</b> {{rental_info.staff_email}}</li>
+        <li><b>First name:</b> {{rental_info.staff_first_name}},</li>
+        <li><b>Last name:</b> {{rental_info.staff_last_name}},</li>
+        <li><b>Email:</b> {{rental_info.staff_email}}</li>
       </ul>
     </li>
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close tabindex="0" aria-label="close the info rental page">Cancel</button>
+  <button mat-button mat-dialog-close tabindex="0" aria-label="press to close the info rental page">Cancel</button>
 </mat-dialog-actions>
 
 <ng-template #ret_date_true><b>Rental date:</b> {{rental_info.return_date | date:'dd/MM/yyyy' }}</ng-template>
