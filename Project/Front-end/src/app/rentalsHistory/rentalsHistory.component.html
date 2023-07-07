@@ -35,8 +35,8 @@
   <table [dataSource]="dataSource" class="full-width-table" mat-table matSort>
 
     <ng-container matColumnDef="rental_id">
-      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Rental id</th>
-      <td mat-cell *matCellDef="let row"> <a (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"  class="cell link-style"  tabindex="0">
+      <th *matHeaderCellDef class="tableHeaderCellDiv " mat-header-cell mat-sort-header>Rental id</th>
+      <td mat-cell *matCellDef="let row" class="first-row"> <a (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"  class="cell link-style"  tabindex="0">
         <b><span class="head-before">ID: </span></b>{{row.rental_id}}</a></td>
     </ng-container>
     <ng-container matColumnDef="film_title">
@@ -64,7 +64,7 @@
           sortActionDescription="Sort by duration">
         Duration
       </th>
-      <td *matCellDef="let row" class="cell" mat-cell tabindex="0"><b><span
+      <td *matCellDef="let row" class="cell last-cell" mat-cell tabindex="0"><b><span
         class="head-before">Duration: </span></b> {{row.duration | convertiDurata}}</td>
     </ng-container>
     <tr *matHeaderRowDef="dispayedColumn" mat-header-row></tr>
