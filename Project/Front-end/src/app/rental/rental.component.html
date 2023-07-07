@@ -13,7 +13,7 @@
   <ng-template #disp>
     <mat-form-field>
       <mat-label>Select a store</mat-label>
-      <mat-select #select_store [(value)]="selected_store" name="store" required="true" tabindex="0">
+      <mat-select #select_store [(value)]="selected_store" required="true" tabindex="0">
         <mat-option *ngFor="let store of stores" [value]="store.store_id">
           {{store.address}}
         </mat-option>
@@ -21,7 +21,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select a date</mat-label>
-      <mat-select #select_date name="rental_date" required="true" tabindex="0">
+      <mat-select #select_date required="true" tabindex="0">
         <mat-option *ngFor="let date of rental_dates" [value]="date">
           {{date}}
         </mat-option>
@@ -29,12 +29,12 @@
     </mat-form-field>
 
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button mat-dialog-close aria-label="press to close the rental page">Cancel</button>
       <div *ngIf="select_store.value!=null && select_date.value!=null; then enabled else disabled"></div>
     </mat-dialog-actions>
 
     <ng-template #enabled>
-      <button (click)="openPopup()" [mat-dialog-close]="true" cdkFocusInitial color="primary" mat-raised-button>Buy
+      <button (click)="openPopup()" [mat-dialog-close]="true" cdkFocusInitial color="primary" mat-raised-button aria-label="press to rental the film">Buy
       </button>
     </ng-template>
 
@@ -44,9 +44,9 @@
   </ng-template>
 
   <ng-template #noDisp>
-    <span>RENTAL NOT AVAILABLE></span>
+    <h2 tabindex="0">RENTAL NOT AVAILABLE</h2>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button mat-dialog-close aria-label="press to close the rental page">Cancel</button>
     </mat-dialog-actions>
   </ng-template>
 
