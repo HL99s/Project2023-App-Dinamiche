@@ -33,6 +33,8 @@ const RENTALS_BY_ID_QUERY = gql`
   }
 `;
 
+
+
 @Component({
   selector: 'app-histoprova',
   templateUrl: './rentalsHistory.component.html',
@@ -43,8 +45,9 @@ export class RentalsHistoryComponent implements OnInit {
   dispayedColumn: String[] = ['rental_id', 'film_title', 'payment_date', 'amount', 'shop', 'duration'];
   dataSource: MatTableDataSource<RentalData>;
   //
-  ordineSelezionato: string;
-  isOrderAsc: boolean = false;
+  ordineSelezionato: string = 'film_title';
+  isOrderAsc: boolean = true;
+
 
   @ViewChild(MatSort) sort: MatSort
   @ViewChild(MatPaginator) pagination: MatPaginator
@@ -56,7 +59,6 @@ export class RentalsHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.cust_id);
     this.apollo.query({
       query: RENTALS_BY_ID_QUERY,
       variables: {customerId: Number(this.cust_id)}
@@ -97,11 +99,10 @@ export class RentalsHistoryComponent implements OnInit {
   }
 
   openInfo(rentalId: Number, shop: Number) {
-    console.log(shop)
     this.dialog.open(Rental_infoComponent, {data: {rental_id: rentalId, store_id: shop}})
   }
 
-
+  //Da togliere
   onOrdineChange() {
     if (this.ordineSelezionato) {
       this.dataSource.sort = this.sort;
@@ -116,4 +117,30 @@ export class RentalsHistoryComponent implements OnInit {
       this.dataSource.sort.sortChange.emit();
     }
   }
+
+
+  onOrdinaClick(){
+
+    if (this.ordineSelezionato){
+
+      this.dataSource.sort = this.sort;
+      this.dataSource.sort.active = this.ordineSelezionato;
+
+      if (this.isOrderAsc) {
+        this.dataSource.sort.direction = 'asc';
+      } else {
+        this.dataSource.sort.direction = 'desc';
+      }
+
+      this.dataSource.sort.sortChange.emit();
+
+
+
+      //console.log(this.ordineSelezionato);
+      //console.log(this.isOrderAsc);
+    }
+
+  }
+
+
 }
