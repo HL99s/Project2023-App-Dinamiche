@@ -80,7 +80,7 @@
   }
 
   .container-search {
-    display: center;
+    display: flex; /*center?*/
     flex-direction: column;
   }
 

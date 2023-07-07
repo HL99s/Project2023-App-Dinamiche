@@ -42,6 +42,26 @@
     flex-direction: column;
   }
 
+  .order-button{
+    margin-bottom: 30px;
+  }
+
+  .slider {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .first-row{
+    background-color:rgba(211, 211, 211, 0.575);
+  }
+
+  .id-ref{
+    font-size: 25px;
+  }
+
 
 }
 
@@ -85,6 +105,9 @@
     flex-direction: column;
   }
 
+  .order-button{
+    margin-bottom: 30px;
+  }
   .slider {
     display: flex;
     justify-content: center;
@@ -93,6 +116,14 @@
     margin-bottom: 20px;
   }
 
+  
+  .first-row{
+    background-color:rgba(211, 211, 211, 0.575);
+  }
+
+  .id-ref{
+    font-size: 25px;
+  }
 
 }
 
