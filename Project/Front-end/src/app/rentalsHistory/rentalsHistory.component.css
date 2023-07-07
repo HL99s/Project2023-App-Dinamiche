@@ -58,6 +58,10 @@
     background-color:rgba(211, 211, 211, 0.575);
   }
 
+  .id-ref{
+    font-size: 25px;
+  }
+
 
 }
 
@@ -117,6 +121,9 @@
     background-color:rgba(211, 211, 211, 0.575);
   }
 
+  .id-ref{
+    font-size: 25px;
+  }
 
 }
 
