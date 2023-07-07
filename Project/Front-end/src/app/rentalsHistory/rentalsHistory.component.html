@@ -3,7 +3,7 @@
 <div class="form-container">
   <mat-form-field>
     <mat-label>Search title</mat-label>
-    <input #input (keyup)="titleFilter($event)" matInput placeholder="" search/>
+    <input #input (keyup)="titleFilter($event)" matInput placeholder=""/>
   </mat-form-field>
 
   <mat-form-field class="order-by">
@@ -63,20 +63,5 @@
       <td class="cell mat-cell" colspan="4">No title named {{input.value}}</td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-labels="select page of rentals"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="select page of rentals"></mat-paginator>
 </div>
-
-
-<!--
-<ng-container matColumnDef="rental_date">
-  <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header>Rental date</th>
-  <td mat-cell *matCellDef="let row">{{row.rental_date | date: 'dd/MM/yyyy H:mm'}}</td>
-</ng-container>
-<ng-container matColumnDef="return_date">
-  <th class = "tableHeaderCellDiv" mat-header-cell *matHeaderCellDef mat-sort-header>Return date</th>
-  <td mat-cell *matCellDef="let row">{{row.return_date | date: 'dd/MM/yyyy H:mm'}}</td>
-</ng-container>
-
-
-{{row.duration.giorni}} days, {{row.duration.ore}} hour, {{row.duration.minuti}} min
--->

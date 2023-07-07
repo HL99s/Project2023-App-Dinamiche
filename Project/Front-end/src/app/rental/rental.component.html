@@ -13,7 +13,7 @@
   <ng-template #disp>
     <mat-form-field>
       <mat-label>Select a store</mat-label>
-      <mat-select #select_store [(value)]="selected_store" name="store" required="true" tabindex="0">
+      <mat-select #select_store [(value)]="selected_store" required="true" tabindex="0">
         <mat-option *ngFor="let store of stores" [value]="store.store_id">
           {{store.address}}
         </mat-option>
@@ -21,7 +21,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select a date</mat-label>
-      <mat-select #select_date name="rental_date" required="true" tabindex="0">
+      <mat-select #select_date required="true" tabindex="0">
         <mat-option *ngFor="let date of rental_dates" [value]="date">
           {{date}}
         </mat-option>
