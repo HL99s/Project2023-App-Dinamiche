@@ -16,14 +16,14 @@
   </ul>
 
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close tabindex="0">Cancel</button>
-    <button (click)="openRental()" [mat-dialog-close]="true" mat-button tabindex="0">Rental</button>
+    <button mat-button mat-dialog-close tabindex="0" aria-label="close the info film page">Cancel</button>
+    <button (click)="openRental()" [mat-dialog-close]="true" mat-button tabindex="0" aria-label="press to open the rental page">Rental</button>
   </mat-dialog-actions>
 
 
   <ng-template #store_true><b>Available in:</b>
-    <ul *ngFor="let store of stores; let la = last">
-      <li>{{store.address}}, {{store.city}} ({{store.country}})</li>
+    <ul *ngFor="let store of stores; let las = last">
+      <li>{{store.address}}, {{store.city}} ({{store.country}})<span *ngIf="!las">,</span></li>
     </ul>
   </ng-template>
   <ng-template #store_false><b>Not available in stores</b></ng-template>
