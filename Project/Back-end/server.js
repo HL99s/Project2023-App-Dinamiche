@@ -12,7 +12,8 @@ const {graphqlHTTP} = require('express-graphql')
 const bcrypt = require('bcrypt');
 //jwt for token
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = "Project2023"
+const {unless} = require('express-unless');
+const SECRET_KEY = "Project2023";
 
 //DB Connection
 db.connect();
@@ -26,28 +27,6 @@ app.use((req, res, next) => {
     next();
 });
 
-/*function getTokenPayload(token) {
-    return jwt.verify(token, SECRET_KEY);
-}
-
-function getUserId(req, authToken) {
-    if (req) {
-        const authHeader = req.headers.authorization;
-        if (authHeader) {
-            const token = authHeader.replace('Bearer ', '');
-            if (!token) {
-                throw new Error('No token found');
-            }
-            const { userId } = getTokenPayload(token);
-            return userId;
-        }
-    } else if (authToken) {
-        const { userId } = getTokenPayload(authToken);
-        return userId;
-    }
-
-    throw new Error('Not authenticated');
-}*/
 
 const schema = buildSchema(fs.readFileSync('schema.graphql', 'utf8'));
 
@@ -343,7 +322,31 @@ const root = {
     }
 }
 
-app.use('/graphql', graphqlHTTP({
+const verifyToken = (req, res, next) => {
+    let auth = req.headers.authorization;
+    if (auth) {
+        const token = auth.split(' ')[1];
+        console.log(token);
+        jwt.verify(token, SECRET_KEY, (err, decoded) => {
+            if (err) {
+                return res.sendStatus(401);
+            }
+            next();
+        });
+    }else{
+        next();
+    }
+}
+
+verifyToken.unless = unless;
+app.use(
+    verifyToken.unless(
+        {path: ["/login/"]}
+    )
+);
+app.use(
+    '/graphql',
+    graphqlHTTP({
         schema,
         rootValue: root,
         graphiql: true
