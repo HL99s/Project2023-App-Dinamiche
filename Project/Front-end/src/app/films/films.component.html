@@ -1,132 +1,136 @@
 <!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
 <ng-container *ngIf="films">
-<div class="container-search">
-  <div class="search-input-container">
+  <h1 tabindex="0">Film List</h1>
+  <div class="container-search">
+    <div class="search-input-container">
+      <mat-form-field>
+        <mat-label>Search By Title</mat-label>
+        <input (input)="searchFilmByTitle($event)" matInput/>
+      </mat-form-field>
+    </div>
+
     <mat-form-field>
-      <mat-label>Search By Title</mat-label>
-      <input (input)="searchFilmByTitle($event)" matInput tabindex="0"/>
+      <mat-label>Film Category</mat-label>
+      <mat-select (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption">
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
 
-  <mat-form-field>
-    <mat-label>Film Category</mat-label>
-    <mat-select (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption" tabindex="0">
-      <mat-option value="All">All</mat-option>
-      <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+
+  <div *ngIf="films.length!=0 then found else notFound"></div>
+
+  <ng-template #notFound>
+
+    <h2 style="text-align: center;">No film named "{{searchByTitle}}", in category "{{selectedCategoryOption}}" try
+      another film! </h2>
+
+  </ng-template>
 
 
-<div *ngIf="films.length!=0 then found else notFound"></div>
+  <ng-template #found>
+    <div class="table-container">
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
+        <colgroup>
+          <col class="mat-column-title mdl-data-table__cell--non-numeric">
+          <col class="mat-column-year mdl-data-table__cell--non-numeric">
+          <col class="mat-column-rating mdl-data-table__cell--non-numeric">
+          <col class="mat-column-category mdl-data-table__cell--non-numeric">
+          <col class="mat-column-language mdl-data-table__cell--non-numeric">
+          <col class="mat-column-price mdl-data-table__cell">
+          <col class="mat-column-rent mdl-data-table__cell--non-numeric">
+        </colgroup>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+            class="head-title">Title</b></th>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b class="head-title">Year</b>
+          </th>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+            class="head-title">Rating</b></th>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+            class="head-title">Category</b></th>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+            class="head-title">Language</b></th>
+          <th class="mdl-data-table__cell align-center" scope="col"><b class="head-title">Price</b></th>
+          <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+            class="head-title">Rental</b></th>
+        </tr>
 
-<ng-template #notFound>
+        <tr *ngFor="let film of films; index as i">
+          <ng-template [ngIf]="i!=10">
+            <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center">
+              <b class="no-underline"><span class="before-title"></span></b>
+              <a (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id)" class="link_style"
+                 tabindex="0">{{film.film_title}}</a>
+            </td>
+            <td class="cell year-cell mdl-data-table__cell--non-numeric align-center">
+              <b><span class="before-year"></span></b>{{film.release_year}}
+            </td>
+            <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" id="rating">
+              <b><span class="before-rating"></span></b>{{film.rating}}
+            </td>
+            <td class="cell category-cell mdl-data-table__cell--non-numeric align-center">
+              <b><span class="before-category"></span></b>{{film.category}}
+            </td>
+            <td class="cell language-cell mdl-data-table__cell--non-numeric align-center">
+              <b><span class="before-language"></span></b>{{film.language}}
+            </td>
+            <td class="cell price-cell mdl-data-table__cell align-center">
+              <b><span class="before-price"></span></b>{{film.cost | currency}}
+            </td>
 
-  <h2 tabindex="0" style="text-align: center;">No film named "{{searchByTitle}}", in category "{{selectedCategoryOption}}" try another film! </h2>
+            <td class="cell button-cell align-center">
+              <button (click)="openRental(film.film_id)" class="button-rent align-center" color="primary"
+                      mat-raised-button tabindex="0" aria-label="press to open the rental page">
 
-</ng-template>
+                Rental
+              </button>
+            </td>
+            <td class="cell-not-visible"></td>
+          </ng-template>
+        </tr>
+      </table>
+    </div>
+  </ng-template>
 
+  <div class="paging">
+    <div *ngIf="page==0 then disabled else enabled"></div>
+    <ng-template #enabled>
+      <button
+        (click)="prevPage()"
+        class="mdl-button mdl-js-button mdl-button--colored" aria-label="press to go on the previous page">
+        <i class="material-icons">arrow_back</i>
+      </button>
+    </ng-template>
 
-<ng-template #found>
-<div class="table-container">
-  <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
-    <colgroup>
-      <col class="mat-column-title mdl-data-table__cell--non-numeric">
-      <col class="mat-column-year mdl-data-table__cell--non-numeric">
-      <col class="mat-column-rating mdl-data-table__cell--non-numeric">
-      <col class="mat-column-category mdl-data-table__cell--non-numeric">
-      <col class="mat-column-language mdl-data-table__cell--non-numeric">
-      <col class="mat-column-price mdl-data-table__cell">
-      <col class="mat-column-rent mdl-data-table__cell--non-numeric">
-    </colgroup>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b
-        class="head-title">Title</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b class="head-title">Year</b>
-      </th>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b
-        class="head-title">Rating</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b
-        class="head-title">Category</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b
-        class="head-title">Language</b></th>
-      <th class="mdl-data-table__cell align-center" scope="col" tabindex="0"><b class="head-title">Price</b></th>
-      <th class="mdl-data-table__cell--non-numeric align-center" scope="col" tabindex="0"><b
-        class="head-title">Rental</b></th>
-    </tr>
+    <ng-template #disabled>
+      <button
+        (click)="prevPage()"
+        class="mdl-button mdl-js-button mdl-button--colored" disabled>
+        <i class="material-icons">arrow_back</i>
+      </button>
+    </ng-template>
 
-      <tr *ngFor="let film of films; index as i">
-        <ng-template [ngIf]="i!=10">
-          <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center">
-            <b class="no-underline"><span class="before-title"></span></b>
-            <a (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id)" class="link_style"
-             tabindex="0">{{film.film_title}}</a>
-          </td>
-          <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" tabindex="0">
-            <b><span class="before-year"></span></b>{{film.release_year}}
-          </td>
-          <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" id="rating"
-            tabindex="0">
-            <b><span class="before-rating"></span></b>{{film.rating}}
-          </td>
-          <td class="cell category-cell mdl-data-table__cell--non-numeric align-center" tabindex="0">
-            <b><span class="before-category"></span></b>{{film.category}}
-          </td>
-          <td class="cell language-cell mdl-data-table__cell--non-numeric align-center" tabindex="0">
-            <b><span class="before-language"></span></b>{{film.language}}
-          </td>
-          <td class="cell price-cell mdl-data-table__cell align-center" tabindex="0">
-            <b><span class="before-price"></span></b>{{film.cost | currency}}
-          </td>
-          <td class="cell button-cell">
-            <button (click)="openRental(film.film_id)" class="button-rent" color="primary" mat-raised-button tabindex="0" aria-label="press to open the rental page">
-              Rental
-            </button>
-          </td>
-          <td class="cell-not-visible"></td>
-        </ng-template>
-      </tr>
-    </table>
+    <span class="page-number">Page {{page + 1}}</span>
+    <div *ngIf="films.length==11 then notLastPage else lastPage"></div>
+    <ng-template #notLastPage>
+      <button
+        (click)="nextPage()"
+        class="mdl-button mdl-js-button mdl-button--colored" aria-label="press to go on the next page">
+        <i class="material-icons">arrow_forward</i>
+      </button>
+    </ng-template>
+
+    <ng-template #lastPage>
+      <button
+        (click)="nextPage()"
+        class="mdl-button mdl-js-button mdl-button--colored" disabled>
+        <i class="material-icons">arrow_forward</i>
+      </button>
+    </ng-template>
   </div>
-</ng-template>
 
-<div class="paging">
-  <div *ngIf="page==0 then disabled else enabled"></div>
-  <ng-template #enabled>
-    <button
-      (click)="prevPage()"
-      class="mdl-button mdl-js-button mdl-button--colored" tabindex="0" aria-label="press to go on the previous page">
-      <i class="material-icons">arrow_back</i>
-    </button>
-  </ng-template>
-
-  <ng-template #disabled>
-    <button
-      (click)="prevPage()"
-      class="mdl-button mdl-js-button mdl-button--colored" disabled>
-      <i class="material-icons">arrow_back</i>
-    </button>
-  </ng-template>
-
-  <span class="page-number" tabindex="0">Page {{page + 1}}</span>
-  <div *ngIf="films.length==11 then notLastPage else lastPage"></div>
-  <ng-template #notLastPage>
-    <button
-      (click)="nextPage()"
-      class="mdl-button mdl-js-button mdl-button--colored" tabindex="0" aria-label="press to go on the next page">
-      <i class="material-icons">arrow_forward</i>
-    </button>
-  </ng-template>
-
-  <ng-template #lastPage>
-    <button
-      (click)="nextPage()"
-      class="mdl-button mdl-js-button mdl-button--colored" disabled>
-      <i class="material-icons">arrow_forward</i>
-    </button>
-  </ng-template>
-</div>
-
-<br>
+  <br>
 
 </ng-container>

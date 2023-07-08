@@ -1,24 +1,24 @@
 <ng-container *ngIf="film && actors && stores">
-<h2 mat-dialog-title tabindex="0">Info page of {{film.film_title}}</h2>
+<h2 mat-dialog-title>Info page of {{film.film_title}}</h2>
 <mat-dialog-content class="mat-typography">
   <ul>
-    <li tabindex="0"><b>Rating:</b> {{film.rating}}</li>
-    <li tabindex="0"><b>Release:</b> {{film.release_year}}</li>
-    <li tabindex="0"><b>Language:</b> {{film.language}}</li>
-    <li tabindex="0"><b>Duration:</b> {{film.length}} min</li>
-    <li tabindex="0"><b>Category:</b> {{film.category}}</li>
-    <li tabindex="0"><b>Description:</b> {{film.description}}</li>
-    <li tabindex="0"><b>Actors:</b> <span
+    <li ><b>Rating:</b> {{film.rating}}</li>
+    <li ><b>Release:</b> {{film.release_year}}</li>
+    <li ><b>Language:</b> {{film.language}}</li>
+    <li ><b>Duration:</b> {{film.length}} min</li>
+    <li ><b>Category:</b> {{film.category}}</li>
+    <li ><b>Description:</b> {{film.description}}</li>
+    <li ><b>Actors:</b> <span
       *ngFor="let actor of actors; let la = last">{{actor.first_name}} {{actor.last_name}}<span
       *ngIf="!la">, </span></span></li>
-    <li tabindex="0"><b>Price:</b> {{film.cost | currency}}</li>
-    <li tabindex="0"><b>Rental duration:</b> {{film.rental_duration}} days</li>
-    <li tabindex="0"><span *ngIf="stores.length != 0; then store_true else store_false"></span></li>
+    <li ><b>Price:</b> {{film.cost | currency}}</li>
+    <li ><b>Rental duration:</b> {{film.rental_duration}} days</li>
+    <li ><span *ngIf="stores.length != 0; then store_true else store_false"></span></li>
   </ul>
 
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close tabindex="0" aria-label="press to close the info film page">Cancel</button>
-    <button (click)="openRental()" [mat-dialog-close]="true" mat-button tabindex="0" aria-label="press to open the rental page">Rental</button>
+    <button mat-button mat-dialog-close aria-label="press to close the info film page">Cancel</button>
+    <button (click)="openRental()" [mat-dialog-close]="true" mat-button aria-label="press to open the rental page">Rental</button>
   </mat-dialog-actions>
 
 

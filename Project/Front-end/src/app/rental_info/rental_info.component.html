@@ -1,14 +1,14 @@
 <ng-container *ngIf="store && rental_info">
-<h2 mat-dialog-title tabindex="0">Info of rental id {{rental_info.rental_id}}</h2>
+<h2 mat-dialog-title>Info of rental id {{rental_info.rental_id}}</h2>
 <mat-dialog-content class="mat-typography">
   <ul>
-    <li tabindex="0"><b>Film title:</b> {{rental_info.film_title}}</li>
-    <li tabindex="0"><b>Rental date:</b> {{rental_info.rental_date | date:'dd/MM/yyyy' }}</li>
-    <li tabindex="0"><span *ngIf="rental_info.return_date != null; then ret_date_true else ret_date_false"></span></li>
-    <li tabindex="0"><b>Store:</b> {{store.address}} {{store.city}} ({{store.country}})</li>
-    <li tabindex="0"><b>Payment date:</b> {{rental_info.payment_date | date:'dd/MM/yyyy'}}</li>
-    <li tabindex="0"><b>Amount:</b> {{rental_info.amount | currency}}</li>
-    <li tabindex="0"><b>Seller:</b>
+    <li ><b>Film title:</b> {{rental_info.film_title}}</li>
+    <li ><b>Rental date:</b> {{rental_info.rental_date | date:'dd/MM/yyyy' }}</li>
+    <li ><span *ngIf="rental_info.return_date != null; then ret_date_true else ret_date_false"></span></li>
+    <li ><b>Store:</b> {{store.address}} {{store.city}} ({{store.country}})</li>
+    <li ><b>Payment date:</b> {{rental_info.payment_date | date:'dd/MM/yyyy'}}</li>
+    <li ><b>Amount:</b> {{rental_info.amount | currency}}</li>
+    <li ><b>Seller:</b>
       <ul>
         <li><b>First name:</b> {{rental_info.staff_first_name}},</li>
         <li><b>Last name:</b> {{rental_info.staff_last_name}},</li>
@@ -18,7 +18,7 @@
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close tabindex="0" aria-label="press to close the info rental page">Cancel</button>
+  <button mat-button mat-dialog-close  aria-label="press to close the info rental page">Cancel</button>
 </mat-dialog-actions>
 
 <ng-template #ret_date_true><b>Rental date:</b> {{rental_info.return_date | date:'dd/MM/yyyy' }}</ng-template>
