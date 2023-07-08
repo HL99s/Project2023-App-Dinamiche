@@ -33,7 +33,18 @@ const RENTALS_BY_ID_QUERY = gql`
   }
 `;
 
-
+interface getRentalInfoByCustIdResponse{
+  getRentalInfoByCustId: {
+    rental_id: number,
+    film_title: string,
+    payment_date: Date,
+    amount: number,
+    store_id: number,
+    shop: string,
+    rental_date: Date,
+    return_date: Date
+  }
+}
 
 @Component({
   selector: 'app-histoprova',
@@ -59,14 +70,11 @@ export class RentalsHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apollo.query({
+    this.apollo.query<getRentalInfoByCustIdResponse>({
       query: RENTALS_BY_ID_QUERY,
       variables: {customerId: Number(this.cust_id)}
     }).subscribe(({data, loading}) => {
       //@ts-ignore
-
-
-      //this.rental_data = data.getRentalInfoByCustId
       this.rental_data = data.getRentalInfoByCustId.map((rental: {
         rental_date: string | number | Date; return_date: string | number | Date;
       }) => {
