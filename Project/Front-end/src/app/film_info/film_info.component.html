@@ -1,3 +1,4 @@
+<ng-container *ngIf="film && actors && stores">
 <h2 mat-dialog-title tabindex="0">Info page of {{film.film_title}}</h2>
 <mat-dialog-content class="mat-typography">
   <ul>
@@ -28,4 +29,6 @@
   </ng-template>
   <ng-template #store_false><b>Not available in stores</b></ng-template>
 </mat-dialog-content>
+
+</ng-container>
 

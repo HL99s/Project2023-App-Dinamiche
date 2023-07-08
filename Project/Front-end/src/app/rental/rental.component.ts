@@ -43,6 +43,35 @@ const STORE_INFO_DISP = gql`
   }
 `;
 
+interface getBuyDispResponse{
+  getBuyDisp: {
+    inventory_id: number
+  }
+}
+
+interface getFilmInfoByIdResponse{
+  getFilmInfoById: {
+    film_title: string,
+    release_year: number,
+    language: string,
+    length: string,
+    category: string,
+    description: string,
+    rating: string,
+    cost: number,
+    rental_duration: number
+  }
+}
+
+interface getStoreDispByFilmIdResponse{
+  getStoreDispByFilmId: {
+    store_id: number,
+    address: string,
+    city: string,
+    country: string
+  }
+}
+
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
@@ -61,19 +90,19 @@ export class RentalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apollo.query({
+    this.apollo.query<getFilmInfoByIdResponse>({
       query: FILM_INFO_BY_ID,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.film = data.getFilmInfoById
     })
 
-    this.apollo.query({
+    this.apollo.query<getStoreDispByFilmIdResponse>({
       query: STORE_INFO_DISP,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.stores = data.getStoreDispByFilmId;
       this.available = this.stores.length != 0;
     })
@@ -81,11 +110,11 @@ export class RentalComponent implements OnInit {
   }
 
   openPopup() {
-    this.apollo.query({
+    this.apollo.query<getBuyDispResponse>({
       query: GET_BUY_DISP,
       variables: {filmId: this.arg.film_id, storeId: Number(this.selected_store)}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.disp_store = data.getBuyDisp
       console.log(this.disp_store)
       this.res = this.disp_store.length != 0;
