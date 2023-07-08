@@ -74,8 +74,9 @@ export class RentalsHistoryComponent implements OnInit {
       query: RENTALS_BY_ID_QUERY,
       variables: {customerId: Number(this.cust_id)}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
-      this.rental_data = data.getRentalInfoByCustId.map((rental: {
+
+      this.rental_data = data.getRentalInfoByCustId
+      this.rental_data = this.rental_data.map((rental: {
         rental_date: string | number | Date; return_date: string | number | Date;
       }) => {
         const startDate: Date = new Date(rental.rental_date);
