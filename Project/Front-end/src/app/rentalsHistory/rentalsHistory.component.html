@@ -1,32 +1,32 @@
-<h1 tabindex="0">Rentals History</h1>
+<h1 >Rentals History</h1>
 
 <div class="form-container">
   <mat-form-field>
     <mat-label>Search title</mat-label>
-    <input #input (keyup)="titleFilter($event)" matInput placeholder="" tabindex="0"/>
+    <input #input (keyup)="titleFilter($event)" matInput placeholder="" />
   </mat-form-field>
 
   <mat-form-field class="order-by">
     <mat-label>Order By</mat-label>
     <!--(selectionChange)="onOrdineChange()"-->
-    <mat-select [(ngModel)]="ordineSelezionato" tabindex="0">
+    <mat-select [(ngModel)]="ordineSelezionato" >
       <mat-option *ngFor="let col of dispayedColumn" [value]="col">
         {{col}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  
 
-  <mat-slide-toggle [(ngModel)]="isOrderAsc" class="slider order-by" tabindex="0"><span *ngIf="isOrderAsc; else descending">Ascending order</span></mat-slide-toggle>
 
-  
+  <mat-slide-toggle [(ngModel)]="isOrderAsc" class="slider order-by" ><span *ngIf="isOrderAsc; else descending">Ascending order</span></mat-slide-toggle>
+
+
   <ng-template #descending>
     <span>Descending order</span>
   </ng-template>
-  
-  <button (click)="onOrdinaClick()" class="order-button order-by" mat-raised-button color="primary">Ordina</button>
-  
+
+  <button (click)="onOrdinaClick()" class="order-button order-by" mat-raised-button color="primary">Sort</button>
+
 
 </div>
 
@@ -41,22 +41,22 @@
     </ng-container>
     <ng-container matColumnDef="film_title">
       <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Title</th>
-      <td *matCellDef="let row" class="cell" mat-cell tabindex="0"><b><span
+      <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Film Title: </span></b>{{row.film_title}}</td>
     </ng-container>
     <ng-container matColumnDef="payment_date">
       <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Payment date</th>
-      <td *matCellDef="let row" class="cell" mat-cell tabindex="0"><b><span
+      <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Payment Date: </span></b>{{row.payment_date | date: 'dd/MM/yyyy'}}</td>
     </ng-container>
     <ng-container matColumnDef="amount">
       <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Amount</th>
-      <td *matCellDef="let row" class="cell" mat-cell tabindex="0"><b><span
+      <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Amount: </span></b>{{row.amount | currency}}</td>
     </ng-container>
     <ng-container matColumnDef="shop">
       <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header >Shop</th>
-      <td *matCellDef="let row" class="cell" mat-cell tabindex="0"><b><span class="head-before">Shop: </span></b>{{row.shop}}</td>
+      <td *matCellDef="let row" class="cell" mat-cell ><b><span class="head-before">Shop: </span></b>{{row.shop}}</td>
     </ng-container>
 
     <ng-container matColumnDef="duration">
@@ -64,7 +64,7 @@
           sortActionDescription="Sort by duration">
         Duration
       </th>
-      <td *matCellDef="let row" class="cell last-cell" mat-cell tabindex="0"><b><span
+      <td *matCellDef="let row" class="cell last-cell" mat-cell ><b><span
         class="head-before">Duration: </span></b> {{row.duration | convertiDurata}}</td>
     </ng-container>
     <tr *matHeaderRowDef="dispayedColumn" mat-header-row></tr>
@@ -72,7 +72,7 @@
 
 
     <tr *matNoDataRow class="tableHeaderCellDiv">
-      <td class="cell mat-cell" colspan="4" tabindex="0">No title named {{input.value}}</td>
+      <td class="cell mat-cell" colspan="4" >No title named {{input.value}}</td>
     </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10]" aria-label="select page of rentals"></mat-paginator>

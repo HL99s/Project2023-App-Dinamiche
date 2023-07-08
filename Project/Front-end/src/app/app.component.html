@@ -1,33 +1,42 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+<!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">-->
+<!--onresize = "onChanges();"-->
+
+<!--<body onresize = "onChanges()">-->
+<!--mdl-layout--fixed-header-->
+
+
+<div [ngClass]="{'mdl-js-layout': screenWidth < 768, '': screenWidth >= 768}"
+     class="mdl-layout mdl-layout--fixed-header">
+
+
   <div class="mdl-layout__header mdl-layout__header--waterfall">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title" *ngIf="logged" routerLink="/">
-        <i class="material-icons">home</i> Movie Shop
-      </span>
-      <span class="mdl-layout-title" *ngIf="!logged" (click)="isNotLogged()">
-        <i class="material-icons">home</i> Movie Shop
-      </span>
+            <span class="mdl-layout-title">
+               Movie Shop
+            </span>
       <!-- Add spacer, to align navigation to the right in desktop -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <ng-template [ngIf]="logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/')"
-              (keydown.enter)="redirectTo('/')" tabindex="0" aria-label="press to go to homepage">Home
+          <li (click)="redirectTo('/')" (keydown.enter)="redirectTo('/')"
+              aria-label="press to go to homepage" class="link-top link_style mdl-navigation__link" tabindex="0">Home
           </li>
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/films')"
-              (keydown.enter)="redirectTo('/films')" tabindex="0" aria-label="press to go to film list">Films
+          <li (click)="redirectTo('/films')" (keydown.enter)="redirectTo('/films')"
+              aria-label="press to go to film list" class="link-top link_style mdl-navigation__link" tabindex="0">Films
           </li>
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/rentals_history')"
-              (keydown.enter)="redirectTo('/rentals_history')" tabindex="0" aria-label="press to go to rental history">Rentals history
+          <li (click)="redirectTo('/rentals_history')" (keydown.enter)="redirectTo('/rentals_history')"
+              aria-label="press to go to rental history" class="link-top link_style mdl-navigation__link" tabindex="0">
+            Rentals history
           </li>
-          <li class="link_style mdl-navigation__link" (click)="logOut()"
-              (keydown.enter)="logOut()" tabindex="0" aria-label="press to logout">Logout
+          <li (click)="logOut()" (keydown.enter)="logOut()"
+              aria-label="press to logout" class="link-top link_style mdl-navigation__link" tabindex="0">Logout
           </li>
         </ul>
       </ng-template>
@@ -35,54 +44,58 @@
       <ng-template [ngIf]="!logged">
         <ul class="mdl-navigation">
           <!--Quelli in alto-->
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0" aria-label="press to go to homepage">Home
+          <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" aria-label="press to go to homepage"
+              class="link-top link_style mdl-navigation__link" tabindex="0">Home
           </li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0" aria-label="press to go to film list">Films
+          <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" aria-label="press to go to film list"
+              class="link-top link_style mdl-navigation__link" tabindex="0">Films
           </li>
-          <li class="link_style mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-              tabindex="0" aria-label="press to go to rental history">Rentals history
+          <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" aria-label="press to go to rental history"
+              class="link-top link_style mdl-navigation__link" tabindex="0">Rentals history
           </li>
-          <li class="link_style mdl-navigation__link" (click)="redirectTo('/login')"
-              (keydown.enter)="redirectTo('/login')" tabindex="0" aria-label="press to login">Login
+          <li (click)="redirectTo('/login')" (keydown.enter)="redirectTo('/login')"
+              aria-label="press to login" class="link-top link_style mdl-navigation__link" tabindex="0">Login
           </li>
         </ul>
       </ng-template>
     </div>
   </div>
 
-  <div class="mdl-layout__drawer">
+  <div [ngClass]="{'mdl-layout__drawer': screenWidth < 768, '': screenWidth >= 768}"
+       class="list-not-visible mdl-layout__drawer">
     <ng-template [ngIf]="logged">
       <ul class="mdl-navigation">
-        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/')"
-            (keydown.enter)="redirectTo('/')" tabindex="0" aria-label="press to go to homepage">Home
+        <li (click)="redirectTo('/')" (keydown.enter)="redirectTo('/')"
+            [tabindex]="tabindexValue()" aria-label="press to go to homepage" class="link_style_side mdl-navigation__link">Home
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/films')"
-            (keydown.enter)="redirectTo('/films')" tabindex="0" aria-label="press to go to film list">Films
+        <li (click)="redirectTo('/films')" (keydown.enter)="redirectTo('/films')"
+            [tabindex]="tabindexValue()" aria-label="press to go to film list" class="link_style_side mdl-navigation__link">
+          Films
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/rentals_history')"
-            (keydown.enter)="redirectTo('/rentals_history')" tabindex="0" aria-label="press to go to rental history">Rentals history
+        <li (click)="redirectTo('/rentals_history')" (keydown.enter)="redirectTo('/rentals_history')"
+            [tabindex]="tabindexValue()" aria-label="press to go to rental history"
+            class="link_style_side mdl-navigation__link">Rentals history
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="logOut()" (keydown.enter)="logOut()" tabindex="0" aria-label="press to logout">
+        <li (click)="logOut()" (keydown.enter)="logOut()" [tabindex]="tabindexValue()"
+            aria-label="press to logout" class="link_style_side mdl-navigation__link">
           Logout
         </li>
       </ul>
     </ng-template>
 
     <ng-template [ngIf]="!logged">
-      <ul class="mdl-navigation">
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0" aria-label="press to go to homepage">Home
+      <ul class="list-not-visible mdl-navigation">
+        <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" [tabindex]="tabindexValue()"
+            aria-label="press to go to homepage" class="link_style_side mdl-navigation__link">Home
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0" aria-label="press to go to film list">Films
+        <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" [tabindex]="tabindexValue()"
+            aria-label="press to go to film list" class="link_style_side mdl-navigation__link">Films
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="isNotLogged()" (keydown.enter)="isNotLogged()"
-            tabindex="0" aria-label="press to go to rental history">Rentals history
+        <li (click)="isNotLogged()" (keydown.enter)="isNotLogged()" [tabindex]="tabindexValue()"
+            aria-label="press to go to rental history" class="link_style_side mdl-navigation__link">Rentals history
         </li>
-        <li class="link_style_side mdl-navigation__link" (click)="redirectTo('/login')"
-            (keydown.enter)="redirectTo('/login')" aria-label="press to login">Login
+        <li (click)="redirectTo('/login')" (keydown.enter)="redirectTo('/login')"
+            [tabindex]="tabindexValue()" aria-label="press to login" class="link_style_side mdl-navigation__link">Login
         </li>
       </ul>
     </ng-template>
@@ -92,3 +105,11 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+
+
+
+
+
+
+
+
