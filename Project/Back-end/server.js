@@ -236,7 +236,7 @@ const root = {
                     throw new Error('Invalid password');
                 }
                 // Create token
-                res.rows[0].token = jwt.sign({customerId: res.rows[0].customer_id}, SECRET_KEY, {expiresIn: 1800});
+                res.rows[0].token = jwt.sign({customerId: res.rows[0].customer_id}, SECRET_KEY/*, {expiresIn: 7200}*/);
                 return res.rows[0];
             }
         ).catch(
@@ -341,7 +341,7 @@ const verifyToken = (req, res, next) => {
 verifyToken.unless = unless;
 app.use(
     verifyToken.unless(
-        {path: ["/login/"]}
+        {path: ["login/"]}
     )
 );
 app.use(
