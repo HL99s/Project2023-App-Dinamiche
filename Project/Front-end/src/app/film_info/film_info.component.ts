@@ -41,6 +41,58 @@ const STORE_INFO_DISP = gql`
   }
 `;
 
+interface getFilmInfoByIdResponse{
+  getFilmInfoById: {
+    film_title: string,
+    release_year: number,
+    language: string,
+    length: number
+    category: string,
+    description: string,
+    rating: string,
+    cost: number,
+    rental_duration: string
+  }
+}
+
+interface getFilmActorsResponse{
+  getFilmActors: {
+    first_name: string,
+    last_name: string
+  }
+}
+
+interface getStoreDispByFilmIdResponse{
+  getStoreDispByFilmId: {
+    address: string,
+    city: string,
+    country: string
+  }
+}
+
+type Store = {
+  address: string,
+  city: string,
+  country:string
+}
+
+type Film  = {
+  film_title: string,
+  release_year: number,
+  language: string,
+  length: number
+  category: string,
+  description: string,
+  rating: string,
+  cost: number,
+  rental_duration: string
+}
+
+type Actor = {
+  first_name: string,
+  last_name: string
+}
+
 @Component({
   selector: 'app-info',
   templateUrl: './film_info.component.html',
@@ -48,35 +100,35 @@ const STORE_INFO_DISP = gql`
 })
 export class Film_infoComponent implements OnInit {
 
-  film: any;
+  film: Film;
   actors: any;
-  stores: any
+  stores: any;
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.apollo.query({
+    this.apollo.query<getFilmInfoByIdResponse>({
       query: FILM_INFO_BY_ID,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.film = data.getFilmInfoById
     })
 
-    this.apollo.query({
+    this.apollo.query<getFilmActorsResponse>({
       query: FILM_ACTORS,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.actors = data.getFilmActors
     })
 
-    this.apollo.query({
+    this.apollo.query<getStoreDispByFilmIdResponse>({
       query: STORE_INFO_DISP,
       variables: {filmId: this.arg.film_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
+
       this.stores = data.getStoreDispByFilmId
     })
   }
