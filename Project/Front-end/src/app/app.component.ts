@@ -40,13 +40,13 @@ export class AppComponent implements OnInit {
     
     
 
-    if(window.innerWidth < 600 && this.screenWidth > 600){
+    if(window.innerWidth < 768 && this.screenWidth > 768){
       this.screenWidth = window.innerWidth;
       console.log(this.screenWidth);
       location.reload();
     }
     
-    if(window.innerWidth >= 600 && this.screenWidth <= 600){
+    if(window.innerWidth >= 768 && this.screenWidth <= 768){
       this.screenWidth = window.innerWidth;
       console.log(this.screenWidth);
       location.reload();
