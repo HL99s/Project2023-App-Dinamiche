@@ -236,7 +236,7 @@ const root = {
                     throw new Error('Invalid password');
                 }
                 // Create token
-                res.rows[0].token = jwt.sign({customerId: res.rows[0].customer_id}, SECRET_KEY, {expiresIn: 300});
+                res.rows[0].token = jwt.sign({customerId: res.rows[0].customer_id}, SECRET_KEY, {expiresIn: 1800});
                 return res.rows[0];
             }
         ).catch(

@@ -1,20 +1,20 @@
 <ng-container *ngIf="film && stores">
-<h2 mat-dialog-title tabindex="0">Rental page of {{film.film_title}}</h2>
+<h2 mat-dialog-title >Rental page of {{film.film_title}}</h2>
 <mat-dialog-content class="mat-typography">
   <ul>
-    <li tabindex="0"><b>Title:</b> {{film.film_title}}</li>
-    <li tabindex="0"><b>Rating:</b> {{film.rating}}</li>
-    <li tabindex="0"><b>Release:</b> {{film.release_year}}</li>
-    <li tabindex="0"><b>Language:</b> {{film.language}}</li>
-    <li tabindex="0"><b>Duration:</b> {{film.length}} min</li>
-    <li tabindex="0"><b>Category:</b> {{film.category}}</li>
-    <li tabindex="0"><b>Description:</b> {{film.description}}</li>
+    <li ><b>Title:</b> {{film.film_title}}</li>
+    <li ><b>Rating:</b> {{film.rating}}</li>
+    <li ><b>Release:</b> {{film.release_year}}</li>
+    <li ><b>Language:</b> {{film.language}}</li>
+    <li ><b>Duration:</b> {{film.length}} min</li>
+    <li ><b>Category:</b> {{film.category}}</li>
+    <li ><b>Description:</b> {{film.description}}</li>
   </ul>
   <div *ngIf="available; then disp else noDisp"></div>
   <ng-template #disp>
     <mat-form-field>
       <mat-label>Select a store</mat-label>
-      <mat-select #select_store [(value)]="selected_store" required="true" tabindex="0">
+      <mat-select #select_store [(value)]="selected_store" required="true">
         <mat-option *ngFor="let store of stores" [value]="store.store_id">
           {{store.address}}
         </mat-option>
@@ -22,7 +22,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select a date</mat-label>
-      <mat-select #select_date required="true" tabindex="0">
+      <mat-select #select_date required="true" >
         <mat-option *ngFor="let date of rental_dates" [value]="date">
           {{date}}
         </mat-option>
@@ -45,7 +45,7 @@
   </ng-template>
 
   <ng-template #noDisp>
-    <h2 tabindex="0">RENTAL NOT AVAILABLE</h2>
+    <h2 >RENTAL NOT AVAILABLE</h2>
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close aria-label="press to close the rental page">Cancel</button>
     </mat-dialog-actions>
