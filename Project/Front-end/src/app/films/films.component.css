@@ -258,6 +258,11 @@
     display: none;
   }
 
+ 
+  .align-center {
+    text-align: center;
+  }
+  
 }
 
 /* Schermo large (desktop) */
@@ -316,6 +321,10 @@
   td.cell-not-visible {
     display: none;
   }
+
+  .align-center {
+    text-align: center;
+  }
 }
 
 /* Schermo extra large (grandi desktop) */
@@ -373,6 +382,10 @@
 
   td.cell-not-visible {
     display: none;
+  }
+
+  .align-center {
+    text-align: center;
   }
 
 }
