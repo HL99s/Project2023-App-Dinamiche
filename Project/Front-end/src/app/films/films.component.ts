@@ -71,6 +71,65 @@ const CATEGORY_QUERY = gql`
   }
 `;
 
+interface getAllFilmsWithCategoryResponse{
+  getAllFilmsWithCategory: {
+    film_id: number,
+    film_title: string,
+    release_year: number,
+    rating: string,
+    category: string,
+    language: string,
+    cost: number
+  }
+}
+
+interface getFilmsByTitleResponse{
+  getFilmsByTitle: {
+    film_id: number,
+    film_title: string,
+    release_year: number,
+    rating: string,
+    category: string,
+    language: string,
+    cost: number
+  }
+}
+
+interface getFilmsByCategoryResponse{
+  getFilmsByCategory: {
+    film_id: number,
+    film_title: string,
+    release_year: number,
+    rating: string,
+    category: string,
+    language: string,
+    cost: number
+  }
+}
+
+interface getFilmsByCategoryAndTitleResponse{
+  getFilmsByCategoryAndTitle: {
+    film_id: number,
+    film_title: string,
+    release_year: number,
+    rating: string,
+    category: string,
+    language: string,
+    cost: number
+  }
+}
+
+interface getAllCategoriesResponse{
+  getAllCategories: {
+    category_id: number,
+    category: string
+  }
+}
+
+
+
+
+
 @Component({
   selector: 'app-films',
   templateUrl: './films.component.html',
@@ -95,21 +154,21 @@ export class FilmsComponent implements OnInit {
   }
 
   updateCategory() {
-    this.apollo.query({
+    this.apollo.query<getAllCategoriesResponse>({
       query: CATEGORY_QUERY,
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
+
       this.filmCategory = data.getAllCategories;
       console.log(this.filmCategory);
     })
   }
 
   updateAllFilms() {
-    this.apollo.query({
+    this.apollo.query<getAllFilmsWithCategoryResponse>({
       query: FILMS_WITH_CATEGORY_QUERY,
       variables: {offset: 10 * this.page}
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
+
       this.films = data.getAllFilmsWithCategory;
       console.log(this.films);
     })
@@ -117,33 +176,33 @@ export class FilmsComponent implements OnInit {
 
   updateFilmsByTitle(filmTitle: string) {
     console.log("filter: ", filmTitle)
-    this.apollo.query({
+    this.apollo.query<getFilmsByTitleResponse>({
       query: FILMS_BY_TITLE_QUERY,
       variables: {offset: 10 * this.page, filmTitle: filmTitle}
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
+
       this.films = data.getFilmsByTitle;
       console.log(this.films);
     })
   }
 
   updateFilmsByCategory(category: string) {
-    this.apollo.query({
+    this.apollo.query<getFilmsByCategoryResponse>({
       query: FILMS_BY_CATEGORY_QUERY,
       variables: {offset: 10 * this.page, categoryName: category}
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
+
       this.films = data.getFilmsByCategory;
       console.log(this.films);
     })
   }
 
   updateFilmsByCategoryAndTitle(category: string, title: string) {
-    this.apollo.query({
+    this.apollo.query<getFilmsByCategoryAndTitleResponse>({
       query: FILMS_BY_CATEGORY_AND_TITLE_QUERY,
       variables: {offset: 10 * this.page, categoryName: category, filmTitle: title}
     }).subscribe(({data, loading}) => {
-      // @ts-ignore
+
       this.films = data.getFilmsByCategoryAndTitle;
       console.log(this.films);
     })

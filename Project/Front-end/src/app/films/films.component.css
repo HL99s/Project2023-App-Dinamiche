@@ -1,3 +1,24 @@
+
+/* focus for accessibility*/
+button:focus{
+  outline: 2px solid black;
+}
+
+input:focus{
+  outline: 2px solid black;
+}
+mat-form-field:focus{
+  outline: 2px solid black;
+}
+
+mat-select:focus{
+  outline: 2px solid black;
+}
+
+mat-option:focus{
+  outline: 2px solid black;
+}
+
 /* Schermo extra small (telefoni) */
 @media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
