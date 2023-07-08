@@ -6,6 +6,10 @@ import {LoginComponent} from './login/login.component';
 import {RentalsHistoryComponent} from './rentalsHistory/rentalsHistory.component';
 import {AuthGuard} from './auth/auth.guard';
 
+
+
+
+
 const routes: Routes = [
   {
     path: '',
@@ -38,4 +42,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+
+  
+    
 }
