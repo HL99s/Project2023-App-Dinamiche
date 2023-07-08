@@ -17,6 +17,17 @@
   </mat-form-field>
 </div>
 
+
+<div *ngIf="films.length!=0 then found else notFound"></div>
+
+<ng-template #notFound>
+
+  <h2 tabindex="0" style="text-align: center;">No film named "{{searchByTitle}}", in category "{{selectedCategoryOption}}" try another film! </h2>
+
+</ng-template>
+
+
+<ng-template #found>
 <div class="table-container">
   <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
     <colgroup>
@@ -44,14 +55,6 @@
         class="head-title">Rental</b></th>
     </tr>
 
-
-      <div *ngIf="films.length!=0 then found else notFound"></div>
-
-      <ng-template #notFound>
-        <tr tabindex="0" aria-label="no film found, search another film">NO FILM FOUND</tr>
-      </ng-template>
-
-      <ng-template #found>
       <tr *ngFor="let film of films; index as i">
         <ng-template [ngIf]="i!=10">
           <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center">
@@ -83,9 +86,9 @@
           <td class="cell-not-visible"></td>
         </ng-template>
       </tr>
-    </ng-template>
     </table>
   </div>
+</ng-template>
 
 <div class="paging">
   <div *ngIf="page==0 then disabled else enabled"></div>

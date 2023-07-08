@@ -31,6 +31,47 @@ const STORE_BY_ID_QUERY = gql`
   }
 `;
 
+interface getRentalInfoByRenIdResponse{
+  getRentalInfoByRenId: {
+    rental_id: number,
+    film_title: string,
+    payment_date: Date,
+    amount: number,
+    shop: string,
+    rental_date: Date,
+    return_date: Date,
+    staff_first_name: string,
+    staff_last_name: string,
+    staff_email: string
+  }
+}
+
+interface getStoreByIdResponse{
+  getStoreById: {
+    address: string,
+    city: string,
+    country: string
+  }
+}
+
+type Store = {
+    address: string,
+    city: string,
+    country:string
+}
+
+type RentalInfo = {
+  rental_id: number,
+  film_title: string,
+  payment_date: Date,
+  amount: number,
+  shop: string,
+  rental_date: Date,
+  return_date: Date,
+  staff_first_name: string,
+  staff_last_name: string,
+  staff_email: string
+}
 
 @Component({
   selector: 'app-info-rental',
@@ -39,31 +80,29 @@ const STORE_BY_ID_QUERY = gql`
 })
 export class Rental_infoComponent implements OnInit {
 
-  rental_info: any;
-  store: any;
+  rental_info: RentalInfo;
+  store: Store;
+
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any) {
   }
 
   ngOnInit(): void {
-    this.apollo.query({
+    this.apollo.query<getRentalInfoByRenIdResponse>({
       query: RENTALS_BY_REN_ID_QUERY,
       variables: {rentalId: this.arg.rental_id}
     }).subscribe(({data, loading}) => {
-      //@ts-ignore
       this.rental_info = data.getRentalInfoByRenId
+      console.log(this.rental_info)
     })
 
-    this.apollo.query({
+    this.apollo.query<getStoreByIdResponse>({
       query: STORE_BY_ID_QUERY,
       variables: {storeId: this.arg.store_id}
     }).subscribe(({data, loading}) => {
-      console.log(this.arg.store_id)
-      //@ts-ignore
       this.store = data.getStoreById
+      console.log(this.store)
     })
-
-
   }
 
 }
