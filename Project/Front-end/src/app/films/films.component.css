@@ -279,6 +279,11 @@ mat-option:focus{
     display: none;
   }
 
+ 
+  .align-center {
+    text-align: center;
+  }
+  
 }
 
 /* Schermo large (desktop) */
@@ -337,6 +342,10 @@ mat-option:focus{
   td.cell-not-visible {
     display: none;
   }
+
+  .align-center {
+    text-align: center;
+  }
 }
 
 /* Schermo extra large (grandi desktop) */
@@ -394,6 +403,10 @@ mat-option:focus{
 
   td.cell-not-visible {
     display: none;
+  }
+
+  .align-center {
+    text-align: center;
   }
 
 }

@@ -1,5 +1,7 @@
 <!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
-<ng-container *ngIf="films">
+
+<h1 tabindex="0">Film List</h1>
+
 <div class="container-search">
   <div class="search-input-container">
     <mat-form-field>
@@ -76,8 +78,10 @@
           <td class="cell price-cell mdl-data-table__cell align-center" >
             <b><span class="before-price"></span></b>{{film.cost | currency}}
           </td>
-          <td class="cell button-cell">
-            <button (click)="openRental(film.film_id)" class="button-rent" color="primary" mat-raised-button aria-label="press to open the rental page">
+
+          <td class="cell button-cell align-center">
+            <button (click)="openRental(film.film_id)" class="button-rent align-center" color="primary" mat-raised-button tabindex="0" aria-label="press to open the rental page">
+
               Rental
             </button>
           </td>
