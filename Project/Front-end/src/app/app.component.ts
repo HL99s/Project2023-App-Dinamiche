@@ -57,6 +57,15 @@ export class AppComponent implements OnInit {
     
   }
 
+  tabindexValue(): number {
+    if(this.screenWidth<=768){
+      return 0;
+    }
+    else{
+      return -1;
+    }
+  }
+
   
 
   

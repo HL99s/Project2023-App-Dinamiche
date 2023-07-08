@@ -107,6 +107,9 @@
       text-decoration: underline !important;
     }
     
+    .list-not-visible{
+      display: none;
+    }
     
   }
   
@@ -140,6 +143,10 @@
     
     .link_style_side:hover {
       text-decoration: underline !important;
+    }
+
+    .list-not-visible{
+      display: none;
     }
     
   
@@ -179,6 +186,10 @@
     text-decoration: underline !important;
   }
 
+
+  .list-not-visible{
+    display: none;
+  }
   
   
 
