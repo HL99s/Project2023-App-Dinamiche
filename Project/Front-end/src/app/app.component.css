@@ -1,4 +1,9 @@
-  /* Schermo extra small (telefoni) */
+
+/* focus for accessibility*/
+li:focus{
+  outline: 2px solid black;
+}
+/* Schermo extra small (telefoni) */
   @media screen and (max-width: 480px) {
     /* Regole CSS per lo schermo extra small */
     .content {
@@ -6,25 +11,25 @@
       display: flex;
       justify-content: center;
     }
-    
+
     .link_style {
       display: inline-block !important;
       text-decoration: none !important;
       color: white !important;
       cursor: pointer !important;
     }
-    
+
     .link_style:hover {
       text-decoration: underline !important;
     }
-    
+
     .link_style_side {
       display: inline-block !important;
       text-decoration: none !important;
       color: rgb(0, 0, 0) !important;
       cursor: pointer !important;
     }
-    
+
     .link_style_side:hover {
       text-decoration: underline !important;
     }
@@ -32,38 +37,42 @@
     .link-top{
       display: none !important;
     }
-  
-  
+
+    .link-top:focus{
+      background-color: lightblue;
+    }
+
+
   }
-  
+
   /* Schermo small (tablet verticali) */
   @media screen and (min-width: 480.01px) and (max-width: 767.98px) {
     /* Regole CSS per lo schermo small */
-  
+
     .content {
       padding: 1rem;
       display: flex;
       justify-content: center;
     }
-    
+
     .link_style {
       display: inline-block !important;
       text-decoration: none !important;
       color: white !important;
       cursor: pointer !important;
     }
-    
+
     .link_style:hover {
       text-decoration: underline !important;
     }
-    
+
     .link_style_side {
       display: inline-block !important;
       text-decoration: none !important;
       color: rgb(0, 0, 0) !important;
       cursor: pointer !important;
     }
-    
+
     .link_style_side:hover {
       text-decoration: underline !important;
     }
@@ -71,76 +80,41 @@
     .link-top{
       display: none !important;
     }
-    
-    
+    .link-top:focus{
+      background-color: lightblue;
+    }
+
+
   }
-  
+
   /* Schermo medium (tablet orizzontali) */
   @media screen and (min-width: 768px) and (max-width: 991.98px) {
     /* Regole CSS per lo schermo medium */
-  
+
     .content {
       padding: 1rem;
       display: flex;
       justify-content: center;
     }
-    
+
     .link_style {
       display: inline-block !important;
       text-decoration: none !important;
       color: white !important;
       cursor: pointer !important;
     }
-    
+
     .link_style:hover {
       text-decoration: underline !important;
     }
-    
+
     .link_style_side {
       display: inline-block !important;
       text-decoration: none !important;
       color: rgb(0, 0, 0) !important;
       cursor: pointer !important;
     }
-    
-    .link_style_side:hover {
-      text-decoration: underline !important;
-    }
-    
-    .list-not-visible{
-      display: none;
-    }
-    
-  }
-  
-  /* Schermo large (desktop) */
-  @media screen and (min-width: 992px) and (max-width: 1199.98px) {
-    /* Regole CSS per lo schermo large */
-  
-    .content {
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-    }
-    
-    .link_style {
-      display: inline-block !important;
-      text-decoration: none !important;
-      color: white !important;
-      cursor: pointer !important;
-    }
-    
-    .link_style:hover {
-      text-decoration: underline !important;
-    }
-    
-    .link_style_side {
-      display: inline-block !important;
-      text-decoration: none !important;
-      color: rgb(0, 0, 0) !important;
-      cursor: pointer !important;
-    }
-    
+
     .link_style_side:hover {
       text-decoration: underline !important;
     }
@@ -148,53 +122,94 @@
     .list-not-visible{
       display: none;
     }
-    
-  
+
   }
-  
+
+  /* Schermo large (desktop) */
+  @media screen and (min-width: 992px) and (max-width: 1199.98px) {
+    /* Regole CSS per lo schermo large */
+
+    .content {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .link_style {
+      display: inline-block !important;
+      text-decoration: none !important;
+      color: white !important;
+      cursor: pointer !important;
+    }
+
+    .link_style:hover {
+      text-decoration: underline !important;
+    }
+
+    .link_style_side {
+      display: inline-block !important;
+      text-decoration: none !important;
+      color: rgb(0, 0, 0) !important;
+      cursor: pointer !important;
+    }
+
+    .link_style_side:hover {
+      text-decoration: underline !important;
+    }
+
+    .list-not-visible{
+      display: none;
+    }
+
+
+  }
+
 /*Togliere barrette*/
 
   /* Schermo extra large (grandi desktop) */
 @media screen and (min-width: 1200px) {
   /* Regole CSS per lo schermo extra large */
-  
+
   .content {
     padding: 1rem;
     display: flex;
     justify-content: center;
   }
-  
+
   .link_style {
     display: inline-block !important;
     text-decoration: none !important;
     color: white !important;
     cursor: pointer !important;
   }
-  
+
   .link_style:hover {
     text-decoration: underline !important;
   }
-  
+
   .link_style_side {
     display: inline-block !important;
     text-decoration: none !important;
     color: rgb(0, 0, 0) !important;
     cursor: pointer !important;
   }
-  
+
   .link_style_side:hover {
     text-decoration: underline !important;
   }
 
+  .link-top:focus{
+    background-color: lightblue;
+  }
 
   .list-not-visible{
     display: none;
   }
-  
-  
+
+
 
 }
-  
+
 
 
 
