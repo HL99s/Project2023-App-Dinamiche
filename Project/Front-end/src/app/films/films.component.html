@@ -1,7 +1,7 @@
 <!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
 <ng-container *ngIf="films">
   <div class="container-search">
-    <h1 tabindex="0" class="align-left align-inline">Film List</h1>
+    <h1 class="align-left align-inline">Film List</h1>
     <div class="search-input-container">
       <mat-form-field>
         <mat-label>Search By Title</mat-label>
@@ -10,8 +10,8 @@
     </div>
 
     <mat-form-field>
-      <mat-label>Film Category</mat-label>
-      <mat-select (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption">
+      <mat-label for="category">Film Category</mat-label>
+      <mat-select id="category"  (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption">
         <mat-option value="All">All</mat-option>
         <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}</mat-option>
       </mat-select>
@@ -41,7 +41,8 @@
           <col class="mat-column-price mdl-data-table__cell">
           <col class="mat-column-rent mdl-data-table__cell--non-numeric">
         </colgroup>
-        <tr>
+       
+          <tr>
           <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
             class="head-title">Title</b></th>
           <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b class="head-title">Year</b>
@@ -56,7 +57,9 @@
           <th class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
             class="head-title">Rental</b></th>
         </tr>
+      
 
+   
         <tr *ngFor="let film of films; index as i">
           <ng-template [ngIf]="i!=10">
             <td class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center">
@@ -90,6 +93,7 @@
             <td class="cell-not-visible"></td>
           </ng-template>
         </tr>
+      
       </table>
     </div>
   </ng-template>
@@ -107,7 +111,7 @@
     <ng-template #disabled>
       <button
         (click)="prevPage()"
-        class="mdl-button mdl-js-button mdl-button--colored" disabled>
+        class="mdl-button mdl-js-button mdl-button--colored black-button">
         <i class="material-icons">arrow_back</i>
       </button>
     </ng-template>

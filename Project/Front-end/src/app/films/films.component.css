@@ -129,6 +129,11 @@ mat-option:focus{
     margin-right: 10px;
   }
 
+  .black-button{
+    color: rgba(0, 0, 0, 0.559);
+  }
+
+
 }
 
 /* Schermo small (tablet verticali) */
@@ -244,6 +249,11 @@ mat-option:focus{
     text-align: left;
     margin-right: auto;
   }
+  
+  .black-button{
+    color: rgba(0, 0, 0, 0.559);
+  }
+
 }
 
 /* Schermo medium (tablet orizzontali) */
@@ -318,6 +328,11 @@ mat-option:focus{
     text-align: left;
     margin-right: auto;
   }
+
+  .black-button{
+    color: rgba(0, 0, 0, 0.559);
+  }
+
   
 }
 
@@ -391,6 +406,11 @@ mat-option:focus{
     text-align: left;
     margin-right: auto;
   }
+
+  .black-button{
+    color: rgba(0, 0, 0, 0.559);
+  }
+
 }
 
 /* Schermo extra large (grandi desktop) */
@@ -462,6 +482,10 @@ mat-option:focus{
   .align-left{
     text-align: left;
     margin-right: auto;
+  }
+
+  .black-button{
+    color: rgba(0, 0, 0, 0.559);
   }
 
 }
