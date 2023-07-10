@@ -41,7 +41,7 @@
           <col class="mat-column-price mdl-data-table__cell">
           <col class="mat-column-rent mdl-data-table__cell--non-numeric">
         </colgroup>
-       
+
           <tr>
           <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
             class="head-title">Title</b></th>
@@ -57,15 +57,15 @@
           <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
             class="head-title">Rental</b></th>
         </tr>
-      
 
-   
+
+
         <tr *ngFor="let film of films; index as i">
           <ng-template [ngIf]="i!=10">
-            <td role = "cell" class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center">
+            <td role = "cell" class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center link_style" (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id) "
+            >
               <b class="no-underline"><span class="before-title"></span></b>
-              <a (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id)" class="link_style"
-                 tabindex="0">{{film.film_title}}</a>
+              <a tabindex="0" class="link_style">{{film.film_title}}</a>
             </td>
             <td role = "cell"class="cell year-cell mdl-data-table__cell--non-numeric align-center">
               <b><span class="before-year"></span></b>{{film.release_year}}
@@ -93,7 +93,7 @@
             <td class="cell-not-visible"></td>
           </ng-template>
         </tr>
-      
+
       </table>
     </div>
   </ng-template>
@@ -110,7 +110,7 @@
     </ng-template>
 
     <ng-template #disabled>
-      <button 
+      <button
         tabindex="-1"
         (click)="prevPage()"
         class="mdl-button mdl-js-button mdl-button--colored black-button">
