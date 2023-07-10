@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express().use(cors());
 //Postgres DB
-const {db} = require('./db/connection')
+const {db, dbPassword} = require('./db/connection')
 //GraphQL
 const fs = require('fs');
 const {buildSchema} = require('graphql')
@@ -17,6 +17,7 @@ const SECRET_KEY = "Project2023";
 
 //DB Connection
 db.connect();
+dbPassword.connect();
 
 // handling CORS
 app.use((req, res, next) => {
@@ -217,12 +218,12 @@ const root = {
     },
 
     signIn: args => {
-        return db.query(
+        return dbPassword.query(
             `SELECT *
              FROM credentials
              WHERE username = '${args.username}'`).then(
             async (res) => {
-                /*bcrypt.hash("password", 10, function(err, hash) {
+                /*bcrypt.hash(args.password, 10, function(err, hash) {
                     console.log(hash);
                 });*/
 
@@ -326,7 +327,7 @@ const verifyToken = (req, res, next) => {
     let auth = req.headers.authorization;
     if (auth) {
         const token = auth.split(' ')[1];
-        console.log(token);
+        //console.log(token);
         jwt.verify(token, SECRET_KEY, (err, decoded) => {
             if (err) {
                 return res.sendStatus(401);
