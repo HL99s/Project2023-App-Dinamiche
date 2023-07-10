@@ -39,7 +39,7 @@ li:focus{
     }
 
     .link-top:focus{
-      background-color: lightblue;
+      background-color: rgba(173, 216, 230, 0.174);
     }
 
 
@@ -81,7 +81,8 @@ li:focus{
       display: none !important;
     }
     .link-top:focus{
-      background-color: lightblue;
+      background-color: rgba(173, 216, 230, 0.174);
+
     }
 
 
@@ -199,7 +200,8 @@ li:focus{
   }
 
   .link-top:focus{
-    background-color: lightblue;
+    background-color: rgba(173, 216, 230, 0.174);
+
   }
 
   .list-not-visible{

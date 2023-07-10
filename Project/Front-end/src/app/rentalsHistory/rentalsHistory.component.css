@@ -116,7 +116,7 @@
     margin-bottom: 20px;
   }
 
-  
+
   .first-row{
     background-color:rgba(211, 211, 211, 0.575);
   }
@@ -157,6 +157,16 @@
     display: none;
   }
 
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .inline-title {
+    display: inline;
+    margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
+  }
+
 }
 
 /* Schermo large (desktop) */
@@ -187,6 +197,16 @@
 
   .head-before {
     display: none;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .inline-title {
+    display: inline;
+    margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
   }
 
 }
@@ -220,5 +240,26 @@
   .head-before {
     display: none;
   }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .align-inline {
+    display: inline !important;
+
+  }
+
+
+  .align-left {
+    text-align: left;
+    margin-right: auto;
+  }
+
+  .align-right{
+    margin-left: auto;
+  }
+
 
 }

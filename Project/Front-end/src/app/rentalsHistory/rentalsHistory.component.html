@@ -1,13 +1,14 @@
-<h1 >Rentals History</h1>
 
-<div class="form-container">
-  <mat-form-field>
+
+<div role = "search" class="form-container">
+  <h1 class="align-left align-inline">Rentals History</h1>
+  <mat-form-field class="align-right">
     <mat-label>Search title</mat-label>
     <input #input (keyup)="titleFilter($event)" matInput placeholder="" />
   </mat-form-field>
 
   <mat-form-field class="order-by">
-    <mat-label>Order By</mat-label>
+    <!--<mat-label>Order By</mat-label>-->
     <!--(selectionChange)="onOrdineChange()"-->
     <mat-select [(ngModel)]="ordineSelezionato" >
       <mat-option *ngFor="let col of dispayedColumn" [value]="col">
@@ -31,37 +32,37 @@
 </div>
 
 
-<div class="table-container mat-elevation-z8">
+<div role = "main" class="table-container mat-elevation-z8">
   <table [dataSource]="dataSource" class="full-width-table" mat-table matSort>
 
     <ng-container matColumnDef="rental_id">
-      <th *matHeaderCellDef class="tableHeaderCellDiv " mat-header-cell mat-sort-header>Rental id</th>
-      <td mat-cell *matCellDef="let row" class="first-row id-ref"> <a (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"  class="cell link-style"  tabindex="0">
+      <th *matHeaderCellDef class="tableHeaderCellDiv " mat-header-cell mat-sort-header aria-label="press to order by rental id">Rental id</th>
+      <td mat-cell *matCellDef="let row" class="first-row id-ref cell link-style" (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"> <a class="cell link-style"  tabindex="0">
         <b><span class="head-before">ID: </span></b>{{row.rental_id}}</a></td>
     </ng-container>
     <ng-container matColumnDef="film_title">
-      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Title</th>
+      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header aria-label="press to order by film title">Title</th>
       <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Film Title: </span></b>{{row.film_title}}</td>
     </ng-container>
     <ng-container matColumnDef="payment_date">
-      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Payment date</th>
+      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header aria-label="press to order by payment date">Payment date</th>
       <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Payment Date: </span></b>{{row.payment_date | date: 'dd/MM/yyyy'}}</td>
     </ng-container>
     <ng-container matColumnDef="amount">
-      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header>Amount</th>
+      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header aria-label="press to order by amount">Amount</th>
       <td *matCellDef="let row" class="cell" mat-cell ><b><span
         class="head-before">Amount: </span></b>{{row.amount | currency}}</td>
     </ng-container>
     <ng-container matColumnDef="shop">
-      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header >Shop</th>
+      <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header aria-label="press to order by shop">Shop</th>
       <td *matCellDef="let row" class="cell" mat-cell ><b><span class="head-before">Shop: </span></b>{{row.shop}}</td>
     </ng-container>
 
     <ng-container matColumnDef="duration">
       <th *matHeaderCellDef class="tableHeaderCellDiv" mat-header-cell mat-sort-header
-          sortActionDescription="Sort by duration">
+          sortActionDescription="Sort by duration" aria-label="press to order by duration">
         Duration
       </th>
       <td *matCellDef="let row" class="cell last-cell" mat-cell ><b><span
