@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class AppComponent implements OnInit {
 
   screenWidth: number;
-  //screenHeigth: number; 
+  //screenHeigth: number;
 
   title: string = "client";
 
@@ -35,41 +35,32 @@ export class AppComponent implements OnInit {
     window.onresize = () => this.screenSizeOnChanges();
   }
 
-  
-  screenSizeOnChanges(){
-    
-    
 
-    if(window.innerWidth < 768 && this.screenWidth > 768){
-      this.screenWidth = window.innerWidth;
-      console.log(this.screenWidth);
-      location.reload();
-    }
-    
-    if(window.innerWidth >= 768 && this.screenWidth <= 768){
+  screenSizeOnChanges() {
+
+    if (window.innerWidth < 768 && this.screenWidth > 768) {
       this.screenWidth = window.innerWidth;
       console.log(this.screenWidth);
       location.reload();
     }
 
-    
-    
-    
+    if (window.innerWidth >= 768 && this.screenWidth <= 768) {
+      this.screenWidth = window.innerWidth;
+      console.log(this.screenWidth);
+      location.reload();
+    }
+
+
   }
 
   tabindexValue(): number {
-    if(this.screenWidth<=768){
+    if (this.screenWidth <= 768) {
       return 0;
-    }
-    else{
+    } else {
       return -1;
     }
   }
 
-  
-
-  
-  
 
   logOut() {
     this.authService.logOut();

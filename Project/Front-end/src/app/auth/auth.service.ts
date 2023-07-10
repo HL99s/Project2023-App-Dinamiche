@@ -38,7 +38,8 @@ export class AuthService {
     localStorage.removeItem("USERNAME");
     this.userId = "";
     this._isAuthenticated.next(false);
-    this.router.navigate(['/login']);
+    window.location.href = "/login";
+    //this.router.navigate(['/login']);
   }
 
   autoLogin() {
