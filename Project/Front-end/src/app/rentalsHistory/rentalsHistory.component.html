@@ -1,6 +1,6 @@
 
 
-<div class="form-container">
+<div role = "search" class="form-container">
   <h1 class="align-left align-inline">Rentals History</h1>
   <mat-form-field class="align-right">
     <mat-label>Search title</mat-label>
@@ -8,7 +8,7 @@
   </mat-form-field>
 
   <mat-form-field class="order-by">
-    <mat-label>Order By</mat-label>
+    <!--<mat-label>Order By</mat-label>-->
     <!--(selectionChange)="onOrdineChange()"-->
     <mat-select [(ngModel)]="ordineSelezionato" >
       <mat-option *ngFor="let col of dispayedColumn" [value]="col">
@@ -32,7 +32,7 @@
 </div>
 
 
-<div class="table-container mat-elevation-z8">
+<div role = "main" class="table-container mat-elevation-z8">
   <table [dataSource]="dataSource" class="full-width-table" mat-table matSort>
 
     <ng-container matColumnDef="rental_id">
