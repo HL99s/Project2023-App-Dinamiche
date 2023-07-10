@@ -6,6 +6,7 @@ import {Film_infoComponent} from '../film_info/film_info.component';
 import {RentalComponent} from '../rental/rental.component';
 
 
+
 const FILMS_WITH_CATEGORY_QUERY = gql`
   query getAllFilmsWithCategory($offset: Int!) {
     getAllFilmsWithCategory(offset: $offset, limit: 11) {
@@ -137,6 +138,9 @@ interface getAllCategoriesResponse{
 })
 
 export class FilmsComponent implements OnInit {
+  
+
+  
   page: number = 0;
   films: any;
 

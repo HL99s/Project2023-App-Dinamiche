@@ -9,10 +9,16 @@
 h1 {
   font-size: 30px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+.sr-only{
+  color: blue;
+}
+
+
 .invalid {
-  color: red;
+  color: red !important;
 }
 
 .text-center {
