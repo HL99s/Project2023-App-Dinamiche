@@ -111,6 +111,7 @@
 
     <ng-template #disabled>
       <button 
+        tabindex="-1"
         (click)="prevPage()"
         class="mdl-button mdl-js-button mdl-button--colored black-button">
         <i class="material-icons">arrow_back</i>
@@ -130,7 +131,7 @@
     <ng-template #lastPage>
       <button
         (click)="nextPage()"
-        class="mdl-button mdl-js-button mdl-button--colored" disabled>
+        class="mdl-button mdl-js-button mdl-button--colored black-button" tabindex="-1">
         <i class="material-icons">arrow_forward</i>
       </button>
     </ng-template>
