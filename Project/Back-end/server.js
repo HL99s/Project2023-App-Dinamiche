@@ -313,10 +313,17 @@ const root = {
     getBuyDisp: args => {
         return db.query(
             `SELECT inventory_id
-             from inventory
-             WHERE film_id = ${args.filmId}
-               AND store_id = ${args.storeId}`).then(
-            (res) => (res.rows)
+            FROM inventory
+            WHERE film_id = ${args.filmId}
+            AND store_id = ${args.storeId} 
+            AND inventory_id NOT IN 
+                (SELECT inv.inventory_id
+                 from inventory AS inv
+                 JOIN rental AS re
+                 ON inv.inventory_id = re.inventory_id
+                 WHERE inv.film_id = ${args.filmId} AND inv.store_id = ${args.storeId}
+                 AND re.return_date is null)`).then(
+            (res) => (res.rows[0])
         ).catch(
             (error) => (console.log(error))
         );
