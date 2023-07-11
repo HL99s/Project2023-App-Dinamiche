@@ -183,6 +183,10 @@
     text-align: left !important;
   }
   
+  .cell-no-title-found{
+    font-size: 22px !important;
+  }
+  
 
 }
 
@@ -246,6 +250,10 @@
   
   .mat-label {
     text-align: left !important;
+  }
+  
+  .cell-no-title-found{
+    font-size: 22px !important;
   }
   
 
@@ -314,6 +322,10 @@
 
 .mat-label {
   text-align: left !important;
+}
+
+.cell-no-title-found{
+  font-size: 22px !important;
 }
 
 }
