@@ -1,4 +1,8 @@
-button:hover{
+/*button:hover{
+  background-color:#c9f5f1;
+}*/
+
+button.hover-button:hover{
   background-color:#c9f5f1;
 }
 
