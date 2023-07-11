@@ -116,7 +116,7 @@
     margin-bottom: 20px;
   }
 
-  
+
   .first-row{
     background-color:rgba(211, 211, 211, 0.575);
   }
@@ -248,10 +248,10 @@
 
   .align-inline {
     display: inline !important;
-    
+
   }
 
-  
+
   .align-left {
     text-align: left;
     margin-right: auto;
@@ -260,6 +260,6 @@
   .align-right{
     margin-left: auto;
   }
-  
+
 
 }
