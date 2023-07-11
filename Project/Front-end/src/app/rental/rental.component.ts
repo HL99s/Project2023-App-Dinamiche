@@ -116,7 +116,7 @@ export class RentalComponent implements OnInit {
   staff: any;
   cust_id = localStorage.getItem("ID");
   insertResult: boolean;
-  
+
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
   }
@@ -214,7 +214,7 @@ export class RentalComponent implements OnInit {
   openResult(){
     const rent_dialog = this.dialog.open(AfterBuyDialog, {data: {result: this.insertResult}});
     rent_dialog.afterClosed().subscribe(result => {
-
+        location.reload()
     });
   }
 }
