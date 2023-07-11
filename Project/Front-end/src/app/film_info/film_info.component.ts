@@ -41,7 +41,7 @@ const STORE_INFO_DISP = gql`
   }
 `;
 
-interface getFilmInfoByIdResponse{
+interface getFilmInfoByIdResponse {
   getFilmInfoById: {
     film_title: string,
     release_year: number,
@@ -55,14 +55,14 @@ interface getFilmInfoByIdResponse{
   }
 }
 
-interface getFilmActorsResponse{
+interface getFilmActorsResponse {
   getFilmActors: {
     first_name: string,
     last_name: string
   }
 }
 
-interface getStoreDispByFilmIdResponse{
+interface getStoreDispByFilmIdResponse {
   getStoreDispByFilmId: {
     address: string,
     city: string,
@@ -73,10 +73,10 @@ interface getStoreDispByFilmIdResponse{
 type Store = {
   address: string,
   city: string,
-  country:string
+  country: string
 }
 
-type Film  = {
+type Film = {
   film_title: string,
   release_year: number,
   language: string,

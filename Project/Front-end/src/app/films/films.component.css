@@ -1,21 +1,21 @@
-
 /* focus for accessibility*/
-button:focus{
+button:focus {
   outline: 2px solid black;
 }
 
-input:focus{
-  outline: 2px solid black;
-}
-mat-form-field:focus{
+input:focus {
   outline: 2px solid black;
 }
 
-mat-select:focus{
+mat-form-field:focus {
   outline: 2px solid black;
 }
 
-mat-option:focus{
+mat-select:focus {
+  outline: 2px solid black;
+}
+
+mat-option:focus {
   outline: 2px solid black;
 }
 
@@ -101,7 +101,7 @@ mat-option:focus{
   }
 
   .container-search {
-    display: flex; 
+    display: flex;
     flex-direction: column;
   }
 
@@ -124,12 +124,12 @@ mat-option:focus{
     background-color: whitesmoke;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
     margin-right: 10px;
   }
 
-  .black-button{
+  .black-button {
     color: rgba(0, 0, 0, 0.559);
   }
 
@@ -234,21 +234,21 @@ mat-option:focus{
     background-color: whitesmoke;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
     margin-right: 10px;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
   }
 
-  .align-left{
+  .align-left {
     text-align: left;
     margin-right: auto;
   }
-  
-  .black-button{
+
+  .black-button {
     color: rgba(0, 0, 0, 0.559);
   }
 
@@ -307,30 +307,30 @@ mat-option:focus{
     display: none;
   }
 
- 
+
   .align-center {
     text-align: center;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
     margin-right: 10px;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
   }
 
-  .align-left{
+  .align-left {
     text-align: left;
     margin-right: auto;
   }
 
-  .black-button{
+  .black-button {
     color: rgba(0, 0, 0, 0.559);
   }
 
-  
+
 }
 
 /* Schermo large (desktop) */
@@ -394,16 +394,16 @@ mat-option:focus{
     text-align: center;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
   }
 
-  .align-left{
+  .align-left {
     text-align: left;
     margin-right: auto;
   }
 
-  .black-button{
+  .black-button {
     color: rgba(0, 0, 0, 0.559);
   }
 
@@ -470,16 +470,16 @@ mat-option:focus{
     text-align: center;
   }
 
-  .align-inline{
+  .align-inline {
     display: inline;
   }
 
-  .align-left{
+  .align-left {
     text-align: left;
     margin-right: auto;
   }
 
-  .black-button{
+  .black-button {
     color: rgba(0, 0, 0, 0.559);
   }
 

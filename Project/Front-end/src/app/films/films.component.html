@@ -1,6 +1,6 @@
 <!--<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>-->
 <ng-container *ngIf="films">
-  <div role="search" class="container-search">
+  <div class="container-search" role="search">
     <h1 class="align-left align-inline">Film List</h1>
     <div class="search-input-container">
       <mat-form-field>
@@ -11,7 +11,7 @@
 
     <mat-form-field>
       <mat-label for="category">Film Category</mat-label>
-      <mat-select id="category"  (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption">
+      <mat-select (selectionChange)="onCategoryChange()" [(value)]="selectedCategoryOption" id="category">
         <mat-option value="All">All</mat-option>
         <mat-option *ngFor="let category of filmCategory" [value]="category.category">{{category.category}}</mat-option>
       </mat-select>
@@ -19,7 +19,7 @@
   </div>
 
 
-  <div role = "main" *ngIf="films.length!=0 then found else notFound"></div>
+  <div *ngIf="films.length!=0 then found else notFound" role="main"></div>
 
   <ng-template #notFound>
 
@@ -30,7 +30,7 @@
 
 
   <ng-template #found>
-    <div role="main" class="table-container">
+    <div class="table-container" role="main">
       <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
         <colgroup>
           <col class="mat-column-title mdl-data-table__cell--non-numeric">
@@ -42,50 +42,55 @@
           <col class="mat-column-rent mdl-data-table__cell--non-numeric">
         </colgroup>
 
-          <tr>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
             class="head-title">Title</b></th>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b class="head-title">Year</b>
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
+            class="head-title">Year</b>
           </th>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
             class="head-title">Rating</b></th>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
             class="head-title">Category</b></th>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
             class="head-title">Language</b></th>
-          <th role = "columnheader" class="mdl-data-table__cell align-center" scope="col"><b class="head-title">Price</b></th>
-          <th role = "columnheader" class="mdl-data-table__cell--non-numeric align-center" scope="col"><b
+          <th class="mdl-data-table__cell align-center" role="columnheader" scope="col"><b class="head-title">Price</b>
+          </th>
+          <th class="mdl-data-table__cell--non-numeric align-center" role="columnheader" scope="col"><b
             class="head-title">Rental</b></th>
         </tr>
 
 
-
         <tr *ngFor="let film of films; index as i">
           <ng-template [ngIf]="i!=10">
-            <td role = "cell" class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center link_style" (click)="openInfo(film.film_id)" (keydown.enter)="openInfo(film.film_id) "
+            <td (click)="openInfo(film.film_id)"
+                (keydown.enter)="openInfo(film.film_id) "
+                class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center link_style" role="cell"
             >
               <b class="no-underline"><span class="before-title"></span></b>
-              <a tabindex="0" class="link_style" attr.aria-label="press to open {{film.film_title}} details">{{film.film_title}}</a>
+              <a attr.aria-label="press to open {{film.film_title}} details" class="link_style"
+                 tabindex="0">{{film.film_title}}</a>
             </td>
-            <td role = "cell"class="cell year-cell mdl-data-table__cell--non-numeric align-center">
+            <td class="cell year-cell mdl-data-table__cell--non-numeric align-center" role="cell">
               <b><span class="before-year"></span></b>{{film.release_year}}
             </td>
-            <td role = "cell" class="cell rating-cell mdl-data-table__cell--non-numeric align-center">
+            <td class="cell rating-cell mdl-data-table__cell--non-numeric align-center" role="cell">
               <b><span class="before-rating"></span></b>{{film.rating}}
             </td>
-            <td role = "cell" class="cell category-cell mdl-data-table__cell--non-numeric align-center">
+            <td class="cell category-cell mdl-data-table__cell--non-numeric align-center" role="cell">
               <b><span class="before-category"></span></b>{{film.category}}
             </td>
-            <td role = "cell" class="cell language-cell mdl-data-table__cell--non-numeric align-center">
+            <td class="cell language-cell mdl-data-table__cell--non-numeric align-center" role="cell">
               <b><span class="before-language"></span></b>{{film.language}}
             </td>
-            <td role = "cell" class="cell price-cell mdl-data-table__cell align-center">
+            <td class="cell price-cell mdl-data-table__cell align-center" role="cell">
               <b><span class="before-price"></span></b>{{film.cost | currency}}
             </td>
 
-            <td role = "cell" class="cell button-cell align-center">
-              <button (click)="openRental(film.film_id)" class="button-rent align-center" color="primary"
-                      mat-raised-button tabindex="0" attr.aria-label="press to open the rental page of {{film.film_title}}">
+            <td class="cell button-cell align-center" role="cell">
+              <button (click)="openRental(film.film_id)" attr.aria-label="press to open the rental page of {{film.film_title}}" class="button-rent align-center"
+                      color="primary" mat-raised-button
+                      tabindex="0">
 
                 Rental
               </button>
@@ -99,21 +104,21 @@
   </ng-template>
 
 
-  <div role = "complementary" class="paging">
+  <div class="paging" role="complementary">
     <div *ngIf="page==0 then disabled else enabled"></div>
     <ng-template #enabled>
       <button
         (click)="prevPage()"
-        class="mdl-button mdl-js-button mdl-button--colored" aria-label="press to go on the previous page">
+        aria-label="press to go on the previous page" class="mdl-button mdl-js-button mdl-button--colored">
         <i class="material-icons">arrow_back</i>
       </button>
     </ng-template>
 
     <ng-template #disabled>
       <button
-        tabindex="-1"
         (click)="prevPage()"
-        class="mdl-button mdl-js-button mdl-button--colored black-button">
+        class="mdl-button mdl-js-button mdl-button--colored black-button"
+        tabindex="-1">
         <i class="material-icons">arrow_back</i>
       </button>
     </ng-template>
@@ -123,7 +128,7 @@
     <ng-template #notLastPage>
       <button
         (click)="nextPage()"
-        class="mdl-button mdl-js-button mdl-button--colored" aria-label="press to go on the next page">
+        aria-label="press to go on the next page" class="mdl-button mdl-js-button mdl-button--colored">
         <i class="material-icons">arrow_forward</i>
       </button>
     </ng-template>

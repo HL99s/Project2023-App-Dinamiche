@@ -7,9 +7,6 @@ import {RentalsHistoryComponent} from './rentalsHistory/rentalsHistory.component
 import {AuthGuard} from './auth/auth.guard';
 
 
-
-
-
 const routes: Routes = [
   {
     path: '',
@@ -43,6 +40,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-  
-    
+
 }
