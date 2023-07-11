@@ -19,6 +19,14 @@ mat-option:focus {
   outline: 2px solid black;
 }
 
+mat-label{
+  color: black;
+}
+
+mat-option{
+  background-color: #d6f6f3;
+}
+
 /* Schermo extra small (telefoni) */
 @media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
