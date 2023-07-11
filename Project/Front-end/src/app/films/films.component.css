@@ -13,27 +13,27 @@ mat-form-field:focus {
 
 mat-select:focus {
   outline: 2px solid black;
-  
+
 }
 
 mat-option:focus {
   /*outline: 2px solid black;*/
-  border: solid 1px !important; 
+  border: solid 1px !important;
 }
 
-mat-label{
+mat-label {
   color: black;
-  
+
 }
 
-mat-option{
+mat-option {
   background-color: #d6f6f3;
   border: solid 1px;
 
 }
 
 
-mat-option:hover{
+mat-option:hover {
   text-decoration: solid;
   border: solid 3px;
 }

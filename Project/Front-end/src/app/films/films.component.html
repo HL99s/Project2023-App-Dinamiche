@@ -24,13 +24,13 @@
   <ng-template #notFound>
 
     <div role="main">
-    <h2 style="text-align: center;">No film named "{{searchByTitle}}", in category "{{selectedCategoryOption}}" try
-      another film! </h2>
+      <h2 style="text-align: center;">No film named "{{searchByTitle}}", in category "{{selectedCategoryOption}}" try
+        another film! </h2>
     </div>
   </ng-template>
 
 
-  <ng-template #found >
+  <ng-template #found>
     <div class="table-container" role="main">
       <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp fixed-size-table">
         <colgroup>
@@ -66,7 +66,8 @@
           <ng-template [ngIf]="i!=10">
             <td (click)="openInfo(film.film_id)"
                 (keydown.enter)="openInfo(film.film_id) "
-                class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center link_style" role="cell"
+                class="cell title-cell  film-title mdl-data-table__cell--non-numeric align-center link_style"
+                role="cell"
             >
               <b class="no-underline"><span class="before-title"></span></b>
               <a attr.aria-label="press to open {{film.film_title}} details" class="link_style"
@@ -89,7 +90,9 @@
             </td>
 
             <td class="cell button-cell align-center" role="cell">
-              <button (click)="openRental(film.film_id)" attr.aria-label="press to open the rental page of {{film.film_title}}" class="button-rent align-center"
+              <button (click)="openRental(film.film_id)"
+                      attr.aria-label="press to open the rental page of {{film.film_title}}"
+                      class="button-rent align-center"
                       color="primary" mat-raised-button
                       tabindex="0">
 
