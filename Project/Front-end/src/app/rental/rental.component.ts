@@ -203,11 +203,7 @@ export class RentalComponent implements OnInit {
       }).subscribe({
       next: (res) => {
         console.log(res.data?.rentalInsert)
-        if (res.data?.rentalInsert != null) {
-          this.insertResult = true;
-        } else {
-          this.insertResult = false;
-        }
+        this.insertResult = res.data?.rentalInsert != null;
 
         this.openResult();
       },
@@ -220,7 +216,7 @@ export class RentalComponent implements OnInit {
 
   openResult() {
     const rent_dialog = this.dialog.open(AfterBuyDialog, {data: {result: this.insertResult}});
-    rent_dialog.afterClosed().subscribe(result => {
+    rent_dialog.afterClosed().subscribe(() => {
       location.reload()
     });
   }

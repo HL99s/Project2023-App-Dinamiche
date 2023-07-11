@@ -365,7 +365,7 @@ const verifyToken = (req, res, next) => {
     if (auth) {
         const token = auth.split(' ')[1];
         //console.log(token);
-        jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        jwt.verify(token, SECRET_KEY, (err) => {
             if (err) {
                 return res.sendStatus(401);
             }

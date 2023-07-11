@@ -70,12 +70,6 @@ interface getStoreDispByFilmIdResponse {
   }
 }
 
-type Store = {
-  address: string,
-  city: string,
-  country: string
-}
-
 type Film = {
   film_title: string,
   release_year: number,
@@ -86,11 +80,6 @@ type Film = {
   rating: string,
   cost: number,
   rental_duration: string
-}
-
-type Actor = {
-  first_name: string,
-  last_name: string
 }
 
 @Component({
