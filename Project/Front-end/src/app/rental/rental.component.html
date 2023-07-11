@@ -22,7 +22,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select a date</mat-label>
-      <mat-select #select_date required="true" >
+      <mat-select #select_date [(value)]="selected_date" required="true" >
         <mat-option *ngFor="let date of rental_dates" [value]="date">
           {{date}}
         </mat-option>
