@@ -37,7 +37,8 @@
       <th *matHeaderCellDef aria-label="press to order by rental id" class="tableHeaderCellDiv " mat-header-cell
           mat-sort-header>Rental id
       </th>
-      <td (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)" *matCellDef="let row"
+      <td (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"
+          *matCellDef="let row"
           class="first-row id-ref cell link-style" mat-cell>
         <a attr.aria-label="press to open rental number {{row.rental_id}} details" class="cell link-style" tabindex="0">
           <b><span class="head-before">ID: </span></b>{{row.rental_id}}</a></td>

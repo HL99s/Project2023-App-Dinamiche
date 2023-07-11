@@ -1,7 +1,39 @@
-button:hover{
+/*button:hover{
   background-color:#c9f5f1;
+}*/
+
+button.hover-button:hover {
+  background-color: #c9f5f1;
+  outline: 2px solid black;
 }
 
 button:focus {
   outline: 2px solid black;
+}
+
+.bottone-disabilitato {
+  color: rgba(0, 0, 0, 0.559);
+  pointer-events: none;
+}
+
+mat-option:focus {
+  /*outline: 2px solid black;*/
+  border: solid 1px !important;
+}
+
+mat-label {
+  color: black;
+
+}
+
+mat-option {
+  background-color: #d6f6f3;
+  border: solid 1px;
+
+}
+
+
+mat-option:hover {
+  text-decoration: solid;
+  border: solid 3px;
 }
