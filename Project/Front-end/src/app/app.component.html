@@ -56,7 +56,8 @@
     </div>
   </div>
 
-  <div [ngClass]="{'mdl-layout__drawer': screenWidth < 768, '': screenWidth >= 768}" aria-label="press to open side menu"
+  <div [ngClass]="{'mdl-layout__drawer': screenWidth < 768, '': screenWidth >= 768}"
+       aria-label="press to open side menu"
        class="list-not-visible mdl-layout__drawer"
        role="navigation">
     <ng-template [ngIf]="logged">

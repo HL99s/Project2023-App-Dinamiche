@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {Rental_infoComponent} from '../rental_info/rental_info.component';
 import gql from 'graphql-tag';
 
-
 export interface RentalData {
   rental_id: number,
   film_title: String,
@@ -58,7 +57,6 @@ export class RentalsHistoryComponent implements OnInit {
   //
   ordineSelezionato: string = 'film_title';
   isOrderAsc: boolean = true;
-
 
   @ViewChild(MatSort) sort: MatSort
   @ViewChild(MatPaginator) pagination: MatPaginator
@@ -111,23 +109,6 @@ export class RentalsHistoryComponent implements OnInit {
     this.dialog.open(Rental_infoComponent, {data: {rental_id: rentalId, store_id: shop}})
   }
 
-  //Da togliere
-  onOrdineChange() {
-    if (this.ordineSelezionato) {
-      this.dataSource.sort = this.sort;
-      this.dataSource.sort.active = this.ordineSelezionato;
-
-      if (this.isOrderAsc) {
-        this.dataSource.sort.direction = 'asc';
-      } else {
-        this.dataSource.sort.direction = 'desc';
-      }
-
-      this.dataSource.sort.sortChange.emit();
-    }
-  }
-
-
   onOrdinaClick() {
 
     if (this.ordineSelezionato) {
@@ -142,13 +123,9 @@ export class RentalsHistoryComponent implements OnInit {
       }
 
       this.dataSource.sort.sortChange.emit();
-
-
       //console.log(this.ordineSelezionato);
       //console.log(this.isOrderAsc);
     }
-
   }
-
 
 }

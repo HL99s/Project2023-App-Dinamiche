@@ -30,18 +30,20 @@
       </mat-form-field>
 
       <mat-dialog-actions align="end">
-        <button class = "hover-button" aria-label="press to close the rental page" mat-button mat-dialog-close>Cancel</button>
+        <button aria-label="press to close the rental page" class="hover-button" mat-button mat-dialog-close>Cancel
+        </button>
         <div *ngIf="select_store.value!=null && select_date.value!=null; then enabled else disabled"></div>
       </mat-dialog-actions>
 
       <ng-template #enabled>
-        <button (click)="openPopup()" [mat-dialog-close]="true" aria-label="press to rental the film" cdkFocusInitial color="primary"
+        <button (click)="openPopup()" [mat-dialog-close]="true" aria-label="press to rental the film" cdkFocusInitial
+                color="primary"
                 mat-raised-button>Buy
         </button>
       </ng-template>
 
       <ng-template #disabled>
-        <button class = "bottone-disabilitato" [mat-dialog-close]="true" tabindex= "-1" mat-button>Buy</button>
+        <button [mat-dialog-close]="true" class="bottone-disabilitato" mat-button tabindex="-1">Buy</button>
       </ng-template>
     </ng-template>
 
