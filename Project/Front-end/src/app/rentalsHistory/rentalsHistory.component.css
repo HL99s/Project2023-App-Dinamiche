@@ -167,6 +167,29 @@
     margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
   }
 
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .align-left {
+    text-align: left;
+  }
+  
+  
+  .position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  
+  
+  .mat-label {
+    text-align: left !important;
+  }
+  
+
 }
 
 /* Schermo large (desktop) */
@@ -204,10 +227,34 @@
     align-items: center;
   }
 
-  .inline-title {
-    display: inline;
-    margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
+  .align-left {
+    text-align: left;
+    margin-right: 5px !important;
   }
+
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .align-left {
+    text-align: left;
+  }
+  
+  
+  .position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  
+  
+  .mat-label {
+    text-align: left !important;
+  }
+  
+
 
 }
 
@@ -242,7 +289,7 @@
   }
 
   .header-container {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
   }
 
@@ -252,14 +299,27 @@
   }
 
 
-  .align-left {
-    text-align: left;
-    margin-right: auto;
-  }
+  
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .align-right{
-    margin-left: auto;
-  }
+.align-left {
+  text-align: left;
+}
 
+
+.position-absolute-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+.mat-label {
+  text-align: left !important;
+}
 
 }
