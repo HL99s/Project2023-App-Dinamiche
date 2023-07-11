@@ -13,18 +13,32 @@ mat-form-field:focus {
 
 mat-select:focus {
   outline: 2px solid black;
+  
 }
 
 mat-option:focus {
-  outline: 2px solid black;
+  /*outline: 2px solid black;*/
+  border: solid 1px !important; 
 }
 
 mat-label{
   color: black;
+  
 }
 
 mat-option{
   background-color: #d6f6f3;
+  border: solid 1px;
+  /*outline: 2px solid black;*/
+}
+
+
+
+
+mat-option:hover{
+  text-decoration: solid;
+  /*outline: 2px solid black;*/
+  border: solid 3px;
 }
 
 /* Schermo extra small (telefoni) */
