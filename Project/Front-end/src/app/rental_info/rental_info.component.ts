@@ -31,7 +31,7 @@ const STORE_BY_ID_QUERY = gql`
   }
 `;
 
-interface getRentalInfoByRenIdResponse{
+interface getRentalInfoByRenIdResponse {
   getRentalInfoByRenId: {
     rental_id: number,
     film_title: string,
@@ -46,7 +46,7 @@ interface getRentalInfoByRenIdResponse{
   }
 }
 
-interface getStoreByIdResponse{
+interface getStoreByIdResponse {
   getStoreById: {
     address: string,
     city: string,
@@ -55,9 +55,9 @@ interface getStoreByIdResponse{
 }
 
 type Store = {
-    address: string,
-    city: string,
-    country:string
+  address: string,
+  city: string,
+  country: string
 }
 
 type RentalInfo = {

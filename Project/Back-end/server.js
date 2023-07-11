@@ -313,10 +313,47 @@ const root = {
     getBuyDisp: args => {
         return db.query(
             `SELECT inventory_id
-             from inventory
+             FROM inventory
              WHERE film_id = ${args.filmId}
-               AND store_id = ${args.storeId}`).then(
-            (res) => (res.rows)
+               AND store_id = ${args.storeId}
+               AND inventory_id NOT IN
+                   (SELECT inv.inventory_id
+                    from inventory AS inv
+                             JOIN rental AS re
+                                  ON inv.inventory_id = re.inventory_id
+                    WHERE inv.film_id = ${args.filmId}
+                      AND inv.store_id = ${args.storeId}
+                      AND re.return_date is null)`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    getStaffIdByStoreId: args => {
+        return db.query(
+            `SELECT staff_id
+             FROM staff
+             WHERE store_id = ${args.storeId}`).then(
+            (res) => (res.rows[0])
+        ).catch(
+            (error) => (console.log(error))
+        );
+    },
+    rentalInsert: args => {
+        return db.query(
+            `INSERT INTO rental
+             (rental_date, inventory_id, customer_id, return_date, staff_id, last_update)
+             VALUES ('${args.rental_date}', ${args.inventory_id}, ${args.customer_id}, null, ${args.staff_id},
+                     '${args.rental_date}')
+             RETURNING rental_id`).then(
+            (res) => {
+                console.log("RENTAL ID: ", res.rows[0])
+                if (!res.rows[0]) {
+                    throw new Error('insert not done')
+                }
+
+                return res.rows[0];
+            }
         ).catch(
             (error) => (console.log(error))
         );
@@ -328,13 +365,13 @@ const verifyToken = (req, res, next) => {
     if (auth) {
         const token = auth.split(' ')[1];
         //console.log(token);
-        jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        jwt.verify(token, SECRET_KEY, (err) => {
             if (err) {
                 return res.sendStatus(401);
             }
             next();
         });
-    }else{
+    } else {
         next();
     }
 }

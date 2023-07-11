@@ -1,9 +1,3 @@
-/*table{
-  width: 100%;
-}
-*/
-
-
 /* Schermo extra small (telefoni) */
 @media screen and (max-width: 480px) {
   /* Regole CSS per lo schermo extra small */
@@ -42,7 +36,7 @@
     flex-direction: column;
   }
 
-  .order-button{
+  .order-button {
     margin-bottom: 30px;
   }
 
@@ -54,11 +48,11 @@
     margin-bottom: 20px;
   }
 
-  .first-row{
-    background-color:rgba(211, 211, 211, 0.575);
+  .first-row {
+    background-color: rgba(211, 211, 211, 0.575);
   }
 
-  .id-ref{
+  .id-ref {
     font-size: 25px;
   }
 
@@ -105,9 +99,10 @@
     flex-direction: column;
   }
 
-  .order-button{
+  .order-button {
     margin-bottom: 30px;
   }
+
   .slider {
     display: flex;
     justify-content: center;
@@ -117,11 +112,11 @@
   }
 
 
-  .first-row{
-    background-color:rgba(211, 211, 211, 0.575);
+  .first-row {
+    background-color: rgba(211, 211, 211, 0.575);
   }
 
-  .id-ref{
+  .id-ref {
     font-size: 25px;
   }
 
@@ -164,8 +159,35 @@
 
   .inline-title {
     display: inline;
-    margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
+    margin-right: 10px;
   }
+
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+
+  .position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+
+  .mat-label {
+    text-align: left !important;
+  }
+
+  .cell-no-title-found {
+    font-size: 22px !important;
+  }
+
 
 }
 
@@ -204,10 +226,37 @@
     align-items: center;
   }
 
-  .inline-title {
-    display: inline;
-    margin-right: 10px; /* Puoi regolare il margine a tuo piacimento */
+  .align-left {
+    text-align: left;
+    margin-right: 5px !important;
   }
+
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+
+  .position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+
+  .mat-label {
+    text-align: left !important;
+  }
+
+  .cell-no-title-found {
+    font-size: 22px !important;
+  }
+
 
 }
 
@@ -242,7 +291,7 @@
   }
 
   .header-container {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
   }
 
@@ -252,14 +301,30 @@
   }
 
 
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .align-left {
     text-align: left;
-    margin-right: auto;
   }
 
-  .align-right{
-    margin-left: auto;
+
+  .position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
+
+  .mat-label {
+    text-align: left !important;
+  }
+
+  .cell-no-title-found {
+    font-size: 22px !important;
+  }
 
 }

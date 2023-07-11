@@ -6,7 +6,6 @@ import {Film_infoComponent} from '../film_info/film_info.component';
 import {RentalComponent} from '../rental/rental.component';
 
 
-
 const FILMS_WITH_CATEGORY_QUERY = gql`
   query getAllFilmsWithCategory($offset: Int!) {
     getAllFilmsWithCategory(offset: $offset, limit: 11) {
@@ -72,7 +71,7 @@ const CATEGORY_QUERY = gql`
   }
 `;
 
-interface getAllFilmsWithCategoryResponse{
+interface getAllFilmsWithCategoryResponse {
   getAllFilmsWithCategory: {
     film_id: number,
     film_title: string,
@@ -84,7 +83,7 @@ interface getAllFilmsWithCategoryResponse{
   }
 }
 
-interface getFilmsByTitleResponse{
+interface getFilmsByTitleResponse {
   getFilmsByTitle: {
     film_id: number,
     film_title: string,
@@ -96,7 +95,7 @@ interface getFilmsByTitleResponse{
   }
 }
 
-interface getFilmsByCategoryResponse{
+interface getFilmsByCategoryResponse {
   getFilmsByCategory: {
     film_id: number,
     film_title: string,
@@ -108,7 +107,7 @@ interface getFilmsByCategoryResponse{
   }
 }
 
-interface getFilmsByCategoryAndTitleResponse{
+interface getFilmsByCategoryAndTitleResponse {
   getFilmsByCategoryAndTitle: {
     film_id: number,
     film_title: string,
@@ -120,15 +119,12 @@ interface getFilmsByCategoryAndTitleResponse{
   }
 }
 
-interface getAllCategoriesResponse{
+interface getAllCategoriesResponse {
   getAllCategories: {
     category_id: number,
     category: string
   }
 }
-
-
-
 
 
 @Component({
@@ -138,9 +134,8 @@ interface getAllCategoriesResponse{
 })
 
 export class FilmsComponent implements OnInit {
-  
 
-  
+
   page: number = 0;
   films: any;
 
