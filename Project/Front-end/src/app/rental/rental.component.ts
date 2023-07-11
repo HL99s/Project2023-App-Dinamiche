@@ -142,7 +142,8 @@ export class RentalComponent implements OnInit {
   }
 
   openPopup() {
-    this.getInvDisp()
+    //this.getInvDisp()
+    this.dialog.open(AfterBuyDialog, {data: {result: true}});
   }
 
 

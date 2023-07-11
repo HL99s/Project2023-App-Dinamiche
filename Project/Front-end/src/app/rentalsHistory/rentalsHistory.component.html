@@ -37,7 +37,8 @@
 
     <ng-container matColumnDef="rental_id">
       <th *matHeaderCellDef class="tableHeaderCellDiv " mat-header-cell mat-sort-header aria-label="press to order by rental id">Rental id</th>
-      <td mat-cell *matCellDef="let row" class="first-row id-ref cell link-style" (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"> <a class="cell link-style"  tabindex="0">
+      <td mat-cell *matCellDef="let row" class="first-row id-ref cell link-style" (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)">
+        <a class="cell link-style"  tabindex="0" attr.aria-label="press to open rental number {{row.rental_id}} details">
         <b><span class="head-before">ID: </span></b>{{row.rental_id}}</a></td>
     </ng-container>
     <ng-container matColumnDef="film_title">
