@@ -33,7 +33,7 @@ mat-option:focus{
   .table-container {
     display: flex;
     justify-content: center;
-    align-items: center; /* Opzionale: per allineare verticalmente al centro */
+    align-items: center; /* Per allineare verticalmente al centro */
   }
 
   .fixed-size-table {
@@ -101,7 +101,7 @@ mat-option:focus{
   }
 
   .container-search {
-    display: flex; /*center?*/
+    display: flex; 
     flex-direction: column;
   }
 
@@ -149,7 +149,7 @@ mat-option:focus{
   .table-container {
     display: flex;
     justify-content: center;
-    align-items: center; /* Opzionale: per allineare verticalmente al centro */
+    align-items: center; /* Per allineare verticalmente al centro */
   }
 
   .fixed-size-table {
@@ -180,7 +180,6 @@ mat-option:focus{
 
   .before-title::before {
     content: "Title: ";
-    /*text-decoration: none !important;*/
   }
 
 
@@ -242,7 +241,6 @@ mat-option:focus{
 
   .align-inline{
     display: inline;
-    /*margin-right: 10px;*/
   }
 
   .align-left{
@@ -321,7 +319,6 @@ mat-option:focus{
 
   .align-inline{
     display: inline;
-    /*margin-right: 10px;*/
   }
 
   .align-left{
@@ -399,7 +396,6 @@ mat-option:focus{
 
   .align-inline{
     display: inline;
-    /*margin-right: 10px;*/
   }
 
   .align-left{
@@ -476,7 +472,6 @@ mat-option:focus{
 
   .align-inline{
     display: inline;
-    /*margin-right: 10px;*/
   }
 
   .align-left{

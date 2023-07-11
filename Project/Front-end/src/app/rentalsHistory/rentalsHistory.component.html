@@ -1,10 +1,10 @@
 
 
-<div role = "search" class="form-container">
+<div role = "search" class="form-container position-relative">
   <h1 class="align-left align-inline">Rentals History</h1>
   <mat-form-field class="align-right">
     <mat-label>Search title</mat-label>
-    <input #input (keyup)="titleFilter($event)" matInput placeholder="" />
+    <input #input (keyup)="titleFilter($event)" matInput placeholder="" class="position-absolute-bottom"/>
   </mat-form-field>
 
   <mat-form-field class="order-by">
@@ -37,7 +37,8 @@
 
     <ng-container matColumnDef="rental_id">
       <th *matHeaderCellDef class="tableHeaderCellDiv " mat-header-cell mat-sort-header aria-label="press to order by rental id">Rental id</th>
-      <td mat-cell *matCellDef="let row" class="first-row id-ref cell link-style" (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)"> <a class="cell link-style"  tabindex="0">
+      <td mat-cell *matCellDef="let row" class="first-row id-ref cell link-style" (click)="openInfo(row.rental_id, row.store_id)" (keydown.enter)="openInfo(row.rental_id, row.store_id)">
+        <a class="cell link-style"  tabindex="0" attr.aria-label="press to open rental number {{row.rental_id}} details">
         <b><span class="head-before">ID: </span></b>{{row.rental_id}}</a></td>
     </ng-container>
     <ng-container matColumnDef="film_title">
@@ -73,7 +74,7 @@
 
 
     <tr *matNoDataRow class="tableHeaderCellDiv">
-      <td class="cell mat-cell" colspan="4" >No title named {{input.value}}</td>
+      <td class="cell-no-title-found cell mat-cell" colspan="4" >No title named {{input.value}}</td>
     </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[10]" aria-label="select page of rentals"></mat-paginator>

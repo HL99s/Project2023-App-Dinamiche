@@ -4,7 +4,7 @@ const db = new Client({
     host: "localhost",
     user: "postgres",
     port: 5432,
-    password: "password",   //TODO: change to your password
+    password: "rootuser",   //TODO: change to your password
     database: "dvdrental"
 })
 
@@ -12,7 +12,7 @@ const dbPassword = new Client({
     host: "localhost",
     user: "postgres",
     port: 5432,
-    password: "password",   //TODO: change to your password
+    password: "rootuser",   //TODO: change to your password
     database: "appcredentials"
 })
 
