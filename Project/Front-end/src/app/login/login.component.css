@@ -4,9 +4,6 @@ h1 {
   text-align: center;
 }
 
-button:hover{
-  background-color:#c9f5f1;
-}
 
 button:focus {
   outline: 2px solid black;
