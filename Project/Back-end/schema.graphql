@@ -14,7 +14,8 @@ type Query {
     getRentalInfoByCustId(customerId: Int): [RentalInfo],
     getRentalInfoByRenId(rentalId: Int): RentalInfo,
     getStoreById(storeId: Int): Store,
-    getBuyDisp(filmId: Int, storeId: Int): Inventory
+    getBuyDisp(filmId: Int, storeId: Int): Inventory,
+    getStaffIdByStoreId(storeId: Int): Staff
 
 }
 
@@ -50,7 +51,8 @@ type Store{
 }
 
 type Mutation{
-    signIn(username: String, password: String): Credentials
+    signIn(username: String, password: String): Credentials,
+    rentalInsert(rental_date: Date, inventory_id: Int, customer_id: Int, staff_id: Int, last_update: Date): RentalInserted
 }
 
 type Credentials{
@@ -78,4 +80,12 @@ type RentalInfo{
 
 type Inventory{
     inventory_id: Int
+}
+
+type Staff{
+    staff_id: Int
+}
+
+type RentalInserted{
+    rental_id: Int
 }

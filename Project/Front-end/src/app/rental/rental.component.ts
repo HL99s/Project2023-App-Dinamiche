@@ -43,6 +43,22 @@ const STORE_INFO_DISP = gql`
   }
 `;
 
+const GET_STAFF_ID = gql`
+  query  getStaffIdByStoreId($storeId: Int){
+    getStaffIdByStoreId(storeId: $storeId){
+      staff_id
+    }
+  }
+`;
+
+const RENTAL_INSERT_MUTATION = gql`
+  mutation rentalInsert($rental_date: Date, $inventory_id: Int, $customer_id: Int, $staff_id: Int, $last_update: Date) {
+    rentalInsert(rental_date: $rental_date, inventory_id: $inventory_id, customer_id: $customer_id, staff_id: $staff_id, last_update: $last_update) {
+      rental_id
+    }
+  }
+`;
+
 interface getBuyDispResponse{
   getBuyDisp: {
     inventory_id: number
@@ -72,6 +88,18 @@ interface getStoreDispByFilmIdResponse{
   }
 }
 
+interface getStaffIdByStoreIdResponse{
+  getStaffIdByStoreId: {
+    staff_id: number,
+  }
+}
+
+interface rentalInsertResponse{
+  rentalInsert: {
+    rental_id: number,
+  }
+}
+
 @Component({
   selector: 'app-rental',
   templateUrl: './rental.component.html',
@@ -79,12 +107,16 @@ interface getStoreDispByFilmIdResponse{
 })
 export class RentalComponent implements OnInit {
   film: any;
-  res: boolean;
   stores: any;
   rental_dates: any;
   selected_store: any;
   disp_store: any;
   available: boolean;
+  selected_date: Date;
+  staff: any;
+  cust_id = localStorage.getItem("ID");
+  insertResult: boolean;
+  
 
   constructor(private apollo: Apollo, @Inject(MAT_DIALOG_DATA) public arg: any, public dialog: MatDialog) {
   }
@@ -110,18 +142,10 @@ export class RentalComponent implements OnInit {
   }
 
   openPopup() {
-    this.apollo.query<getBuyDispResponse>({
-      query: GET_BUY_DISP,
-      variables: {filmId: this.arg.film_id, storeId: Number(this.selected_store)}
-    }).subscribe(({data, loading}) => {
-
-      this.disp_store = data.getBuyDisp
-      console.log(this.disp_store)
-      this.res = this.disp_store.length != 0;
-      this.dialog.open(AfterBuyDialog, {data: {result: this.res}});
-    })
-
+    this.getInvDisp()
   }
+
+
 
   get_rental_dates() {
     let re_d = [];
@@ -133,6 +157,65 @@ export class RentalComponent implements OnInit {
     }
     this.rental_dates = re_d
 
+  }
+
+
+  getInvDisp(){
+    this.apollo.query<getBuyDispResponse>({
+      query: GET_BUY_DISP,
+      variables: {filmId: this.arg.film_id, storeId: Number(this.selected_store)}
+    }).subscribe(({data, loading}) => {
+
+      this.disp_store = data.getBuyDisp.inventory_id
+      console.log("inv: ",this.disp_store)
+      console.log("Store: ", this.selected_store)
+      console.log("Date: ",this.selected_date)
+
+      this.getStaffInfo()
+    })
+  }
+
+  getStaffInfo(){
+    this.apollo.query<getStaffIdByStoreIdResponse>({
+      query: GET_STAFF_ID,
+      variables: {storeId: Number(this.selected_store)}
+    }).subscribe(({data, loading}) => {
+
+      this.staff = data.getStaffIdByStoreId.staff_id;
+      console.log("Staff: ",this.staff);
+      this.getInsertInfo()
+
+    })
+
+  }
+
+  getInsertInfo(){
+    this.apollo
+      .mutate<rentalInsertResponse>({
+        mutation: RENTAL_INSERT_MUTATION,
+        variables: {rental_date: this.selected_date, inventory_id: this.disp_store, customer_id: Number(this.cust_id), staff_id: this.staff, last_update: this.selected_date}
+      }).subscribe({
+        next: (res) => {
+        console.log(res.data?.rentalInsert)
+        if(res.data?.rentalInsert != null){
+          this.insertResult = true;
+        }
+        else{
+          this.insertResult = false;
+        }
+
+        this.openResult();
+      },
+      error: (e) => {
+        console.log("there was an error sending the query", e);
+      }});
+
+  }
+  openResult(){
+    const rent_dialog = this.dialog.open(AfterBuyDialog, {data: {result: this.insertResult}});
+    rent_dialog.afterClosed().subscribe(result => {
+
+    });
   }
 }
 
