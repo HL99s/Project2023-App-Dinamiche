@@ -2,17 +2,16 @@
   <h2 mat-dialog-title>Info page of {{film.film_title}}</h2>
   <mat-dialog-content class="mat-typography">
     <ul>
-      <li><b>Rating:</b> {{film.rating}}</li>
-      <li><b>Release:</b> {{film.release_year}}</li>
-      <li><b>Language:</b> {{film.language}}</li>
-      <li><b>Duration:</b> {{film.length}} min</li>
-      <li><b>Category:</b> {{film.category}}</li>
-      <li><b>Description:</b> {{film.description}}</li>
+      <li><b>Rating:</b> {{film.rating}},</li>
+      <li><b>Release:</b> {{film.release_year}},</li>
+      <li><b>Language:</b> {{film.language}},</li>
+      <li><b>Duration:</b> {{film.length}} min,</li>
+      <li><b>Category:</b> {{film.category}},</li>
+      <li><b>Description:</b> {{film.description}},</li>
       <li><b>Actors:</b> <span
-        *ngFor="let actor of actors; let la = last">{{actor.first_name}} {{actor.last_name}}<span
-        *ngIf="!la">, </span></span></li>
-      <li><b>Price:</b> {{film.cost | currency}}</li>
-      <li><b>Rental duration:</b> {{film.rental_duration}} days</li>
+        *ngFor="let actor of actors; let la = last">{{actor.first_name}} {{actor.last_name}}, </span></li>
+      <li><b>Price:</b> {{film.cost | currency}},</li>
+      <li><b>Rental duration:</b> {{film.rental_duration}} days,</li>
       <li><span *ngIf="stores.length != 0; then store_true else store_false"></span></li>
     </ul>
 
