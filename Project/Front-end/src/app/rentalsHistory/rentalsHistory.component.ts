@@ -33,7 +33,7 @@ const RENTALS_BY_ID_QUERY = gql`
   }
 `;
 
-interface getRentalInfoByCustIdResponse{
+interface getRentalInfoByCustIdResponse {
   getRentalInfoByCustId: {
     rental_id: number,
     film_title: string,
@@ -128,9 +128,9 @@ export class RentalsHistoryComponent implements OnInit {
   }
 
 
-  onOrdinaClick(){
+  onOrdinaClick() {
 
-    if (this.ordineSelezionato){
+    if (this.ordineSelezionato) {
 
       this.dataSource.sort = this.sort;
       this.dataSource.sort.active = this.ordineSelezionato;
@@ -142,7 +142,6 @@ export class RentalsHistoryComponent implements OnInit {
       }
 
       this.dataSource.sort.sortChange.emit();
-
 
 
       //console.log(this.ordineSelezionato);

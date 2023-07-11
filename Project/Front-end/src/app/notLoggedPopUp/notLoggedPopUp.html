@@ -1,7 +1,17 @@
 <!-- PopUp if user is not logged-->
 
-<h1 mat-dialog-title >ERROR</h1>
-<div mat-dialog-content >You must Login first!!</div>
+<h1 mat-dialog-title>ERROR</h1>
+<div mat-dialog-content>You must Login first!!</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close aria-label="press to close the popup">Close</button>
+  <button aria-label="press to close the popup" mat-button mat-dialog-close>Close</button>
 </div>
+
+<style>
+  button:hover{
+    background-color:#c9f5f1;
+  }
+
+  button:focus {
+    outline: 2px solid black;
+  }
+</style>

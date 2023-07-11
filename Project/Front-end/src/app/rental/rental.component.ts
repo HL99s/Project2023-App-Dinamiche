@@ -59,13 +59,13 @@ const RENTAL_INSERT_MUTATION = gql`
   }
 `;
 
-interface getBuyDispResponse{
+interface getBuyDispResponse {
   getBuyDisp: {
     inventory_id: number
   }
 }
 
-interface getFilmInfoByIdResponse{
+interface getFilmInfoByIdResponse {
   getFilmInfoById: {
     film_title: string,
     release_year: number,
@@ -79,7 +79,7 @@ interface getFilmInfoByIdResponse{
   }
 }
 
-interface getStoreDispByFilmIdResponse{
+interface getStoreDispByFilmIdResponse {
   getStoreDispByFilmId: {
     store_id: number,
     address: string,
@@ -88,13 +88,13 @@ interface getStoreDispByFilmIdResponse{
   }
 }
 
-interface getStaffIdByStoreIdResponse{
+interface getStaffIdByStoreIdResponse {
   getStaffIdByStoreId: {
     staff_id: number,
   }
 }
 
-interface rentalInsertResponse{
+interface rentalInsertResponse {
   rentalInsert: {
     rental_id: number,
   }
@@ -147,7 +147,6 @@ export class RentalComponent implements OnInit {
   }
 
 
-
   get_rental_dates() {
     let re_d = [];
     let now = new Date()
@@ -161,61 +160,64 @@ export class RentalComponent implements OnInit {
   }
 
 
-  getInvDisp(){
+  getInvDisp() {
     this.apollo.query<getBuyDispResponse>({
       query: GET_BUY_DISP,
       variables: {filmId: this.arg.film_id, storeId: Number(this.selected_store)}
     }).subscribe(({data, loading}) => {
 
       this.disp_store = data.getBuyDisp.inventory_id
-      console.log("inv: ",this.disp_store)
+      console.log("inv: ", this.disp_store)
       console.log("Store: ", this.selected_store)
-      console.log("Date: ",this.selected_date)
+      console.log("Date: ", this.selected_date)
 
       this.getStaffInfo()
     })
   }
 
-  getStaffInfo(){
+  getStaffInfo() {
     this.apollo.query<getStaffIdByStoreIdResponse>({
       query: GET_STAFF_ID,
       variables: {storeId: Number(this.selected_store)}
     }).subscribe(({data, loading}) => {
 
       this.staff = data.getStaffIdByStoreId.staff_id;
-      console.log("Staff: ",this.staff);
+      console.log("Staff: ", this.staff);
       this.getInsertInfo()
 
     })
 
   }
 
-  getInsertInfo(){
+  getInsertInfo() {
     this.apollo
       .mutate<rentalInsertResponse>({
         mutation: RENTAL_INSERT_MUTATION,
-        variables: {rental_date: this.selected_date, inventory_id: this.disp_store, customer_id: Number(this.cust_id), staff_id: this.staff, last_update: this.selected_date}
+        variables: {
+          rental_date: this.selected_date,
+          inventory_id: this.disp_store,
+          customer_id: Number(this.cust_id),
+          staff_id: this.staff,
+          last_update: this.selected_date
+        }
       }).subscribe({
-        next: (res) => {
+      next: (res) => {
         console.log(res.data?.rentalInsert)
-        if(res.data?.rentalInsert != null){
-          this.insertResult = true;
-        }
-        else{
-          this.insertResult = false;
-        }
+        this.insertResult = res.data?.rentalInsert != null;
 
         this.openResult();
       },
       error: (e) => {
         console.log("there was an error sending the query", e);
-      }});
+      }
+    });
 
   }
-  openResult(){
+
+  openResult() {
     const rent_dialog = this.dialog.open(AfterBuyDialog, {data: {result: this.insertResult}});
-    rent_dialog.afterClosed().subscribe(result => {
-        location.reload()
+    rent_dialog.afterClosed().subscribe(() => {
+      location.reload()
     });
   }
 }
