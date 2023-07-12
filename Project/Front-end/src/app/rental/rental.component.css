@@ -2,8 +2,8 @@
   background-color:#c9f5f1;
 }*/
 
-button.hover-button:hover{
-  background-color:#c9f5f1;
+button.hover-button:hover {
+  background-color: #c9f5f1;
   outline: 2px solid black;
 }
 
@@ -11,29 +11,29 @@ button:focus {
   outline: 2px solid black;
 }
 
-.bottone-disabilitato{
+.bottone-disabilitato {
   color: rgba(0, 0, 0, 0.559);
   pointer-events: none;
 }
 
 mat-option:focus {
   /*outline: 2px solid black;*/
-  border: solid 1px !important; 
+  border: solid 1px !important;
 }
 
-mat-label{
+mat-label {
   color: black;
-  
+
 }
 
-mat-option{
+mat-option {
   background-color: #d6f6f3;
   border: solid 1px;
 
 }
 
 
-mat-option:hover{
+mat-option:hover {
   text-decoration: solid;
   border: solid 3px;
 }

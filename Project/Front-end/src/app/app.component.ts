@@ -13,13 +13,10 @@ import {Router} from "@angular/router";
 export class AppComponent implements OnInit {
 
   screenWidth: number;
-  //screenHeigth: number;
 
   title: string = "client";
 
   logged: boolean = false;
-
-  window: any;
 
   constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {
   }
@@ -35,7 +32,6 @@ export class AppComponent implements OnInit {
     window.onresize = () => this.screenSizeOnChanges();
   }
 
-
   screenSizeOnChanges() {
 
     if (window.innerWidth < 768 && this.screenWidth > 768) {
@@ -49,8 +45,6 @@ export class AppComponent implements OnInit {
       console.log(this.screenWidth);
       location.reload();
     }
-
-
   }
 
   tabindexValue(): number {
@@ -60,7 +54,6 @@ export class AppComponent implements OnInit {
       return -1;
     }
   }
-
 
   logOut() {
     this.authService.logOut();
