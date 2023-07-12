@@ -13,6 +13,12 @@ export class ConvertiDurataPipe implements PipeTransform {
     const rimanentiOre = ore % 24;
     const rimanentiMinuti = minuti % 60;
 
-    return `${giorni} days, ${rimanentiOre} hours, ${rimanentiMinuti} minutes`;
+    if (millisecondi < 0){
+      return 'Not returned yet';
+    }else{
+      return `${giorni} days, ${rimanentiOre} hours, ${rimanentiMinuti} minutes`;
+
+    }
+
   }
 }
